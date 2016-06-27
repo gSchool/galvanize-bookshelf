@@ -14,7 +14,7 @@ Next, stop the PostgreSQL service, initialize a project-specific PostgreSQL clus
 ```shell
 brew services stop postgresql
 initdb pg
-postgres -D
+postgres -D pg
 ```
 
 In a new Terminal tab, create a development and a test database.
