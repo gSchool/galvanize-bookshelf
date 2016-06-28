@@ -1,6 +1,6 @@
 # Knex Migrations and Seeds
 
-In this assignment, you're going to build a web application that manages book collection. In the first part, you'll lay the foundation by building a few Knex migration and seed files. Start by forking and cloning this repository to your development environment.
+In this assignment, you're going to build a web application that manages a book collection. In the first part, you'll lay the foundation by building a few Knex migration and seed files. Start by forking and cloning this repository to your development environment.
 
 Next, install the necessary dependencies via NPM.
 
@@ -9,15 +9,7 @@ cd galvanize-bookshelf
 npm install
 ```
 
-Next, stop the PostgreSQL service, initialize a project-specific PostgreSQL cluster, and start a local PostgreSQL server.
-
-```shell
-brew services stop postgresql
-initdb pg
-postgres -D
-```
-
-In a new Terminal tab, create a development and a test database.
+Next, ensure there's a PostgreSQL server running on your machine. You could run it as a service or run it as a project-specific server. The choice is yours. Either way, create both a development and a test database.
 
 ```shell
 createdb bookshelf_dev
