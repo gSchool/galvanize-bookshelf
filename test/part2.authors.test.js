@@ -1,15 +1,14 @@
-const chai = require('chai');
-const {assert} = chai;
+'use strict';
+
+process.env.NODE_ENV = 'test';
+
+const assert = require('chai').assert;
 const {suite, test} = require('mocha');
 const request = require('supertest');
-
-const env = 'test';
-const knexConfig = require('../knexfile')[env];
-const knex = require('knex')(knexConfig);
-process.env.NODE_ENV = env;
+const knex = require('../knex');
 const server = require('../server');
 
-suite('authors REST interface', () => {
+suite('authors routes', () => {
   before(function(done) {
     knex.migrate.latest()
       .then(() => {
@@ -40,7 +39,7 @@ suite('authors REST interface', () => {
       });
   });
 
-  test('GET all request', (done) => {
+  test('GET /authors', (done) => {
     request(server)
       .get('/authors')
       .expect('Content-Type', /json/)
@@ -143,7 +142,7 @@ suite('authors REST interface', () => {
       }], done);
   });
 
-  test('GET individual request', (done) => {
+  test('GET /authors/:id', (done) => {
     request(server)
       .get('/authors/3')
       .expect('Content-Type', /json/)
@@ -158,7 +157,7 @@ suite('authors REST interface', () => {
       }, done);
   });
 
-  test('POST request', (done) => {
+  test('POST /authors', (done) => {
     request(server)
       .post('/authors')
       .send({
@@ -187,7 +186,7 @@ suite('authors REST interface', () => {
       });
   });
 
-  test('PATCH request', (done) => {
+  test('PATCH /authors/:id', (done) => {
     request(server)
       .patch('/authors/2')
       .send({
@@ -216,7 +215,7 @@ suite('authors REST interface', () => {
       });
   });
 
-  test('DELETE request', (done) => {
+  test('DELETE /authors/:id', (done) => {
     request(server)
       .del('/authors/2')
       .expect('Content-Type', /json/)
@@ -238,7 +237,7 @@ suite('authors REST interface', () => {
       });
   });
 
-  test('GET author\'s books', (done) => {
+  test('GET /authors/:id/books', (done) => {
     request(server)
       .get('/authors/2/books')
       .expect('Content-Type', /json/)

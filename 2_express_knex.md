@@ -18,14 +18,16 @@ For this assignment, you'll build a RESTful, database-driven HTTP server, using 
 | `DELETE`       | `/authors/3`       | N/A                                                                                                      | `200`           | `{ "first_name": "Bonnie", "last_name": "Eisenman", "biography": "...", "portrait_url": "https://..." }`                                     |
 | `GET`          | `/authors/3/books` | N/A                                                                                                      | `200`           | `[{ "title": "Python In A Nutshell", "author_id": 2, "genre": "Python", "description": "This book..." }, ...]` (books that the author wrote) |
 
-Next, install the necessary dependencies via NPM.
+To get started, install the necessary dependencies via NPM.
 
 ```shell
 cd galvanize-bookshelf
 npm install
 ```
 
-A test case has been created for each route specified above. It only tests the _positive_ case, that is, the case where the route should produce a `200` response status. You can run the tests in the shell.
+To run the test suite can test you route specified above. You can run the tests in the shell.
+
+**NOTE:** For each route handler, the test suite only tests the _positive_ case where the server responds with a `200` status code.
 
 ```shell
 npm test
