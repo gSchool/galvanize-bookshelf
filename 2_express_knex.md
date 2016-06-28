@@ -1,6 +1,6 @@
 # Express and Knex
 
-Now that your database is migrated and seeded, you can build an RESTful, database-driven HTTP server to manage it. In this assignment, you'll build an server that handles the following HTTP requests by sending the appropriate HTTP response.
+Now that your database is migrated and seeded, you can build an RESTful, database-driven HTTP server to manage it. For this assignment, you'll build an database-driven server to handle the following RESTful HTTP requests by sending the appropriate HTTP response.
 
 | Request Method | Request URL        | Request Body                                                                                             | Response Status | Response Content-Type | Response Body                                                                                                                                |
 |----------------|--------------------|----------------------------------------------------------------------------------------------------------|-----------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
