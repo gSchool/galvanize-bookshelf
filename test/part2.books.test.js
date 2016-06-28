@@ -1,15 +1,14 @@
-const chai = require('chai');
-const {assert} = chai;
+'use strict';
+
+process.env.NODE_ENV = 'test';
+
+const assert = require('chai').assert;
 const {suite, test} = require('mocha');
 const request = require('supertest');
-
-const env = 'test';
-const knexConfig = require('../knexfile')[env];
-const knex = require('knex')(knexConfig);
-process.env.NODE_ENV = env;
+const knex = require('../knex');
 const server = require('../server');
 
-suite('books REST interface', () => {
+suite('books routes', () => {
   before(function(done) {
     knex.migrate.latest()
       .then(() => {
@@ -40,7 +39,7 @@ suite('books REST interface', () => {
       });
   });
 
-  test('GET all request', (done) => {
+  test('GET /books', (done) => {
     request(server)
       .get('/books')
       .expect('Content-Type', /json/)
@@ -146,7 +145,7 @@ suite('books REST interface', () => {
       }], done);
   });
 
-  test('GET individual request', (done) => {
+  test('GET /books/:id', (done) => {
     request(server)
       .get('/books/2')
       .expect('Content-Type', /json/)
@@ -162,7 +161,7 @@ suite('books REST interface', () => {
       }, done);
   });
 
-  test('POST request', (done) => {
+  test('POST /books', (done) => {
     request(server)
       .post('/books')
       .send({
@@ -193,7 +192,7 @@ suite('books REST interface', () => {
       });
   });
 
-  test('PATCH request', (done) => {
+  test('PATCH /books/:id', (done) => {
     request(server)
       .patch('/books/2')
       .send({
@@ -224,7 +223,7 @@ suite('books REST interface', () => {
       });
   });
 
-  test('DELETE request', (done) => {
+  test('DELETE /books/:id', (done) => {
     request(server)
       .del('/books/2')
       .expect('Content-Type', /json/)

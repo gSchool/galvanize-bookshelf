@@ -14,7 +14,7 @@
   if (window.COOKIES.userId) {
     $('.session').text('Logout').click((_event) => {
       const $xhr = $.ajax({
-        url: '/users/authentication',
+        url: '/session',
         type: 'DELETE'
       });
 

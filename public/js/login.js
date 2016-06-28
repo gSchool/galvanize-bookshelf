@@ -25,7 +25,7 @@
     }
 
     const $xhr = $.ajax({
-      url: '/users/authentication',
+      url: '/session',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({ email, password })

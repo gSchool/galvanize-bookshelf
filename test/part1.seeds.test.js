@@ -1,12 +1,11 @@
 'use strict';
 
-const chai = require('chai');
-const {assert} = chai;
-const {suite, test} = require('mocha');
+process.env.NODE_ENV = 'test';
 
-const env = 'test';
-const knexConfig = require('../knexfile')[env];
-const knex = require('knex')(knexConfig);
+const assert = require('chai').assert;
+const {suite, test} = require('mocha');
+const request = require('supertest');
+const knex = require('../knex');
 
 suite('seeds', () => {
   before(function(done) {
