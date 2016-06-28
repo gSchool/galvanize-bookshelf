@@ -14,15 +14,15 @@ Translate the following entity diagram into a Knex migration file.
 
 ```text
 ┌───────────────────────────────────────────────────────────────┐
-│                              users                             │
+│                              users                            │
 ├─────────────┬─────────────────────────┬───────────────────────┤
-│id           │serial                   │primary key             │
-│first_name   │varchar(255)             │not null default ''     │
-│last_name    │varchar(255)             │not null default ''     │
-│email        │varchar(255)             │not null default ''     │
-│password     │varchar(255)             │not null default ''     │
-│created_at   │timestamp with time zone │not null default now()  │
-│updated_at   │timestamp with time zone │not null default now()  │
+│id           │serial                   │primary key            │
+│first_name   │varchar(255)             │not null default ''    │
+│last_name    │varchar(255)             │not null default ''    │
+│email        │varchar(255)             │not null default ''    │
+│password     │varchar(255)             │not null default ''    │
+│created_at   │timestamp with time zone │not null default now() │
+│updated_at   │timestamp with time zone │not null default now() │
 └─────────────┴─────────────────────────┴───────────────────────┘
 ```
 
