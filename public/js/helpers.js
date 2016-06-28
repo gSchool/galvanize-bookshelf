@@ -1,6 +1,34 @@
 (function() {
   'use strict';
 
+  const toCamelCase = function(output) {
+    const updatedOutput = {};
+    const find = /(_\w)/g;
+    const convert = function(matches) {
+      return matches[1].toUpperCase();
+    };
+
+    for (const key in output) {
+      updatedOutput[key.replace(find, convert)] = output[key];
+    }
+
+    return updatedOutput;
+  };
+
+  const toSnakeCase = function(output) {
+    const updatedOutput = {};
+    const find = /([A-Z])/g;
+    const convert = function(matches) {
+      return `_${matches.toLowerCase()}`;
+    };
+
+    for (const key in output) {
+      updatedOutput[key.replace(find, convert)] = output[key];
+    }
+
+    return updatedOutput;
+  };
+
   const displayResources = function(resourceName, convert, callback) {
     const plural = `${resourceName}s`;
     const $xhr = $.getJSON(`/${plural}`);
@@ -10,6 +38,10 @@
         const errorStr = `Unable to retrieve ${plural}. Please try again.`;
 
         return Materialize.toast(errorStr, 2000);
+      }
+
+      if (!window.BONUS_CONFIG.CAMEL_CASE) {
+        resources = resources.map(toCamelCase);
       }
 
       return callback(resources.map((resource) => {
@@ -34,6 +66,11 @@
 
   const updateResource = function(resourceName, data, callback) {
     let $xhr;
+
+    if (!window.BONUS_CONFIG.CAMEL_CASE) {
+      data = toSnakeCase(data);
+    }
+
     const dataJSON = JSON.stringify(data);
 
     if (window.QUERY_PARAMETERS.id) {
@@ -58,7 +95,7 @@
         Materialize.toast('Save failed. Please try again.', 2000);
       }
 
-      callback(author);
+      callback(window.BONUS_CONFIG.CAMEL_CASE ? author : toCamelCase(author));
     });
 
     $xhr.fail(() => {
@@ -107,7 +144,16 @@
             return Materialize.toast(errorStr, 2000);
           }
 
-          state[stateName] = resBody;
+          if (window.BONUS_CONFIG.CAMEL_CASE) {
+            state[stateName] = resBody;
+          }
+          else if (Array.isArray(resBody)) {
+            state[stateName] = resBody.map(toCamelCase);
+          }
+          else {
+            state[stateName] = toCamelCase(resBody);
+          }
+
           requestCompletedCount += 1;
           if (requestCount === requestCompletedCount) {
             return callback(state);
@@ -135,6 +181,8 @@
     displayResources,
     updateResource,
     deleteResource,
-    getState
+    getState,
+    toCamelCase,
+    toSnakeCase
   };
 })();

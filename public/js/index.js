@@ -17,6 +17,9 @@
 
         return;
       }
+      if (!window.BONUS_CONFIG.CAMEL_CASE) {
+        books = books.map(window.HELPERS.toCamelCase);
+      }
 
       let $book;
       let $img;
@@ -25,7 +28,7 @@
 
       for (const book of books) {
         $book = $('<div class="col s12 m4 l3 center-align book">');
-        $a = $(`<a href="book.html?id=${book.id}">`);
+        $a = $(`<a href="book.html?id=${book.bookId}">`);
         $link = $('<div>').append($a.clone().text(book.title));
         $img = $('<img>').attr('src', book.coverUrl).attr('alt', book.title);
         $book.append($('<div>').append($a.append($img)));
@@ -69,11 +72,16 @@
       return Materialize.toast('Passwords do not match.', 2000);
     }
 
+    let json = { firstName, lastName, email, password };
+
+    if (!window.BONUS_CONFIG.CAMEL_CASE) {
+      json = window.HELPERS.toSnakeCase(json);
+    }
     const $xhr = $.ajax({
       url: '/users',
       type: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({ firstName, lastName, email, password })
+      data: JSON.stringify(json)
     });
 
     $xhr.done(() => {
