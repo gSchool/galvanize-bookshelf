@@ -33,10 +33,7 @@ suite('authors REST interface', () => {
   beforeEach(function(done) {
     knex.seed.run()
       .then(() => {
-        knex.raw("SELECT setval('authors_id_seq', (SELECT MAX(id) FROM authors))")
-          .then(() => {
-            done();
-          });
+        done();
       })
       .catch((err) => {
         done(err);
@@ -115,7 +112,7 @@ suite('authors REST interface', () => {
         id: 9,
         first_name: 'Shyam',
         last_name: 'Seshadri',
-        biography: 'JCurrently based out of India, Shyam Seshadri is the CEO of Fundoo Solutions (http://www.befundoo.com), Ex-Googler, Author and Chef. He currently spends his time working on interesting product ideas, conducting training sessions internationally on AngularJS & NodeJS, and providing development and architecture consulting on AngularJS, NodeJS and Mobile applications. He conducts extensive, customized two and three day, hands-on workshops for AngularJS & NodeJS, which have been well received internationally.',
+        biography: 'Currently based out of India, Shyam Seshadri is the CEO of Fundoo Solutions (http://www.befundoo.com), Ex-Googler, Author and Chef. He currently spends his time working on interesting product ideas, conducting training sessions internationally on AngularJS & NodeJS, and providing development and architecture consulting on AngularJS, NodeJS and Mobile applications. He conducts extensive, customized two and three day, hands-on workshops for AngularJS & NodeJS, which have been well received internationally.',
         portrait_url: 'http://cdn.oreillystatic.com/images/people/154/shyam_seshadri-1.jpg',
         created_at: new Date('2016-06-26 14:26:16 UTC').toISOString(),
         updated_at: new Date('2016-06-26 14:26:16 UTC').toISOString()

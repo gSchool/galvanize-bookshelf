@@ -33,10 +33,7 @@ suite('books REST interface', () => {
   beforeEach(function(done) {
     knex.seed.run()
       .then(() => {
-        knex.raw("SELECT setval('books_id_seq', (SELECT MAX(id) FROM books))")
-          .then(() => {
-            done();
-          });
+        done();
       })
       .catch((err) => {
         done(err);
