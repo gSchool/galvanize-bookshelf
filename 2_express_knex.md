@@ -1,6 +1,6 @@
 # Express and Knex
 
-Now that we have a database with data set up, we can now build some routes that access the books and authors table. In this assignment, you will implement a RESTful interface for books and authors. It should have the following routes as described below.
+Now that your database is migrated and seeded, you can now build an RESTful, database-driven HTTP server to manage it. In this assignment, you'll build an server that handles the following HTTP requests by sending the appropriate HTTP response.
 
 | Request Method | Request URL        | Request Body                                                                                             | Response Status | Response Content-Type | Response Body                                                                                                                                |
 |----------------|--------------------|----------------------------------------------------------------------------------------------------------|-----------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
