@@ -1,8 +1,8 @@
 # Express and Knex
 
-For this assignment, you'll build a RESTful, database-driven HTTP server, using Express and Knex, to manage your migrated and seeded database. Your server will handle the following HTTP requests and send the appropriate HTTP response.
+In this assignment, you'll build a RESTful, database-driven HTTP server, using Express and Knex, to manage your migrated and seeded database. Your server will handle the following HTTP requests and send the appropriate HTTP response.
 
-**NOTE:** Both the request body and the response body use the `application/json` content type.
+**NOTE:** The information in both the request body and the response body use the `application/json` content type.
 
 | Request Method | Request URL        | Request Body                                                                                             | Response Status | Response Body                                                                                                                                |
 |----------------|--------------------|----------------------------------------------------------------------------------------------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -25,25 +25,20 @@ cd galvanize-bookshelf
 npm install
 ```
 
-To run the test suite can test you route specified above. You can run the tests in the shell.
+Then, add the necessary middleware in the following modules to handle above RESTful route table.
 
-**NOTE:** For each route handler, the test suite only tests the _positive_ case where the server responds with a `200` status code.
+- `routes/authors.js`
+- `routes/books.js`
+
+**TIP:** The middleware for the following HTTP requests must respond with an array of entities ordered by their `id` attribute.
+
+- `GET /books`
+- `GET /authors`
+- `GET /authors/:id/books`
+
+You can use the following test suites to verify the positive case when each middleware responds with a `200` status code.
 
 ```shell
-npm test
+npm test test/part2.authors.test.js
+npm test test/part2.books.test.js
 ```
-
-## Notes
-
-The tests require the `server.js` file to export the express server for the tests. At the bottom of your `server.js` file, add `module.exports = app;` (assuming app is the variable you used for your server). For example.
-
-```javascript
-express = require('express');
-app = express();
-
-// ...
-
-module.exports = app;
-```
-
-The `GET` all requests (`/books`, `/authors`, `/authors/:id/books`) produces an array. PostgreSQL does not ensure any particular order. For the tests to pass, ensure the order of the array is by the `id` value of the resource.
