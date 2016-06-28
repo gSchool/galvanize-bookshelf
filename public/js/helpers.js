@@ -76,7 +76,7 @@
     if (window.QUERY_PARAMETERS.id) {
       $xhr = $.ajax({
         url: `/${resourceName}s/${window.QUERY_PARAMETERS.id}`,
-        type: 'PUT',
+        type: 'PATCH',
         contentType: 'application/json',
         data: dataJSON
       });
