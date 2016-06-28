@@ -1,3 +1,38 @@
-## Part 3 - REST interface for users
+# REST interface for user registration
 
-Build the interface for books that accesses the database to create a user.
+Now that the routes are set up for books and authors, it's time to add the necessary files to allow users to register.
+
+## Migrations
+
+Start off by creating the migration file to define the schema for the users table.
+
+```shell
+npm run knex migrate:make users
+```
+
+Translate the following entity diagram into a Knex migration file.
+
+```text
+┌───────────────────────────────────────────────────────────────┐
+│                              users                                        │
+├─────────────┬─────────────────────────┬───────────────────────┤
+│id              │serial                        │primary key                │
+│first_name      │varchar(255)                  │not null default ''        │
+│last_name       │varchar(255)                  │not null default ''        │
+│email           │varchar(255)                  │not null default ''        │
+│password        │varchar(255)                  │not null default ''        │
+│created_at      │timestamp with time zone      │not null default now()     │
+│updated_at      │timestamp with time zone      │not null default now()     │
+└─────────────┴─────────────────────────┴───────────────────────┘
+```
+
+## User Registration Route
+
+Then, add the correct route to create a new user. Make sure to follow recommended security practices for user registration.
+
+| Request Method | Request URL        | Request Body                                                                                           | Response Status | Response Content-Type | Response Body                                                                                                                               |
+|----------------|--------------------|--------------------------------------------------------------------------------------------------------|-----------------|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `POST`         | `/users`           | `{ "first_name": "Jim", "last_name": "Carrey", "email": "jim.carrey@themask.com", "password": "$2a$10$inytf5JiXvmZewj6iNZ48ebiyvx.8DFYM1HSRAine1JlhRovEEYr." }` | `200`           | `application/json`    | `{ "first_name": "Jim", "last_name": "Carrey", "email": "jim.carrey@themask.com" }`                                      |
+
+- The password is stored as a cryptographic hash
+- The response body does not contain the newly created user's password or hash
