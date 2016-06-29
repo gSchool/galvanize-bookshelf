@@ -13,7 +13,7 @@ Translate the following entity relationship diagram into a Knex migration file.
 │id              │serial                   │primary key            │
 │first_name      │varchar(255)             │not null default ''    │
 │last_name       │varchar(255)             │not null default ''    │
-│email           │varchar(255)             │not null               │
+│email           │varchar(255)             │not null unique        │
 |hashed_password |char(60)                 │not null               │
 │created_at      │timestamp with time zone │not null default now() │
 │updated_at      │timestamp with time zone │not null default now() │
