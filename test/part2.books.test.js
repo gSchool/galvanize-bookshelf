@@ -162,24 +162,18 @@ suite('books routes', () => {
         cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
       })
       .expect('Content-Type', /json/)
-      .expect(200)
-      .end((err, res) => {
-        if(err) {
-          return done(err);
-        }
-
+      .expect((res) => {
         delete res.body.created_at;
         delete res.body.updated_at;
-        assert.deepEqual(res.body, {
-          id: 12,
-          author_id: 2,
-          title: 'Think Python',
-          genre: 'Python',
-          description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
-          cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
-        });
-        done();
-      });
+      })
+      .expect(200, {
+        id: 12,
+        author_id: 2,
+        title: 'Think Python',
+        genre: 'Python',
+        description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
+        cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
+      }, done);
   });
 
   test('PATCH /books/:id', (done) => {
@@ -193,47 +187,34 @@ suite('books routes', () => {
         cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
       })
       .expect('Content-Type', /json/)
-      .expect(200)
-      .end((err, res) => {
-        if(err) {
-          return done(err);
-        }
-
+      .expect((res) => {
         delete res.body.created_at;
         delete res.body.updated_at;
-        assert.deepEqual(res.body, {
-          id: 2,
-          author_id: 2,
-          title: 'Think like Python',
-          genre: 'Python stuff',
-          description: 'More Python',
-          cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
-        });
-        done();
-      });
+      })
+      .expect(200, {
+        id: 2,
+        author_id: 2,
+        title: 'Think like Python',
+        genre: 'Python stuff',
+        description: 'More Python',
+        cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
+      }, done);
   });
 
   test('DELETE /books/:id', (done) => {
     request(server)
       .del('/books/2')
       .expect('Content-Type', /json/)
-      .expect(200)
-      .end((err, res) => {
-        if(err) {
-          return done(err);
-        }
-
+      .expect((res) => {
         delete res.body.created_at;
         delete res.body.updated_at;
-        assert.deepEqual(res.body, {
-          author_id: 2,
-          title: 'Think Python',
-          genre: 'Python',
-          description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
-          cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
-        });
-        done();
-      });
+      })
+      .expect(200, {
+        author_id: 2,
+        title: 'Think Python',
+        genre: 'Python',
+        description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
+        cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
+      }, done);
   });
-
 });
