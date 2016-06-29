@@ -28,16 +28,20 @@ More specifically, the migration file should:
 
 ## Routes
 
-Then, add the correct route to create a new user. Make sure to follow recommended security practices for user registration.
+Next, update your server to handle the following HTTP request and send the appropriate HTTP response.
 
-| Request Method | Request URL        | Request Body                                                                                                    | Response Status | Response Content-Type | Response Body                                                                                                                              |
-|----------------|--------------------|-----------------------------------------------------------------------------------------------------------------|-----------------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| `POST`         | `/users`           | `{ "first_name": "Jim", "last_name": "Carrey", "email": "jim.carrey@themask.com", "password": "to_be_hashed" }` | `200`           | `application/json`    | `{ "id": 1, "first_name": "Jim", "last_name": "Carrey", "email": "jim.carrey@themask.com", "created_at": "now()", "updated_at": "now()" }` |                                      |
+**NOTE:** The information in just the request body uses the `application/json` content type.
 
-- The password is stored as a cryptographic hash
-- The response body does not contain the newly created user's password or hash
+| Request Method | Request URL        | Request Body                                                                                                        | Response Status | Response Content-Type | Response Body |
+|----------------|--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------|-----------------------|---------------|
+| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "email": "john.siracusa@gmail.com", "password": "ilikebigcats" }` | `200`           | `text/plain`          | `OK`          |
 
-You can run the following test suite to verify the positive case when each middleware responds with a `200` status code.
+In the `routes/users.js` module, add the necessary middleware to handle above RESTful route table. Make sure the route handler securely registers new users using the following techniques.
+
+- Only store a cryptographic hash of the password.
+- Do _not_ send new user's password or cryptographic password hash in the response body.
+
+You can run the following test suite to verify the positive case when the middleware responds with a `200` status code.
 
 ```shell
 npm test test/part3.routes.users.test.js
