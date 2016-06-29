@@ -1,4 +1,4 @@
-# REST interface for user registration
+# User Registration
 
 Now that the routes are set up for books and authors, it's time to add the necessary files to allow users to register.
 
@@ -26,7 +26,7 @@ Translate the following entity diagram into a Knex migration file.
 └─────────────┴─────────────────────────┴───────────────────────┘
 ```
 
-## User Registration Route
+## Routes
 
 Then, add the correct route to create a new user. Make sure to follow recommended security practices for user registration.
 
