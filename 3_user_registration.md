@@ -7,17 +7,17 @@ In this assignment, you'll add the necessary code to allow users to register acc
 Translate the following entity relationship diagram into a Knex migration file.
 
 ```text
-┌───────────────────────────────────────────────────────────────┐
-│                              users                            │
-├─────────────┬─────────────────────────┬───────────────────────┤
-│id           │serial                   │primary key            │
-│first_name   │varchar(255)             │not null default ''    │
-│last_name    │varchar(255)             │not null default ''    │
-│email        │varchar(255)             │not null default ''    │
-│password     │varchar(255)             │not null default ''    │
-│created_at   │timestamp with time zone │not null default now() │
-│updated_at   │timestamp with time zone │not null default now() │
-└─────────────┴─────────────────────────┴───────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│                              users                               │
+├────────────────┬─────────────────────────┬───────────────────────┤
+│id              │serial                   │primary key            │
+│first_name      │varchar(255)             │not null default ''    │
+│last_name       │varchar(255)             │not null default ''    │
+│email           │varchar(255)             │not null default ''    │
+|hashed_password │varchar(255)             │not null default ''    │
+│created_at      │timestamp with time zone │not null default now() │
+│updated_at      │timestamp with time zone │not null default now() │
+└────────────────┴─────────────────────────┴───────────────────────┘
 ```
 
 More specifically, the migration file should:
@@ -39,7 +39,7 @@ Next, update your server to handle the following HTTP request and send the appro
 In the `routes/users.js` module, add the necessary middleware to handle above RESTful route table. Make sure the route handler securely registers new users using the following techniques.
 
 - Only store a cryptographic hash of the password in the database.
-- Do _not_ send new user's password or cryptographic password hash in the response body.
+- Do _not_ send the new user's password or hashed password in the response body.
 
 You can run the following test suite to verify the positive case when the middleware responds with a `200` status code.
 

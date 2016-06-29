@@ -32,7 +32,7 @@ suite('part3 routes users', () => {
   });
 
   test('POST /users', (done) => {
-    const password = 'i like big cats';
+    const password = 'ilikebigcats';
 
     request(server)
       .post('/users')
@@ -53,10 +53,10 @@ suite('part3 routes users', () => {
         knex('users')
           .first()
           .then((user) => {
-            const user_password = user.password;
+            const hashed_password = user.hashed_password;
 
             delete user.id;
-            delete user.password;
+            delete user.hashed_password;
             delete user.created_at;
             delete user.updated_at;
 
@@ -66,12 +66,12 @@ suite('part3 routes users', () => {
               email: 'john.siracusa@gmail.com'
             });
 
-            bcrypt.compare(password, user_password, (compErr, isMatch) => {
+            bcrypt.compare(password, hashed_password, (compErr, isMatch) => {
               if (compErr) {
                 return done(compErr);
               }
 
-              assert.isTrue(isMatch, "hashed passwords don't match");
+              assert.isTrue(isMatch, "passwords don't match");
 
               done();
             });

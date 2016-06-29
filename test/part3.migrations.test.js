@@ -49,7 +49,7 @@ suite('part3 migrations', () => {
             defaultValue: '\'\'::character varying'
           },
 
-          password: {
+          hashed_password: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
