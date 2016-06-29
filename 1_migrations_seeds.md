@@ -32,7 +32,7 @@ And, update the `knexfile.js` file with the connection information for the devel
 Finally, ensure the test suite can connect to the right database.
 
 ```shell
-npm test
+npm test test/part1.migrations.test.js
 ```
 
 ## Migrations

@@ -21,7 +21,7 @@ In the `routes/authors.js` module, add the necessary middleware to handle above 
 You can run the following test suite to verify the positive case when each middleware responds with a `200` status code.
 
 ```shell
-npm test test/part2.authors.test.js
+npm test test/part2.routes.authors.test.js
 ```
 
 ## Bonus
@@ -41,5 +41,5 @@ In the `routes/books.js` module, add the necessary middleware to handle above RE
 You can run the following test suite to verify the positive case when each middleware responds with a `200` status code.
 
 ```shell
-npm test test/part2.books.test.js
+npm test test/part2.routes.books.test.js
 ```
