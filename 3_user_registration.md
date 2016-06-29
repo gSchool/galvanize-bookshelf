@@ -46,3 +46,23 @@ You can run the following test suite to verify the positive case when the middle
 ```shell
 npm test test/part3.routes.users.test.js
 ```
+
+## Bonus
+
+Next, update your server to handle the following problem HTTP requests and send the appropriate HTTP response.
+
+**NOTE:** The information in just the request body uses the `application/json` content type.
+
+| Request Method | Request URL        | Request Body                                                                                                        | Response Status | Response Content-Type | Response Body                |
+|----------------|--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------|-----------------------|------------------------------|
+| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "password": "ilikebigcats" }`                                     | `400`           | `text/plain`          | `Email must not be blank`    |
+| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "email": "john.siracusa@gmail.com" }`                             | `400`           | `text/plain`          | `Password must not be blank` |
+| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "email": "john.siracusa@gmail.com", "password": "ilikebigcats" }` | `400`           | `text/plain`          | `Email already exists`       |
+
+In the `routes/users.js` module, update the necessary middleware to handle above RESTful route table. Make sure the route handler continues to securely register new users as before.
+
+You can run the following test suite to verify the negative cases when the middleware responds with a `400` status code.
+
+```shell
+npm test test/part3.routes.users.test.js
+```
