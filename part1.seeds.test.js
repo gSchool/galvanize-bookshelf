@@ -6,7 +6,7 @@ const assert = require('chai').assert;
 const {suite, test} = require('mocha');
 const knex = require('../knex');
 
-suite('seeds', () => {
+suite('part1 seeds', () => {
   before(function(done) {
     knex.migrate.latest()
       .then(() => {
