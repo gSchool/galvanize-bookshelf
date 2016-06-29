@@ -2,9 +2,6 @@
   "name": "galvanize-bookshelf",
   "version": "1.0.0",
   "description": "Create a web application to manage your book collection",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "mocha"
   },
