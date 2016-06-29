@@ -1,4 +1,4 @@
-# User Registration
+# User registration
 
 In this assignment, you'll add the necessary code to allow users to register accounts with the system.
 

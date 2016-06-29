@@ -1,4 +1,4 @@
-## Part 4 - Session Management for users
+# User authentication
 
 Add authorization parameters for users.
 
