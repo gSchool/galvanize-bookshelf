@@ -1,12 +1,16 @@
 'use strict';
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ silent: true });
+}
+
 const express = require('express');
 const path = require('path');
 const port = process.env.PORT || 8000;
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const session = require('cookie-session');
+const cookieSession = require('cookie-session');
 
 const authors = require('./routes/authors');
 const books = require('./routes/books');
@@ -24,10 +28,10 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({
+app.use(cookieSession({
   keys: [
-    'key1',//process.env.SESSION_KEY1,
-    'key2',//process.env.SESSION_KEY2
+    process.env.SESSION_KEY1,
+    process.env.SESSION_KEY2
   ]
 }));
 
