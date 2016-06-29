@@ -46,14 +46,14 @@ suite('part3 migrations', () => {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
-            defaultValue: '\'\'::character varying'
+            defaultValue: null
           },
 
           hashed_password: {
-            type: 'character varying',
-            maxLength: 255,
+            type: 'character',
+            maxLength: 60,
             nullable: false,
-            defaultValue: '\'\'::character varying'
+            defaultValue: null
           },
 
           created_at: {
