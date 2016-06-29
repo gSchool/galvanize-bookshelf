@@ -38,7 +38,7 @@ Next, update your server to handle the following HTTP request and send the appro
 
 In the `routes/users.js` module, add the necessary middleware to handle above RESTful route table. Make sure the route handler securely registers new users using the following techniques.
 
-- Only store a cryptographic hash of the password.
+- Only store a cryptographic hash of the password in the database.
 - Do _not_ send new user's password or cryptographic password hash in the response body.
 
 You can run the following test suite to verify the positive case when the middleware responds with a `200` status code.
