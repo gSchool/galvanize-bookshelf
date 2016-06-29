@@ -19,16 +19,6 @@ suite('books routes', () => {
       });
   });
 
-  after(function(done) {
-    knex.migrate.rollback()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
   beforeEach(function(done) {
     knex.seed.run()
       .then(() => {
