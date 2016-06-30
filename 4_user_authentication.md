@@ -8,7 +8,7 @@ Translate the following entity relationship diagram into a Knex migration file.
 
 ```text
 ┌───────────────────────────────────────────────────────────────────────────────────────────┐
-│                                     users_books                                           │
+│                                        users_books                                        │
 ├────────────────┬─────────────────────────┬────────────────────────────────────────────────┤
 │id              │serial                   │primary key                                     │
 │book_id         │integer                  │not null references books(id) on delete cascade │
@@ -24,8 +24,22 @@ More specifically, the migration file should:
 - Migrate one table per migration file.
 - Pass all the tests when `npm test test/part4.migrations.test.js` is run.
 
-## Bonuses
+## Routes
 
-* Ability to change the order based on query parameter
-* Add Search
-* Add Privileges to Admin users
+Next, update your server to handle the following HTTP request and send the appropriate HTTP response.
+
+**NOTE:** The information in just the request body uses the `application/json` content type.
+
+| Request Method | Request URL        | Request Body                                                         | Response Status | Response Content-Type | Response Body  |
+|----------------|--------------------|----------------------------------------------------------------------|-----------------|-----------------------|----------------|
+| `POST`         | `/session`         | `{ "email": "john.siracusa@gmail.com", "password": "ilikebigcats" }` | `200`           | `text/plain`          | `OK`           |
+| `POST`         | `/session`         | `{ "email": "bad.email@gmail.com", "password": "ilikebigcats" }`     | `401`           | `text/plain`          | `Unauthorized` |
+| `POST`         | `/session`         | `{ "email": "john.siracusa@gmail.com", "password": "badpassword" }`  | `401`           | `text/plain`          | `Unauthorized` |
+
+In the `routes/session.js` module, add the necessary middleware to handle above RESTful route table.
+
+You can run the following test suite to verify both the positive and the negative cases when the middleware responds with a `200` or `401` status code.
+
+```shell
+npm test test/part4.routes.session.test.js
+```
