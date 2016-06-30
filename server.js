@@ -14,6 +14,7 @@ const cookieSession = require('cookie-session');
 
 const authors = require('./routes/authors');
 const books = require('./routes/books');
+const session = require('./routes/session');
 const users = require('./routes/users');
 
 const app = express();
@@ -39,6 +40,7 @@ app.use(express.static(path.join('public')));
 
 app.use(authors);
 app.use(books);
+app.use(session);
 app.use(users);
 
 app.use((_req, res) => {
