@@ -15,7 +15,7 @@
     $('.author-metadata .last-name').val(state.author.lastName);
     $('.author-metadata textarea').text(state.author.biography);
     $('.img-url').val(state.author.portraitUrl);
-    $('.portrait-field').addClass('hide');
+    $('.portrait-field').removeClass('hide');
     $('label').addClass('active');
 
     // Replace Actions with Save button
