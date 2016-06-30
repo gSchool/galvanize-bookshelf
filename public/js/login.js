@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  if (window.COOKIES.userId) {
+  if (window.COOKIES.loggedIn) {
     window.location.href = '/';
 
     return;

@@ -11,7 +11,7 @@
     window.COOKIES[propKey] = propValue;
   });
 
-  if (window.COOKIES.userId) {
+  if (window.COOKIES.loggedIn) {
     $('.session').text('Logout').click((_event) => {
       const $xhr = $.ajax({
         url: '/session',

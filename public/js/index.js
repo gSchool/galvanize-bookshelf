@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  if (window.COOKIES.userId) {
+  if (window.COOKIES.loggedIn) {
     const container = $('<div class="container">');
     const h1 = $('<h1>').text('My Library');
     const row = $('<div class="row">');
@@ -9,7 +9,7 @@
     container.append(h1);
     container.append(row);
 
-    const $xhr = $.getJSON(`/users/${window.COOKIES.userId}/books`);
+    const $xhr = $.getJSON(`/users/books`);
 
     $xhr.done((books) => {
       if ($xhr.status !== 200) {
@@ -41,18 +41,18 @@
   }
 
   $('.register').click((event) => {
-    const firstName = $('#fname').val().trim();
-    const lastName = $('#lname').val().trim();
+    const first_name = $('#fname').val().trim();
+    const last_name = $('#lname').val().trim();
     const email = $('#email').val().trim();
     const password = $('#password').val();
     const password2 = $('#password2').val();
 
     // Validation
-    if (!firstName) {
+    if (!first_name) {
       return Materialize.toast('Please enter a first name.', 2000);
     }
 
-    if (!lastName) {
+    if (!last_name) {
       return Materialize.toast('Please enter a last name.', 2000);
     }
 
@@ -72,11 +72,12 @@
       return Materialize.toast('Passwords do not match.', 2000);
     }
 
-    let json = { firstName, lastName, email, password };
+    let json = { first_name, last_name, email, password };
 
     if (!window.BONUS_CONFIG.CAMEL_CASE) {
       json = window.HELPERS.toSnakeCase(json);
     }
+
     const $xhr = $.ajax({
       url: '/users',
       type: 'POST',
@@ -90,9 +91,8 @@
       }
 
       if ($xhr.status !== 200) {
-        Materialize.toast('User could not be created. Please try again.');
-
-        return;
+        const message = 'User could not be created. Please try again.'
+        return Materialize.toast(message);
       }
 
       window.location.href = '/login.html';

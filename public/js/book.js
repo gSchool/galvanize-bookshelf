@@ -6,7 +6,7 @@
     deleteResource,
     updateResource
   } = window.HELPERS;
-  const userId = window.COOKIES.userId;
+  const loggedIn = window.COOKIES.loggedIn;
   const bookId = window.QUERY_PARAMETERS.id;
   const inputHTML = $('.book-metadata').html();
   let state = {};
@@ -47,8 +47,8 @@
       authors: '/authors'
     };
 
-    if (userId) {
-      statePrep.hasBook = `/users/${userId}/books/${bookId}`;
+    if (loggedIn) {
+      statePrep.hasBook = `/users/books/${bookId}`;
     }
 
     getState(statePrep, (completedState) => {
@@ -57,7 +57,7 @@
         author.id === state.book.authorId
       )[0];
 
-      if (userId) {
+      if (loggedIn) {
         $('.add-remove').removeClass('hide');
         if (state.hasBook) {
           $('.add-remove').text('Remove from Library');
@@ -158,7 +158,7 @@
   $('a.add-remove').click((_event) => {
     const isAdd = $(event.target).text() === 'Add to Library';
     const $xhr = $.ajax({
-      url: `/users/${userId}/books/${state.book.id}`,
+      url: `/users/books/${state.book.id}`,
       type: isAdd ? 'POST' : 'DELETE'
     });
 
