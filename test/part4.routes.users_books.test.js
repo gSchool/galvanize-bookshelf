@@ -11,36 +11,26 @@ const server = require('../server');
 
 suite('part4 routes users_books', () => {
   const agent = request.agent(server);
-  const password = 'ilikebigcats';
 
   before(function(done) {
     knex.migrate.latest()
       .then(() => {
-        return knex.seed.run();
+        done();
       })
-      .then(() => {
-        return knex('users').del();
-      })
-      .then(() => {
-        return knex('users')
-          .insert({
-            id: 1,
-            first_name: 'John',
-            last_name: 'Siracusa',
-            email: 'john.siracusa@gmail.com',
-            hashed_password: bcrypt.hashSync(password, 1)
-          });
-      })
-      .then(() => {
-        return knex.raw("SELECT setval('users_books_id_seq', 1);");
-      })
+      .catch((err) => {
+        done(err);
+      });
+  });
+
+  beforeEach(function(done) {
+    knex.seed.run()
       .then(() => {
         request(server)
           .post('/session')
           .set('Content-Type', 'application/json')
           .send({
-            email: 'john.siracusa@gmail.com',
-            password: password
+            email: 'jkrowling@gmail.com',
+            password: 'youreawizard'
           })
           .end(function (err, res) {
             if (err) {
@@ -56,7 +46,55 @@ suite('part4 routes users_books', () => {
       });
   });
 
-  test('POST /users/books/:bookId', (done) => {
+  test('GET /users/books', (done) => {
+    agent
+      .get('/users/books')
+      .expect('Content-Type', /json/)
+      .expect((res) => {
+        res.body.forEach((book) => {
+          delete book.created_at;
+          delete book.updated_at;
+        });
+      })
+      .expect(200, [{
+        id: 1,
+        book_id: 1,
+        author_id: 2,
+        title: 'Python In A Nutshell',
+        genre: 'Python',
+        description: 'This book offers Python programmers one place to look when they need help remembering or deciphering the syntax of this open source language and its many powerful but scantily documented modules. This comprehensive reference guide makes it easy to look up the most frequently needed information--not just about the Python language itself, but also the most frequently used parts of the standard library and the most important third-party extensions.',
+        cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/python_in_a_nutshell.jpg',
+        user_id: 1
+      }], done);
+  });
+
+  test('GET /users/books/1', (done) => {
+    agent
+      .get('/users/books/1')
+      .expect('Content-Type', /json/)
+      .expect((res) => {
+        delete res.body.created_at;
+        delete res.body.updated_at;
+      })
+      .expect(200, {
+        id: 1,
+        book_id: 1,
+        author_id: 2,
+        title: 'Python In A Nutshell',
+        genre: 'Python',
+        description: 'This book offers Python programmers one place to look when they need help remembering or deciphering the syntax of this open source language and its many powerful but scantily documented modules. This comprehensive reference guide makes it easy to look up the most frequently needed information--not just about the Python language itself, but also the most frequently used parts of the standard library and the most important third-party extensions.',
+        cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/python_in_a_nutshell.jpg',
+        user_id: 1
+      }, done);
+  });
+
+  test('GET /users/books/2', (done) => {
+    agent
+      .get('/users/books/2')
+      .expect(404, done);
+  });
+
+  test('POST /users/books/2', (done) => {
     agent
       .post('/users/books/2')
       .expect('Content-Type', /json/)
@@ -71,64 +109,16 @@ suite('part4 routes users_books', () => {
       }, done);
   });
 
-  test('GET /users/books', (done) => {
+  test('DELETE /users/books/1', (done) => {
     agent
-      .get('/users/books')
-      .expect('Content-Type', /json/)
-      .expect((res) => {
-        res.body.forEach((book) => {
-          delete book.created_at;
-          delete book.updated_at;
-        });
-      })
-      .expect(200, [{
-        id: 2,
-        book_id: 2,
-        author_id: 2,
-        title: 'Think Python',
-        genre: 'Python',
-        description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
-        cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg',
-        user_id: 1
-      }], done);
-  });
-
-  test('GET /users/books/:bookId 200', (done) => {
-    agent
-      .get('/users/books/2')
+      .delete('/users/books/1')
       .expect('Content-Type', /json/)
       .expect((res) => {
         delete res.body.created_at;
         delete res.body.updated_at;
       })
       .expect(200, {
-        id: 2,
-        book_id: 2,
-        author_id: 2,
-        title: 'Think Python',
-        genre: 'Python',
-        description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
-        cover_url: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg',
-        user_id: 1
-      }, done);
-  });
-
-  test('GET /users/books/:bookId 404', (done) => {
-    agent
-      .get('/users/books/1')
-      .expect(404, done);
-  });
-
-  test('DELETE /users/books/:bookId', (done) => {
-    agent
-      .delete('/users/books/2')
-      .expect('Content-Type', /json/)
-      .expect((res) => {
-        delete res.body.created_at;
-        delete res.body.updated_at;
-      })
-      .expect(200, {
-        book_id: 2,
+        book_id: 1,
         user_id: 1
       }, done);
   });
