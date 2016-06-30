@@ -1,4 +1,4 @@
-# User authentication
+# User Authentication
 
 In this assignment, you'll add the necessary code to allow registered users to authenticate with the system.
 
