@@ -32,7 +32,7 @@ Translate the following [JavaScript entities](https://gist.github.com/ryansobol/
 - Seed one table per seed file.
 - Pass all the tests when `npm test test/part4.seeds.test.js` is run.
 
-## `session` Routes
+## `session` routes
 
 Next, update your server to handle the following HTTP request and send the appropriate HTTP response.
 
@@ -52,7 +52,7 @@ You can run the following test suite to verify both the positive and the negativ
 npm test test/part4.routes.session.test.js
 ```
 
-## `users_books` Routes
+## `users_books` routes
 
 Next, update your server to handle the following HTTP request and send the appropriate HTTP response.
 
