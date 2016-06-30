@@ -42,12 +42,11 @@ suite('part4 routes users_books', () => {
             email: 'john.siracusa@gmail.com',
             password: password
           })
-          .expect('Content-Type', /plain/)
-          .expect(200, 'OK')
           .end(function (err, res) {
             if (err) {
               return done(err);
             }
+
             agent.saveCookies(res);
             done();
           });
