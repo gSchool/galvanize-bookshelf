@@ -34,7 +34,8 @@ app.use(cookieSession({
   keys: [
     process.env.SESSION_KEY1,
     process.env.SESSION_KEY2
-  ]
+  ],
+  name: 'bookshelf'
 }));
 
 app.use(express.static(path.join('public')));
