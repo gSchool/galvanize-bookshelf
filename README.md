@@ -7,6 +7,7 @@ This is a multi-day assignment split into the following parts. Your task is to c
 1. [Express and Knex](2_express_knex.md)
 1. [User Registration](3_user_registration.md)
 1. [User Authentication](4_user_authentication.md)
+1. [Heroku Deployment](5_heroku_deployment.md)
 
 Additionally, each part has a set of optional bonus assignments to try once you completed the its main assignment. Since parts share many of the same bonus assignments, you may move to the next part without having finished all the bonuses.
 
