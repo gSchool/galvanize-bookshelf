@@ -30,11 +30,8 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cookieSession({
-  keys: [
-    process.env.SESSION_KEY1,
-    process.env.SESSION_KEY2
-  ],
-  name: 'bookshelf'
+  name: 'bookshelf',
+  secret: process.env.SESSION_SECRET
 }));
 
 app.use(express.static(path.join('public')));
