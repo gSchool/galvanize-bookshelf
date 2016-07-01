@@ -50,8 +50,8 @@ suite('part4 routes session', () => {
             password: password
           })
           .expect('set-cookie', /loggedIn=true; Path=\//)
-          .expect('set-cookie', /session=[a-zA-Z0-9=]*; path=\//)
-          .expect('set-cookie', /session.sig=[a-zA-Z0-9=\-_]*; path=\//)
+          .expect('set-cookie', /bookshelf=[a-zA-Z0-9=]*; path=\//)
+          .expect('set-cookie', /bookshelf.sig=[a-zA-Z0-9=\-_]*; path=\//)
           .expect('Content-Type', /plain/)
           .expect(200, 'OK', done);
       })
@@ -114,8 +114,8 @@ suite('part4 routes session', () => {
     request(server)
       .delete('/session')
       .expect('set-cookie', /loggedIn=; Path=\//)
-      .expect('set-cookie', /session=; path=\//)
-      .expect('set-cookie', /session.sig=[a-zA-Z0-9=\-_]*; path=\//)
+      .expect('set-cookie', /bookshelf=; path=\//)
+      .expect('set-cookie', /bookshelf.sig=[a-zA-Z0-9=\-_]*; path=\//)
       .expect('Content-Type', /plain/)
       .expect(200, 'OK', done);
   });
