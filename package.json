@@ -2,16 +2,32 @@
   "name": "galvanize-bookshelf",
   "version": "1.0.0",
   "description": "Create a web application to manage your book collection",
+  "main": "server.js",
   "scripts": {
+    "knex": "knex",
+    "lint": "eslint  --ignore-pattern public/js/vendor",
+    "nf": "nf start",
+    "start": "nodemon server.js",
     "test": "mocha"
   },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
   "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
   "dependencies": {
-    "bcrypt": "^0.8.7",
+    "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.15.2",
+    "boom": "^3.2.2",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-alpha.1",
     "express": "^4.14.0",
+    "humps": "^1.1.0",
     "knex": "^0.11.7",
     "morgan": "^1.7.0",
     "pg": "^6.0.0"
@@ -19,9 +35,14 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "dotenv": "^2.0.0",
+    "eslint": "^3.1.1",
+    "eslint-config-ryansobol": "^7.7.0",
     "foreman": "^1.4.1",
     "mocha": "^2.5.3",
-    "nodemon": "^1.9.2",
+    "nodemon": "^1.10.0",
     "supertest": "^1.2.0"
+  },
+  "engines": {
+    "node": ""
   }
 }
