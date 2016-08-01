@@ -9,18 +9,18 @@ In this assignment, you'll build authentication and authorization systems for y
 Translate the following entity relationship diagram into a Knex migration file.
 
 ```text
-┌───────────────────────────────────────────────────────────────────────────────────────────┐
-│                                         favorites                                         │
-├────────────────┬─────────────────────────┬────────────────────────────────────────────────┤
-│id              │serial                   │primary key                                     │
-│book_id         │integer                  │not null references books(id) on delete cascade │
-|user_id         │integer                  │not null references users(id) on delete cascade │
-│created_at      │timestamp with time zone │not null default now()                          │
-│updated_at      │timestamp with time zone │not null default now()                          │
-└────────────────┴─────────────────────────┴────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                         favorites                                               │
+├────────────────┬─────────────────────────┬──────────────────────────────────────────────────────┤
+│id              │serial                   │primary key                                           │
+│book_id         │integer                  │not null references books(id) on delete cascade index │
+|user_id         │integer                  │not null references users(id) on delete cascade index │
+│created_at      │timestamp with time zone │not null default now()                                │
+│updated_at      │timestamp with time zone │not null default now()                                │
+└────────────────┴─────────────────────────┴──────────────────────────────────────────────────────┘
 ```
 
-Additionally, add an index on the foreign key columns. You can run the following test suite to verify the migration file works as expected.
+You can run the following test suite to verify the migration file works as expected.
 
 ```shell
 npm test test/part4.migrations.test.js
