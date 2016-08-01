@@ -1,6 +1,6 @@
 # User Registration
 
-In this assignment, you'll add the necessary code to allow users to register accounts with the system.
+In this assignment, you'll build a user registration system for your RESTful, database-driven, HTTP server.
 
 ## Migrations
 
@@ -20,49 +20,80 @@ Translate the following entity relationship diagram into a Knex migration file.
 └────────────────┴─────────────────────────┴───────────────────────┘
 ```
 
-More specifically, the migration file should:
+You can run the following test suite to verify the migration file works as expected.
 
-- Live in the `migrations` directory.
-- Migrate one table per migration file.
-- Pass all the tests when `npm test test/part3.migrations.test.js` is run.
+```shell
+npm test test/part3.migrations.test.js
+```
+
+## Seeds
+
+Translate the following [JavaScript entity](https://gist.github.com/ryansobol/e1113da9ff1486c04f6175a35f975b65) into a Knex seed file. You can run the following test suite to verify the seed file works as expected.
+
+```shell
+npm test test/part3.seeds.test.js
+```
 
 ## Routes
 
-Next, update your server to handle the following HTTP request and send the appropriate HTTP response.
+In the `routes/users.js` module, add middleware to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type.
 
-**NOTE:** The information in just the request body uses the `application/json` content type.
+| Request Method | Request URL        | Request Body                                                                                                        | Response Status | Response Body                                                   |
+|----------------|--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------|-----------------------------------------------------------------|
+| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "email": "john.siracusa@gmail.com", "password": "ilikebigcats" }` | `200`           | `{ id: 2, "first_name": "John", "last_name": "Siracusa", ... }` |
 
-| Request Method | Request URL        | Request Body                                                                                                        | Response Status | Response Content-Type | Response Body |
-|----------------|--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------|-----------------------|---------------|
-| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "email": "john.siracusa@gmail.com", "password": "ilikebigcats" }` | `200`           | `text/plain`          | `OK`          |
+**NOTE:** Only store a cryptographic hash of the password in the database. And don't send the new user's password or hashed password in the response body.
 
-In the `routes/users.js` module, add the necessary middleware to handle above RESTful route table. Make sure the route handler securely registers new users using the following techniques.
-
-- Only store a cryptographic hash of the password in the database.
-- Do _not_ send the new user's password or hashed password in the response body.
-
-You can run the following test suite to verify the positive case when the middleware responds with a `200` status code.
+You can run the following test suite to verify the middleware works as expected.
 
 ```shell
-npm test test/part3.routes.users.test.js
+npm test test/part3.routes.test.js
 ```
 
 ## Bonus
 
-Next, update your server to handle the following problem HTTP requests and send the appropriate HTTP response.
-
-**NOTE:** The information in just the request body uses the `application/json` content type.
-
-| Request Method | Request URL        | Request Body                                                                                                        | Response Status | Response Content-Type | Response Body                |
-|----------------|--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------|-----------------------|------------------------------|
-| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "password": "ilikebigcats" }`                                     | `400`           | `text/plain`          | `Email must not be blank`    |
-| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "email": "john.siracusa@gmail.com" }`                             | `400`           | `text/plain`          | `Password must not be blank` |
-| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "email": "john.siracusa@gmail.com", "password": "ilikebigcats" }` | `400`           | `text/plain`          | `Email already exists`       |
-
-In the `routes/users.js` module, update the necessary middleware to handle above RESTful route table. Make sure the route handler continues to securely register new users as before.
-
-You can run the following test suite to verify the negative cases when the middleware responds with a `400` status code.
+After migrating and seeding the `bookshelf_dev` database, start an HTTP server.
 
 ```shell
-npm test test/part3.routes.users.test.js
+npm start
 ```
+
+And open the sign up page.
+
+```shell
+open http://localhost:8000/signup.html
+```
+
+Then, play around with the live application by registering a new user. As you play, take a peek at the code for the client application and familiarize yourself with the following techniques.
+
+- How the HTML files scaffold the base structure and content that's presented on page load.
+- How the JavaScript files modify this structure and content as a result of AJAX requests.
+- How the CSS files customize the look-and-feel of the structure and content.
+
+**TIP:** It's important to remember how these techniques work because you'll be building both a server application and a client application for your Q2 Project.
+
+## Bonus
+
+In the `routes/users.js` module, update the middleware to handle the following HTTP requests and send back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type.
+
+| Request Method | Request URL        | Request Body                              | Response Status | Response Body                                 |
+|----------------|--------------------|-------------------------------------------|-----------------|-----------------------------------------------|
+| `POST`         | `/users`           | `{ email: "", ... }`                      | `400`           | `Email must not be blank`                     |
+| `POST`         | `/users`           | `{ password: "", ... }`                   | `400`           | `Password must be at least 8 characters long` |
+| `POST`         | `/users`           | `{ "email": "jkrowling@gmail.com", ... }` | `400`           | `Email already exists`                        |
+
+You can run the following test suite to verify the middleware works as expected.
+
+```shell
+npm test test/part3.routes.bonus.test.js
+```
+
+**NOTE:** Ensure the middleware handles the previous HTTP requests as before.
+
+## Bonus
+
+Using your preferred ESLint rules, lint your project with the `npm run lint .` command.
+
+## Bonus
+
+Once you're satisfied, find a classmate and see if that person would like some help.

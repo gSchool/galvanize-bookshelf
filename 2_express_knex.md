@@ -1,45 +1,82 @@
 # Express and Knex
 
-In this assignment, you'll build a RESTful, database-driven HTTP server, using Express and Knex, to manage your migrated and seeded database. Your server will handle the following HTTP requests and send the appropriate HTTP response.
+In this assignment, you'll build a RESTful, database-driven, HTTP server, using Express and Knex, to manage your migrated and seeded database.
 
-**NOTE:** The information in both the request body and the response body use the `application/json` content type.
+## Books
 
-| Request Method | Request URL        | Request Body                                                                                             | Response Status | Response Body                                                                                                                                |
-|----------------|--------------------|----------------------------------------------------------------------------------------------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `GET`          | `/authors`         | N/A                                                                                                      | `200`           | `[{ "first_name": "Bonnie", "last_name": "Eisenman", "biography": "...", "portrait_url": "https://..." }, ...]`                              |
-| `GET`          | `/authors/3`       | N/A                                                                                                      | `200`           | `{ "first_name": "Bonnie", "last_name": "Eisenman", "biography": "...", "portrait_url": "https://..." }`                                     |
-| `POST`         | `/authors`         | `{ "first_name": "Bonnie", "last_name": "Eisenman", "biography": "...", "portrait_url": "https://..." }` | `200`           | `{ "first_name": "Bonnie", "last_name": "Eisenman", "biography": "...", "portrait_url": "https://..." }`                                     |
-| `PATCH`        | `/authors/3`       | `{ "first_name": "Bonnie", "last_name": "Eisenman", "biography": "...", "portrait_url": "https://..." }` | `200`           | `{ "first_name": "Bonnie", "last_name": "Eisenman", "biography": "...", "portrait_url": "https://..." }`                                     |
-| `DELETE`       | `/authors/3`       | N/A                                                                                                      | `200`           | `{ "first_name": "Bonnie", "last_name": "Eisenman", "biography": "...", "portrait_url": "https://..." }`                                     |
-| `GET`          | `/authors/3/books` | N/A                                                                                                      | `200`           | `[{ "title": "Python In A Nutshell", "author_id": 2, "genre": "Python", "description": "This book..." }, ...]` (books that the author wrote) |
+In the `routes/books.js` module, add middleware to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type.
 
-In the `routes/authors.js` module, add the necessary middleware to handle above RESTful route table. Note that the middleware for the following HTTP requests must respond with an array of entities ordered by their `id` attribute.
+| Request Method | Request URL        | Request Body                                             | Response Status | Response Body                                                          |
+|----------------|--------------------|----------------------------------------------------------|-----------------|------------------------------------------------------------------------|
+| `GET`          | `/books`           | N/A                                                      | `200`           | `[{ id: 1, "title": "JavaScript, The Good Parts", ... }, ...]`         |
+| `GET`          | `/books/1`         | N/A                                                      | `200`           | `{ id: 1, "title": "JavaScript, The Good Parts", ... }`                |
+| `POST`         | `/books`           | `{ "title": "You Don't Know JS: Types & Grammar", ... }` | `200`           | `{ id: 9, "title": "You Don't Know JS: Types & Grammar", ... }`        |
+| `PATCH`        | `/books/9`         | `{ description: "Looks at type coercion problems." }`    | `200`           | `{ id: 9, ..., description: "Looks at type coercion problems.", ... }` |
+| `DELETE`       | `/books/9`         | N/A                                                      | `200`           | `{ "title": "You Don't Know JS: Types & Grammar", ... }`               |
 
-- `GET /authors`
-- `GET /authors/:id/books`
+**NOTE:** The response to a `GET /books` request must contain all book entities ordered by their `title` column.
 
-You can run the following test suite to verify the positive case when each middleware responds with a `200` status code.
+You can run the following test suite to verify the middleware works as expected.
 
 ```shell
-npm test test/part2.routes.authors.test.js
+npm test test/part2.routes.test.js
 ```
 
 ## Bonus
 
-| Request Method | Request URL        | Request Body                                                                                             | Response Status | Response Body                                                                                                                                |
-|----------------|--------------------|----------------------------------------------------------------------------------------------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `GET`          | `/books`           | N/A                                                                                                      | `200`           | `[{ "title": "Python In A Nutshell", "author_id": 2, "genre": "Python", "description": "This book..." }, ...]`                               |                                            |
-| `GET`          | `/books/3`         | N/A                                                                                                      | `200`           | `{ "title": "Python In A Nutshell", "author_id": 2, "genre": "Python", "description": "This book..." }`                                      |
-| `POST`         | `/books`           | `{ "title": "Python In A Nutshell", "author_id": 2, "genre": "Python", "description": "This book..." }`  | `200`           | `{ "title": "Python In A Nutshell", "author_id": 2, "genre": "Python", "description": "This book..." }`                                      |
-| `PATCH`        | `/books/3`         | `{ "title": "Python In A Nutshell", "author_id": 2, "genre": "Python", "description": "This book..." }`  | `200`           | `{ "title": "Python In A Nutshell", "author_id": 2, "genre": "Python", "description": "This book..." }`                                      |
-| `DELETE`       | `/books/3`         | N/A                                                                                                      | `200`           | `{ "title": "Python In A Nutshell", "author_id": 2, "genre": "Python", "description": "This book..." }`                                      |
-
-In the `routes/books.js` module, add the necessary middleware to handle above RESTful route table. Note that the middleware for the following HTTP requests must respond with an array of entities ordered by their `id` attribute.
-
-- `GET /books`
-
-You can run the following test suite to verify the positive case when each middleware responds with a `200` status code.
+After migrating and seeding the `bookshelf_dev` database, start an HTTP server.
 
 ```shell
-npm test test/part2.routes.books.test.js
+npm start
 ```
+
+And open the books page.
+
+```shell
+open http://localhost:8000/index.html
+```
+
+Then, play around with the live application by viewing, editing, and deleting its books. As you play, take a peek at the code for the client application and familiarize yourself with the following techniques.
+
+- How the HTML files scaffold the base structure and content that's presented on page load.
+- How the JavaScript files modify this structure and content as a result of AJAX requests.
+- How the CSS files customize the look-and-feel of the structure and content.
+
+**TIP:** It's important to remember how these techniques work because you'll be building both a server application and a client application for your Q2 Project.
+
+## Bonus
+
+In the `routes/books.js` module, update the middleware to handle the following HTTP requests and send back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type.
+
+| Request Method | Request URL         | Request Body                 | Response Status | Response Body                   |
+|----------------|---------------------|------------------------------|-----------------|---------------------------------|
+| `GET`          | `/books/9000`       | N/A                          | `404`           | `Not Found`                     |
+| `GET`          | `/books/-1`         | N/A                          | `404`           | `Not Found`                     |
+| `GET`          | `/books/one`        | N/A                          | `404`           | `Not Found`                     |
+| `POST`         | `/books`            | `{ "title": "", ... }`       | `400`           | `Title must not be blank`       |
+| `POST`         | `/books`            | `{ "author": "", ... }`      | `400`           | `Author must not be blank`      |
+| `POST`         | `/books`            | `{ "genre": "", ... }`       | `400`           | `Genre name must not be blank`  |
+| `POST`         | `/books`            | `{ "description": "", ... }` | `400`           | `Description must not be blank` |
+| `POST`         | `/books`            | `{ "coverUrl": "", ... }`    | `400`           | `Cover URL must not be blank`   |
+| `PATCH`        | `/books/9000`       | N/A                          | `404`           | `Not Found`                     |
+| `PATCH`        | `/books/-1`         | N/A                          | `404`           | `Not Found`                     |
+| `PATCH`        | `/books/one`        | N/A                          | `404`           | `Not Found`                     |
+| `DELETE`       | `/books/9000`       | N/A                          | `404`           | `Not Found`                     |
+| `DELETE`       | `/books/-1`         | N/A                          | `404`           | `Not Found`                     |
+| `DELETE`       | `/books/one`        | N/A                          | `404`           | `Not Found`                     |
+
+You can run the following test suite to verify the middleware works as expected.
+
+```shell
+npm test test/part2.routes.bonus.test.js
+```
+
+**NOTE:** Ensure the middleware handles the previous HTTP requests as before.
+
+## Bonus
+
+Using your preferred ESLint rules, lint your project with the `npm run lint .` command.
+
+## Bonus
+
+Once you're satisfied, find a classmate and see if that person would like some help.
