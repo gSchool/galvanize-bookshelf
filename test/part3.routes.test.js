@@ -1,16 +1,18 @@
+/* eslint-disable camelcase */
+
 'use strict';
 
 process.env.NODE_ENV = 'test';
 
 const assert = require('chai').assert;
-const {suite, test} = require('mocha');
+const { suite, test } = require('mocha');
 const bcrypt = require('bcrypt');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
 
-suite('part3 routes users', () => {
-  before(function(done) {
+suite('part3 routes', () => {
+  before((done) => {
     knex.migrate.latest()
       .then(() => {
         done();
@@ -20,9 +22,8 @@ suite('part3 routes users', () => {
       });
   });
 
-  beforeEach(function(done) {
-    knex('users')
-      .del()
+  beforeEach((done) => {
+    knex.seed.run()
       .then(() => {
         done();
       })
@@ -36,49 +37,56 @@ suite('part3 routes users', () => {
 
     request(server)
       .post('/users')
+      .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
-        first_name: 'John',
-        last_name: 'Siracusa',
+        firstName: 'John',
+        lastName: 'Siracusa',
         email: 'john.siracusa@gmail.com',
-        password: password
+        password
       })
-      .expect('Content-Type', /plain/)
-      .expect(200, 'OK')
-      .end((httpErr, res) => {
+      .expect('Content-Type', /json/)
+      .expect((res) => {
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+      })
+      .expect(200, {
+        id: 2,
+        firstName: 'John',
+        lastName: 'Siracusa',
+        email: 'john.siracusa@gmail.com'
+      })
+      .end((httpErr, _res) => {
         if (httpErr) {
           return done(httpErr);
         }
 
         knex('users')
+          .where('id', 2)
           .first()
           .then((user) => {
-            const hashed_password = user.hashed_password;
+            const hashedPassword = user.hashed_password;
 
-            delete user.id;
             delete user.hashed_password;
             delete user.created_at;
             delete user.updated_at;
 
             assert.deepEqual(user, {
+              id: 2,
               first_name: 'John',
               last_name: 'Siracusa',
               email: 'john.siracusa@gmail.com'
             });
 
-            bcrypt.compare(password, hashed_password, (compErr, isMatch) => {
-              if (compErr) {
-                return done(compErr);
-              }
+            // eslint-disable-next-line no-sync
+            const isMatch = bcrypt.compareSync(password, hashedPassword);
 
-              assert.isTrue(isMatch, "passwords don't match");
-
-              done();
-            });
+            assert.isTrue(isMatch, "passwords don't match");
+            done();
           })
           .catch((dbErr) => {
             done(dbErr);
           });
-      })
+      });
   });
 });

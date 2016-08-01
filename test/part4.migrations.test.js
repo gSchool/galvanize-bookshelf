@@ -1,13 +1,15 @@
+/* eslint-disable camelcase */
+
 'use strict';
 
 process.env.NODE_ENV = 'test';
 
 const assert = require('chai').assert;
-const {suite, test} = require('mocha');
+const { suite, test } = require('mocha');
 const knex = require('../knex');
 
 suite('part4 migrations', () => {
-  before(function(done) {
+  before((done) => {
     knex.migrate.latest()
       .then(() => {
         done();
@@ -17,15 +19,15 @@ suite('part4 migrations', () => {
       });
   });
 
-  test('users_books table', (done) => {
-    knex('users_books').columnInfo()
+  test('favorites table', (done) => {
+    knex('favorites').columnInfo()
       .then((actual) => {
         const expected = {
           id: {
             type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: 'nextval(\'users_books_id_seq\'::regclass)'
+            defaultValue: 'nextval(\'favorites_id_seq\'::regclass)'
           },
 
           book_id: {
@@ -61,7 +63,7 @@ suite('part4 migrations', () => {
           assert.deepEqual(
             actual[column],
             expected[column],
-            `Column ${column} not the same`
+            `Column ${column} is not the same`
           );
         }
 

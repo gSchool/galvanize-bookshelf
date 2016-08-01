@@ -1,13 +1,15 @@
+/* eslint-disable camelcase */
+
 'use strict';
 
 process.env.NODE_ENV = 'test';
 
 const assert = require('chai').assert;
-const {suite, test} = require('mocha');
+const { suite, test } = require('mocha');
 const knex = require('../knex');
 
 suite('part3 migrations', () => {
-  before(function(done) {
+  before((done) => {
     knex.migrate.latest()
       .then(() => {
         done();
@@ -75,7 +77,7 @@ suite('part3 migrations', () => {
           assert.deepEqual(
             actual[column],
             expected[column],
-            `Column ${column} not the same`
+            `Column ${column} is not the same`
           );
         }
 
