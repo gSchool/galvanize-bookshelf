@@ -19,7 +19,7 @@ suite('part3 migrations', () => {
       });
   });
 
-  test('users table', (done) => {
+  test('users columns', (done) => {
     knex('users').columnInfo()
       .then((actual) => {
         const expected = {

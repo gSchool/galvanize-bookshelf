@@ -29,7 +29,7 @@ suite('part1 seeds', () => {
       });
   });
 
-  test('books', (done) => {
+  test('books rows', (done) => {
     knex('books').orderBy('id', 'ASC')
       .then((actual) => {
         /* eslint-disable max-len */

@@ -29,7 +29,7 @@ suite('part4 seeds', () => {
       });
   });
 
-  test('favorites', (done) => {
+  test('favorites rows', (done) => {
     knex('favorites').orderBy('id', 'ASC')
       .then((actual) => {
         const expected = [{

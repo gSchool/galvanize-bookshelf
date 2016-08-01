@@ -19,7 +19,7 @@ suite('part1 migrations', () => {
       });
   });
 
-  test('books table', (done) => {
+  test('books columns', (done) => {
     knex('books').columnInfo()
       .then((actual) => {
         const expected = {
