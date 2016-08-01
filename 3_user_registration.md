@@ -1,3 +1,5 @@
+#### [⇐ Previous](2_express_knex.md) | [Next ⇒](4_authentication_authorization.md)
+
 # User Registration
 
 In this assignment, you'll build a user registration system for your RESTful, database-driven, HTTP server.
@@ -97,3 +99,5 @@ Using your preferred ESLint rules, lint your project with the `npm run lint .` c
 ## Bonus
 
 Once you're satisfied, find a classmate and see if that person would like some help.
+
+#### [⇐ Previous](2_express_knex.md) | [Next ⇒](4_authentication_authorization.md)

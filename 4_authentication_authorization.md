@@ -1,3 +1,5 @@
+#### [⇐ Previous](3_user_registration.md) | [Next ⇒](5_heroku_deployment.md)
+
 # Authentication and Authorization
 
 In this assignment, you'll build authentication and authorization systems for your RESTful, database-driven, HTTP server.
@@ -152,3 +154,5 @@ Using your preferred ESLint rules, lint your project with the `npm run lint .` c
 ## Bonus
 
 Once you're satisfied, find a classmate and see if that person would like some help.
+
+#### [⇐ Previous](3_user_registration.md) | [Next ⇒](5_heroku_deployment.md)

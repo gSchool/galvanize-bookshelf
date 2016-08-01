@@ -1,3 +1,5 @@
+#### [⇐ Previous](1_migrations_seeds.md) | [Next ⇒](3_user_registration.md)
+
 # Express and Knex
 
 In this assignment, you'll build a RESTful, database-driven, HTTP server, using Express and Knex, to manage your migrated and seeded database.
@@ -80,3 +82,5 @@ Using your preferred ESLint rules, lint your project with the `npm run lint .` c
 ## Bonus
 
 Once you're satisfied, find a classmate and see if that person would like some help.
+
+#### [⇐ Previous](1_migrations_seeds.md) | [Next ⇒](3_user_registration.md)

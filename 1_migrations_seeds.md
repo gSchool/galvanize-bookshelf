@@ -1,3 +1,5 @@
+#### [⇐ Previous](README.md) | [Next ⇒](2_express_knex.md)
+
 # Knex Migrations and Seeds
 
 For this assignment, your task is to build a web application to manage a book collection. In the first part, you'll lay the foundation by creating Knex migration and seed files. Start by forking and cloning this repository to your development environment.
@@ -95,3 +97,5 @@ Then, take a peek at the code for the client application. It lives in the `publi
 ## Bonus
 
 Once you're satisfied, find a classmate and see if that person would like some help.
+
+#### [⇐ Previous](README.md) | [Next ⇒](2_express_knex.md)
