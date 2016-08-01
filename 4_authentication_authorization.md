@@ -20,7 +20,7 @@ Translate the following entity relationship diagram into a Knex migration file.
 └────────────────┴─────────────────────────┴────────────────────────────────────────────────┘
 ```
 
-You can run the following test suite to verify the migration file works as expected.
+Additionally, add an index on the foreign key columns. You can run the following test suite to verify the migration file works as expected.
 
 ```shell
 npm test test/part4.migrations.test.js
