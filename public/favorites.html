@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Galvanize Bookshelf</title>
+    <title>Galvanize Bookshelf - Favorites</title>
     <!--Import Google Icon Font-->
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -45,35 +45,15 @@
       </nav>
     </div>
 
-    <main class="container">
-      <div class="row">
-        <form id="loginForm" class="col offset-s2 s8">
-          <div class="card">
-            <div class="card-content">
-              <span class="card-title">Log in</span>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="Email" id="email" type="text" class="validate">
-                  <label for="email">Email</label>
-                </div>
-              </div>
+    <main>
+      <div class="parallax-container">
+        <div class="parallax"><img src="/images/favorites.jpeg"></div>
+      </div>
 
-              <div class="row">
-                <div class="input-field col s12">
-                  <input placeholder="Password" id="password" type="password" class="validate">
-                  <label for="password">Password</label>
-                </div>
-              </div>
-            </div>
+      <div class="container">
+        <h2>Favorites</h2>
 
-            <div class="card-action">
-              <button class="waves-effect waves-light btn-large" type="submit" name="action">
-                <i class="material-icons left">lock</i>
-                Log in
-              </button>
-            </div>
-          </div>
-        </form>
+        <div id="favorites" class="row"></div>
       </div>
     </main>
 
@@ -87,6 +67,6 @@
     <script type="text/javascript" src="/js/vendor/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/js/vendor/materialize.min.js"></script>
     <script src="/js/nav.js"></script>
-    <script src="/js/login.js"></script>
+    <script src="/js/favorites.js"></script>
   </body>
 </html>

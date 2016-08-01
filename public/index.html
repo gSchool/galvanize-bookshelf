@@ -2,106 +2,72 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Galvanize Bookshelf</title>
+    <title>Galvanize Bookshelf - Books</title>
     <!--Import Google Icon Font-->
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-    <!--Import index.css-->
-    <link type="text/css" rel="stylesheet" href="css/index.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
 
     <!-- Import styles.css -->
-    <link type="text/css" rel="stylesheet" href="css/styles.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/styles.css"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
-  <body>
+  <body class="blue-grey lighten-5">
     <div class="navbar-fixed">
-      <nav>
+      <nav class="blue-grey darken-2">
         <div class="nav-wrapper">
           <a href="/" class="brand-logo">
             <span>
-              <img class="logo-png" src="images/galvanize_logo.png" />
+              <img class="logo-png" src="/images/galvanize.png" />
             </span>
             <span class="logo-text">bookshelf</span>
           </a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+          <a class="button-collapse" data-activates="mobileNav">
+            <i class="material-icons">menu</i>
+          </a>
+
           <ul class="right hide-on-med-and-down">
-            <li><a href="books.html">Books</a></li>
-            <li><a href="authors.html">Authors</a></li>
-            <li><a class="session" href="login.html">Login</a></li>
+            <li><a href="/index.html">Books</a></li>
+            <li class="firstNavItem"></li>
+            <li class="secondNavItem"></li>
           </ul>
-          <ul class="side-nav" id="mobile-demo">
-            <li><a href="books.html">Books</a></li>
-            <li><a href="authors.html">Authors</a></li>
-            <li><a class="session" href="login.html">Login</a></li>
+
+          <ul id="mobileNav" class="side-nav">
+            <li><a href="/index.html">Books</a></li>
+            <li class="firstNavItem"></li>
+            <li class="secondNavItem"></li>
           </ul>
         </div>
       </nav>
     </div>
 
     <main>
-      <div class="container">
-        <div class="row">
-          <div class="col offset-s2 s8">
-            <div class="card">
-              <div class="card-content">
-                <span class="card-title">User Registration</span>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input placeholder="First Name" id="fname" type="text" class="validate">
-                    <label for="fname">First Name</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input placeholder="Last Name" id="lname" type="text" class="validate">
-                    <label for="lname">Last Name</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input placeholder="Email" id="email" type="text" class="validate">
-                    <label for="email">Email</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input placeholder="Password" id="password" type="password" class="validate">
-                    <label for="password">Password</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input placeholder="Retype Password" id="password2" type="password" class="validate">
-                    <label for="password2">Retype Password</label>
-                  </div>
-                </div>
-              </div>
-              <div class="card-action">
-                <a class="waves-effect waves-light btn-large register">Register</a>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="parallax-container">
+        <div class="parallax"><img src="/images/books.jpeg"></div>
       </div>
+
+      <div class="container">
+        <h2>Books</h2>
+
+        <div id="books" class="row"></div>
+      </div>
+
     </main>
 
-    <footer class="page-footer">
+    <footer class="page-footer blue-grey">
       <div class="footer-copyright">
         <small>© 2016 Galvanize, Inc. All Rights Reserved</small>
       </div>
     </footer>
 
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script src="js/bonuses.js"></script>
-    <script src="js/nav.js"></script>
-    <script src="js/helpers.js"></script>
-    <script src="js/index.js"></script>
+    <script type="text/javascript" src="/js/vendor/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/js/vendor/materialize.min.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/index.js"></script>
   </body>
 </html>

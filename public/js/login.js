@@ -1,48 +1,36 @@
 (function() {
   'use strict';
 
-  if (window.COOKIES.loggedIn) {
-    window.location.href = '/';
+  $('.button-collapse').sideNav();
 
-    return;
-  }
+  $('#loginForm').submit((event) => {
+    event.preventDefault();
 
-  $('.login').click((_event) => {
     const email = $('#email').val().trim();
     const password = $('#password').val();
 
-    // Validation
     if (!email) {
-      return Materialize.toast('Please enter an email.', 2000);
-    }
-
-    if (email.indexOf('@') < 0) {
-      return Materialize.toast('Please enter a valid email.', 2000);
+      return Materialize.toast('Email must not be blank', 3000);
     }
 
     if (!password) {
-      return Materialize.toast('Please enter a password.', 2000);
+      return Materialize.toast('Password must not be blank', 3000);
     }
 
-    const $xhr = $.ajax({
-      url: '/session',
-      type: 'POST',
+    const options = {
       contentType: 'application/json',
-      data: JSON.stringify({ email, password })
-    });
+      data: JSON.stringify({ email, password }),
+      dataType: 'json',
+      type: 'POST',
+      url: '/session'
+    };
 
-    $xhr.done(() => {
-      if ($xhr.status !== 200) {
-        Materialize.toast('User could not be logged in. Please try again.');
-
-        return;
-      }
-
-      window.location.href = '/';
-    });
-
-    $xhr.fail(() => {
-      Materialize.toast('User could not be logged in. Please try again.');
-    });
+    $.ajax(options)
+      .done(() => {
+        window.location.href = '/favorites.html';
+      })
+      .fail(($xhr) => {
+        Materialize.toast($xhr.responseText, 3000);
+      });
   });
 })();

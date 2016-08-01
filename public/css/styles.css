@@ -1,68 +1,70 @@
 body {
-  background-color: #eceff1;
+  flex-direction: column;
   display: flex;
   min-height: 100vh;
-  flex-direction: column; }
+}
 
-nav {
-  background-color: #455a64;
-  height: 56px;
-  line-height: 56px; }
-  nav .active {
-    height: 56px; }
-  nav .logo-text {
-    border-left: 0.1rem solid #b6b6b6;
-    bottom: 8px;
-    font-size: 1.25rem;
-    font-weight: 200;
-    letter-spacing: 0.2rem;
-    line-height: 2rem;
-    padding-left: 0.75rem;
-    position: relative;
-    text-transform: uppercase; }
-  nav .logo-png {
-    padding-left: 15px;
-    padding-top: 13px;
-    width: 130px; }
-  nav ul li {
-    font-size: 1.25rem;
-    font-weight: 200;
-    letter-spacing: 0.2rem;
-    text-transform: uppercase; }
-  nav ul a {
-    color: #b6b6b6; }
+nav .logo-text {
+  border-left: 0.1rem solid #b6b6b6;
+  bottom: 8px;
+  font-size: 1.25rem;
+  font-weight: 200;
+  letter-spacing: 0.2rem;
+  line-height: 2rem;
+  padding-left: 0.75rem;
+  position: relative;
+  text-transform: uppercase;
+}
 
-.navbar-fixed {
-  height: 56px; }
+nav .logo-png {
+  padding-left: 15px;
+  padding-top: 13px;
+  width: 130px;
+}
+
+nav ul li {
+  font-size: 1.25rem;
+  font-weight: 200;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+}
 
 main {
-  flex: 1 0 auto; }
-  main input[type=text]:focus:not([readonly]), main input[type=password]:focus:not([readonly]), main textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #607d8b;
-    box-shadow: 0 1px 0 0 #607d8b; }
-    main input[type=text]:focus:not([readonly]) + label, main input[type=password]:focus:not([readonly]) + label, main textarea.materialize-textarea:focus:not([readonly]) + label {
-      color: #607d8b; }
-  main .btn-large, main .btn {
-    background-color: #9e9e9e;
-    color: #eceff1; }
-    main .btn-large:hover, main .btn:hover {
-      background-color: #727272;
-      color: white; }
-  main .parallax-container {
-    height: 300px; }
-    main .parallax-container img {
-      width: 100%; }
-  main .section {
-    color: #212121;
-    margin-bottom: 50px; }
-  main a {
-    color: #727272; }
-    main a:hover {
-      color: #607d8b; }
-  main .card {
-    margin-top: 30px; }
+  flex: 1 0 auto;
+}
 
-footer.page-footer {
-  background-color: #607d8b; }
-  footer.page-footer small {
-    padding-left: 15px; }
+main input[type=text]:focus:not([readonly]),
+main input[type=password]:focus:not([readonly]),
+main textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #607d8b;
+  box-shadow: 0 1px 0 0 #607d8b;
+}
+
+main input[type=text]:focus:not([readonly]) + label,
+main input[type=password]:focus:not([readonly]) + label,
+main textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #607d8b;
+}
+
+
+main .parallax-container {
+  height: 250px;
+}
+
+main .parallax-container img {
+  width: 100%;
+}
+
+main .card {
+  margin-top: 30px;
+}
+
+footer.page-footer small {
+  padding-left: 15px;
+}
+
+@media only screen and (min-width: 601px) {
+  nav .logo-png {
+    padding-top: 20px;
+  }
+}

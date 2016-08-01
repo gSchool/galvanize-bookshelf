@@ -3,32 +3,32 @@
 
   $('.parallax').parallax();
 
-  $.getJSON('/books')
-    .done((books) => {
-      const $books = $('#books');
+  $.getJSON('/favorites')
+    .done((favorites) => {
+      const $favs = $('#favorites');
 
-      for (const book of books) {
+      for (const fav of favorites) {
         const $anchor = $('<a>')
           .attr({
-            href: `/book.html?id=${book.id}`,
+            href: `/book.html?id=${fav.bookId}`,
             'data-delay': '50',
-            'data-tooltip': book.title
+            'data-tooltip': fav.title
           })
           .tooltip();
 
         const $card = $('<div>').addClass('card');
         const $cardImage = $('<div>').addClass('card-image');
         const $col = $('<div>').addClass('col s6 m4 l3');
-        const $img = $('<img>').attr({ src: book.coverUrl, alt: book.title });
+        const $img = $('<img>').attr({ src: fav.coverUrl, alt: fav.title });
 
         $cardImage.append($img);
         $anchor.append($cardImage);
         $card.append($anchor);
         $col.append($card);
-        $books.append($col);
+        $favs.append($col);
       }
     })
     .fail(() => {
-      Materialize.toast('Unable to retrieve books', 3000);
+      window.location.href = '/signup.html';
     });
 })();

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Galvanize Bookshelf</title>
+    <title>Galvanize Bookshelf - Edit Book</title>
     <!--Import Google Icon Font-->
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -47,29 +47,56 @@
 
     <main class="container">
       <div class="row">
-        <form id="loginForm" class="col offset-s2 s8">
+        <form id="editBookForm" class="col offset-s2 s8">
           <div class="card">
             <div class="card-content">
-              <span class="card-title">Log in</span>
+              <span class="card-title">Edit Book</span>
+
               <div class="row">
                 <div class="input-field col s12">
-                  <input placeholder="Email" id="email" type="text" class="validate">
-                  <label for="email">Email</label>
+                  <input type="text" id="title">
+                  <label for="title" class="active">Title</label>
                 </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input placeholder="Password" id="password" type="password" class="validate">
-                  <label for="password">Password</label>
+                  <input type="text" id="author">
+                  <label for="author" class="active">Author</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" id="genre">
+                  <label for="genre" class="active">Genre</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="description" class="materialize-textarea"></textarea>
+                  <label for="description" class="active">Description</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="url" id="cover">
+                  <label for="cover" class="active">Cover URL</label>
                 </div>
               </div>
             </div>
 
             <div class="card-action">
+              <a id="cancel" class="waves-effect waves-light btn-large red">
+                <i class="material-icons left">clear</i>
+                Cancel
+              </a>
+
               <button class="waves-effect waves-light btn-large" type="submit" name="action">
-                <i class="material-icons left">lock</i>
-                Log in
+                <i class="material-icons left">done</i>
+                Save
               </button>
             </div>
           </div>
@@ -87,6 +114,6 @@
     <script type="text/javascript" src="/js/vendor/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/js/vendor/materialize.min.js"></script>
     <script src="/js/nav.js"></script>
-    <script src="/js/login.js"></script>
+    <script src="/js/edit_book.js"></script>
   </body>
 </html>

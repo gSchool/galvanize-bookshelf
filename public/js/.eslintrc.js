@@ -4,5 +4,7 @@ module.exports = {
     'ryansobol/es6',
     'ryansobol/jquery',
     'ryansobol/materialize'
-  ]
+  ],
+
+  root: true
 };
