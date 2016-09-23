@@ -1,7 +1,7 @@
 /* eslint-disable camelcase, no-sync */
 'use strict';
 
-const express = require('express');
+const express = require(`express`);
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
