@@ -1,4 +1,4 @@
-// Update with your config settings.
+/* eslint-disable sort-keys */
 'use strict';
 
 module.exports = {
@@ -9,5 +9,9 @@ module.exports = {
   test: {
     client: `pg`,
     connection: `postgres://localhost/bookshelf_test`
+  },
+  production: {
+    client: `pg`,
+    connnection: process.env.DATABASE_URL
   }
 };

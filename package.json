@@ -8,7 +8,9 @@
     "lint": "eslint  --ignore-pattern public/js/vendor",
     "nf": "nf start",
     "start": "nodemon server.js",
-    "test": "mocha"
+    "test": "mocha",
+    "nodemon": "nodemon server.js",
+    "heroku-postbuild": "knex migrate:latest"
   },
   "repository": {
     "type": "git",
@@ -43,6 +45,6 @@
     "supertest": "^1.2.0"
   },
   "engines": {
-    "node": ""
+    "node": "6.5.0"
   }
 }
