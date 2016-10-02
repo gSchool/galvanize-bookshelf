@@ -4,6 +4,7 @@
   "description": "Create a web application to manage your book collection",
   "main": "server.js",
   "scripts": {
+    "heroku-postbuild": "knex migrate:latest",
     "knex": "knex",
     "lint": "eslint  --ignore-pattern public/js/vendor",
     "nf": "nf start",
@@ -12,22 +13,26 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/gschool/galvanize-bookshelf.git"
   },
-  "author": "",
+  "author": "Ian Smith <ian.smith@galvanize.com>",
+  "contributors": [
+    "Ken McGrady <ken.mcgrady@galvanize.com>",
+    "Ryan Sobol <ryan.sobol@galvanize.com>"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/gschool/galvanize-bookshelf/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/gschool/galvanize-bookshelf#readme",
   "dependencies": {
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.15.2",
     "boom": "^3.2.2",
     "cookie-parser": "^1.4.3",
-    "cookie-session": "^2.0.0-alpha.1",
     "express": "^4.14.0",
     "humps": "^1.1.0",
+    "jsonwebtoken": "^7.1.9",
     "knex": "^0.11.7",
     "morgan": "^1.7.0",
     "pg": "^6.0.0"
@@ -43,6 +48,6 @@
     "supertest": "^1.2.0"
   },
   "engines": {
-    "node": ""
+    "node": "6.3.1"
   }
 }

@@ -10,7 +10,7 @@ const app = express();
 app.disable('x-powered-by');
 
 const bodyParser = require('body-parser');
-const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
 
 switch (app.get('env')) {
@@ -26,11 +26,7 @@ switch (app.get('env')) {
 }
 
 app.use(bodyParser.json());
-app.use(cookieSession({
-  name: 'bookshelf',
-  secret: process.env.SESSION_SECRET,
-  secureProxy: app.get('env') === 'production'
-}));
+app.use(cookieParser());
 
 const path = require('path');
 
@@ -47,12 +43,12 @@ app.use((req, res, next) => {
 
 const books = require('./routes/books');
 const favorites = require('./routes/favorites');
-const session = require('./routes/session');
+const token = require('./routes/token');
 const users = require('./routes/users');
 
 app.use(books);
 app.use(favorites);
-app.use(session);
+app.use(token);
 app.use(users);
 
 app.use((_req, res) => {

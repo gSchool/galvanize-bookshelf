@@ -7,7 +7,7 @@ const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
 
-suite('part4 routes session bonus', () => {
+suite('part4 routes token bonus', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => {
@@ -28,9 +28,9 @@ suite('part4 routes session bonus', () => {
       });
   });
 
-  test('POST /session with no email', (done) => {
+  test('POST /token with no email', (done) => {
     request(server)
-      .post('/session')
+      .post('/token')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
@@ -40,9 +40,9 @@ suite('part4 routes session bonus', () => {
       .expect(400, 'Email must not be blank', done);
   });
 
-  test('POST /session with no password', (done) => {
+  test('POST /token with no password', (done) => {
     request(server)
-      .post('/session')
+      .post('/token')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({

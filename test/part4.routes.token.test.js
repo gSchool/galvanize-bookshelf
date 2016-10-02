@@ -7,7 +7,7 @@ const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
 
-suite('part4 routes session', () => {
+suite('part4 routes token', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => {
@@ -28,25 +28,24 @@ suite('part4 routes session', () => {
       });
   });
 
-  test('GET /session without session', (done) => {
+  test('GET /token without token', (done) => {
     request(server)
-      .get('/session')
+      .get('/token')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200, 'false', done);
   });
 
-  test('POST /session', (done) => {
+  test('POST /token', (done) => {
     request(server)
-      .post('/session')
+      .post('/token')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
         email: 'jkrowling@gmail.com',
         password: 'youreawizard'
       })
-      .expect('set-cookie', /bookshelf=[a-zA-Z0-9=]*; path=\//)
-      .expect('set-cookie', /bookshelf.sig=[a-zA-Z0-9=\-_]*; path=\//)
+      .expect('set-cookie', /accessToken=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
       .expect('Content-Type', /json/)
       .expect((res) => {
         delete res.body.createdAt;
@@ -60,11 +59,11 @@ suite('part4 routes session', () => {
       }, done);
   });
 
-  test('GET /session with session', (done) => {
+  test('GET /token with token', (done) => {
     const agent = request.agent(server);
 
     request(server)
-      .post('/session')
+      .post('/token')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
@@ -79,26 +78,25 @@ suite('part4 routes session', () => {
         agent.saveCookies(res);
 
         agent
-          .get('/session')
+          .get('/token')
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
           .expect(200, 'true', done);
       });
   });
 
-  test('DELETE /session', (done) => {
+  test('DELETE /token', (done) => {
     request(server)
-      .del('/session')
+      .del('/token')
       .set('Accept', 'application/json')
-      .expect('set-cookie', /bookshelf=; path=\//)
-      .expect('set-cookie', /bookshelf.sig=[a-zA-Z0-9=\-_]*; path=\//)
+      .expect('set-cookie', /accessToken=; Path=\//)
       .expect('Content-Type', /json/)
       .expect(200, 'true', done);
   });
 
-  test('POST /session with bad email', (done) => {
+  test('POST /token with bad email', (done) => {
     request(server)
-      .post('/session')
+      .post('/token')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
@@ -109,9 +107,9 @@ suite('part4 routes session', () => {
       .expect(400, 'Bad email or password', done);
   });
 
-  test('POST /session with bad password', (done) => {
+  test('POST /token with bad password', (done) => {
     request(server)
-      .post('/session')
+      .post('/token')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({

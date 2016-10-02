@@ -9,7 +9,7 @@ In this assignment, you'll deploy your database-driven application to Heroku.
 First, complete the following pre-deployment steps.
 
 1. Create a Heroku app called `USERNAME-galvanize-bookshelf` where `USERNAME` is your GitHub username in lowercase form.
-1. Generate a secret key to sign session information and set it to the `SESSION_SECRET` config variable of the new Heroku app.
+1. Generate a secret key to sign JWT information and set it to the `JWT_SECRET` config variable of the new Heroku app.
 1. Update the `package.json` file with a dependency to a specific Node.js version.
 1. Enable the Heroku PostgreSQL add-on for the new Heroku app.
 1. Update the `knexfile.js` file with the `production` database connection information.

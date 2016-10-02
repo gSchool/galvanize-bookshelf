@@ -24,7 +24,7 @@ suite('part4 routes favorites bonus', () => {
     knex.seed.run()
       .then(() => {
         request(server)
-          .post('/session')
+          .post('/token')
           .set('Accept', 'application/json')
           .set('Content-Type', 'application/json')
           .send({

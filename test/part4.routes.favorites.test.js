@@ -20,14 +20,14 @@ suite('part4 routes favorites', () => {
       });
   });
 
-  suite('with session', () => {
+  suite('with token', () => {
     const agent = request.agent(server);
 
     beforeEach((done) => {
       knex.seed.run()
         .then(() => {
           request(server)
-            .post('/session')
+            .post('/token')
             .set('Accept', 'application/json')
             .set('Content-Type', 'application/json')
             .send({
@@ -114,7 +114,7 @@ suite('part4 routes favorites', () => {
     });
   });
 
-  suite('without session', () => {
+  suite('without token', () => {
     before((done) => {
       knex.migrate.latest()
         .then(() => {

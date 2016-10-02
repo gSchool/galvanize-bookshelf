@@ -100,7 +100,7 @@
       Materialize.toast('Unable to retrieve book', 3000);
     });
 
-  $.getJSON('/session')
+  $.getJSON('/token')
     .done((isLoggedIn) => {
       if (!isLoggedIn) {
         return;

@@ -3,7 +3,7 @@
 
   $('.button-collapse').sideNav();
 
-  $.getJSON('/session')
+  $.getJSON('/token')
     .done((loggedIn) => {
       const $firstNavItems = $('.firstNavItem');
       const $secondNavItems = $('.secondNavItem');
@@ -21,7 +21,7 @@
           const options = {
             dataType: 'json',
             type: 'DELETE',
-            url: '/session'
+            url: '/token'
           };
 
           $.ajax(options)

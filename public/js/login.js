@@ -22,7 +22,7 @@
       data: JSON.stringify({ email, password }),
       dataType: 'json',
       type: 'POST',
-      url: '/session'
+      url: '/token'
     };
 
     $.ajax(options)
