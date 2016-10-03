@@ -11,7 +11,7 @@ const knex = require(`../knex`);
 const humps = require(`humps`);
 const bcrypt = require(`bcrypt`);
 
-router.post(`/users`, (req, res, next) => {
+router.post(`/`, (req, res, next) => {
   const hash = bcrypt.hashSync(req.body.password, 8);
   delete req.body.password;
   req.body.hashed_password = hash;

@@ -10,20 +10,20 @@ const router = express.Router();
 const knex = require(`../knex`);
 const humps = require(`humps`);
 
-router.get(`/books`, (req, res) => {
+router.get(`/`, (req, res) => {
   knex(`books`).orderBy(`title`).then((data) => {
     res.json(humps.camelizeKeys(data));
   });
 });
 
-router.get(`/books/:id`, (req, res) => {
+router.get(`/:id`, (req, res) => {
   const id = req.params.id;
   knex(`books`).where(`id`, id).first().then((data) => {
     res.json(humps.camelizeKeys(data));
   });
 });
 
-router.post(`/books`, (req, res) => {
+router.post(`/`, (req, res) => {
   knex(`books`).insert(humps.decamelizeKeys(req.body), `id`).then((num) => {
     const id = num[0];
     knex(`books`).where(`id`, id).first().then((data) => {
@@ -34,7 +34,7 @@ router.post(`/books`, (req, res) => {
 
 // run the below command in bookshelf_test before every attempt to pass
 // ALTER SEQUENCE books_id_seq RESTART WITH 9;
-router.patch(`/books/:id`, (req, res) => {
+router.patch(`/:id`, (req, res) => {
   const id = req.params.id;
   knex(`books`).where(`id`, id).update(humps.decamelizeKeys(req.body)).then(() => {
     knex(`books`).where(`id`, id).first().then((data) => {
@@ -43,7 +43,7 @@ router.patch(`/books/:id`, (req, res) => {
   });
 });
 
-router.delete(`/books/:id`, (req, res) => {
+router.delete(`/:id`, (req, res) => {
   const id = req.params.id;
   let book;
   knex(`books`).select(`author`, `cover_url`, `description`, `genre`, `title`)

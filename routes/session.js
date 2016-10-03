@@ -12,12 +12,12 @@ const humps = require(`humps`);
 const bcrypt = require(`bcrypt`);
 const boom = require(`boom`);
 
-router.get(`/session`, (req, res) => {
+router.get(`/`, (req, res) => {
   if (req.session.userId) { res.json(true); }
   else { res.json(false); }
 });
 
-router.post(`/session`, (req, res, next) => {
+router.post(`/`, (req, res, next) => {
   const user = req.body;
 
   knex(`users`)
@@ -37,7 +37,7 @@ router.post(`/session`, (req, res, next) => {
   .catch((err) => { next(err); });
 });
 
-router.delete(`/session`, (req, res) => {
+router.delete(`/`, (req, res) => {
   req.session = null;
   res.json(true);
 });
