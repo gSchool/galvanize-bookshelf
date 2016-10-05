@@ -19,7 +19,7 @@ router.get(`/`, (req, res) => {
   else { res.json(false); }
 });
 
-router.post(`/`, (req, res, next) => {
+router.post(`/`, validator(validation.session), (req, res, next) => {
   const user = req.body;
 
   knex(`users`)
@@ -33,7 +33,7 @@ router.post(`/`, (req, res, next) => {
       res.json(humps.camelizeKeys(result));
     }
     else {
-      throw boom.create(400, 'Bad email or password');
+      throw boom.create(400, `Bad email or password`);
     }
   })
   .catch((err) => { next(err); });

@@ -2,8 +2,8 @@
 'use strict';
 
 const express = require(`express`);
-// const validator = require(`express-validation`);
-// const validation = require(`../validations/rules.js`);
+const validator = require(`express-validation`);
+const validation = require(`../validations/rules.js`);
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
@@ -13,7 +13,7 @@ const knex = require(`../knex`);
 const humps = require(`humps`);
 const bcrypt = require(`bcrypt`);
 
-router.post(`/`, (req, res, next) => {
+router.post(`/`, validator(validation.users), (req, res, next) => {
   const hash = bcrypt.hashSync(req.body.password, 8);
   delete req.body.password;
   req.body.hashed_password = hash;

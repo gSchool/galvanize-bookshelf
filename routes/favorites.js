@@ -2,8 +2,8 @@
 'use strict';
 
 const express = require(`express`);
-// const validator = require(`express-validation`);
-// const validation = require(`../validations/rules.js`);
+const validator = require(`express-validation`);
+const validation = require(`../validations/rules`);
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
@@ -38,7 +38,7 @@ router.get(`/`, (req, res, next) => {
   else { throw boom.create(401, `Unauthorized`); }
 });
 
-router.post(`/`, (req, res, next) => {
+router.post(`/`, validator(validation.favorites), (req, res, next) => {
   if (req.session.userId) {
     knex(`favorites`)
     .insert({
