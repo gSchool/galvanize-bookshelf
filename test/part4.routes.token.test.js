@@ -45,7 +45,7 @@ suite('part4 routes token', () => {
         email: 'jkrowling@gmail.com',
         password: 'youreawizard'
       })
-      .expect('set-cookie', /accessToken=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
+      .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
       .expect('Content-Type', /json/)
       .expect((res) => {
         delete res.body.createdAt;
@@ -89,7 +89,7 @@ suite('part4 routes token', () => {
     request(server)
       .del('/token')
       .set('Accept', 'application/json')
-      .expect('set-cookie', /accessToken=; Path=\//)
+      .expect('set-cookie', /token=; Path=\//)
       .expect('Content-Type', /json/)
       .expect(200, 'true', done);
   });

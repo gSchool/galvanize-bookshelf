@@ -56,6 +56,8 @@ Additionally, ensure the `POST /token` middleware handles the following HTTP req
 
 You can run the following test suite to verify the middleware works as expected.
 
+**NOTE** The token is assumed to be stored in a cookie called `token`.
+
 ```shell
 npm test test/part4.routes.token.test.js
 ```
