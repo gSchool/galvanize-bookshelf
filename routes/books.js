@@ -1,6 +1,8 @@
 'use strict';
 
 const express = require(`express`);
+const validator = require(`express-validation`);
+const validation = require(`../validations/rules`);
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
@@ -25,7 +27,7 @@ router.get(`/:id`, (req, res, next) => {
   .catch((err) => next(err));
 });
 
-router.post(`/`, (req, res, next) => {
+router.post(`/`, validator(validation.books), (req, res, next) => {
   knex(`books`)
   .insert(humps.decamelizeKeys(req.body), `id`)
   .then((num) => {
