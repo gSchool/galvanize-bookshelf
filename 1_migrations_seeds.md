@@ -76,6 +76,14 @@ Translate the following [JavaScript entities](https://gist.github.com/ryansobol/
 npm test test/part1.seeds.test.js
 ```
 
+**TIP:** Postgres keeps track of the sequences for any of the incrementing serial id columns in its tables.  Doing a describe on a table will show the name of the sequence it is using in the modifiers column.  When data is inserted with the id hardcoded, which is often desirable with test data, the sequence will not be aware of this.  So, it's important to advance the sequence to the last id.  An example alter statement to do this would be:
+
+```sql
+SELECT setval('books_id_seq', (SELECT MAX(id) FROM books));
+```
+
+Using the knex.raw method you can execute a command like this as the last part of the seed data import sequence.  Remember the async nature of javascript and knex when deciding where to use this method.
+
 ## Bonus
 
 Using your preferred ESLint rules, lint your project with the `npm run lint .` command.
