@@ -112,7 +112,7 @@ suite('part1 seeds', () => {
           assert.deepEqual(
             actual[i],
             expected[i],
-            `Row id=${i + 1} not the same`,
+            `Row id=${i + 1} not the same`
           );
         }
 
