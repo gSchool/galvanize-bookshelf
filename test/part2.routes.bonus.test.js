@@ -1,4 +1,4 @@
-'use strict';
+
 
 process.env.NODE_ENV = 'test';
 
@@ -62,7 +62,7 @@ suite('part2 routes bonus', () => {
         genre: 'Python',
         author: 'Allen B. Downey',
         description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
-        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
+        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Title must not be blank', done);
@@ -79,7 +79,7 @@ suite('part2 routes bonus', () => {
         title: 'Think Python',
         genre: 'Python',
         description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
-        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
+        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Author must not be blank', done);
@@ -96,7 +96,7 @@ suite('part2 routes bonus', () => {
         title: 'Think Python',
         author: 'Allen B. Downey',
         description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
-        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
+        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Genre must not be blank', done);
@@ -113,7 +113,7 @@ suite('part2 routes bonus', () => {
         title: 'Think Python',
         author: 'Allen B. Downey',
         genre: 'Python',
-        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg'
+        coverUrl: 'https://s3-us-west-2.amazonaws.com/assessment-images/galvanize_reads/photos/think_python.jpg',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Description must not be blank', done);
@@ -130,7 +130,7 @@ suite('part2 routes bonus', () => {
         title: 'Think Python',
         author: 'Allen B. Downey',
         genre: 'Python',
-        description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.'
+        description: 'If you want to learn how to program, working with Python is an excellent way to start. This hands-on guide takes you through the language a step at a time, beginning with basic programming concepts before moving on to functions, recursion, data structures, and object-oriented design. This second edition and its supporting code have been updated for Python 3.',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Cover URL must not be blank', done);
