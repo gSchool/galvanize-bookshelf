@@ -1,4 +1,4 @@
-'use strict';
+
 
 process.env.NODE_ENV = 'test';
 
@@ -34,7 +34,7 @@ suite('part4 routes token bonus', () => {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
-        password: 'youreawizard'
+        password: 'youreawizard',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Email must not be blank', done);
@@ -46,7 +46,7 @@ suite('part4 routes token bonus', () => {
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
       .send({
-        email: 'jkrowling@gmail.com'
+        email: 'jkrowling@gmail.com',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Password must not be blank', done);

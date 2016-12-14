@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 
-'use strict';
 
 process.env.NODE_ENV = 'test';
 
@@ -27,57 +26,57 @@ suite('part3 migrations', () => {
             type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: 'nextval(\'users_id_seq\'::regclass)'
+            defaultValue: 'nextval(\'users_id_seq\'::regclass)',
           },
 
           first_name: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
-            defaultValue: '\'\'::character varying'
+            defaultValue: '\'\'::character varying',
           },
 
           last_name: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
-            defaultValue: '\'\'::character varying'
+            defaultValue: '\'\'::character varying',
           },
 
           email: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
-            defaultValue: null
+            defaultValue: null,
           },
 
           hashed_password: {
             type: 'character',
             maxLength: 60,
             nullable: false,
-            defaultValue: null
+            defaultValue: null,
           },
 
           created_at: {
             type: 'timestamp with time zone',
             maxLength: null,
             nullable: false,
-            defaultValue: 'now()'
+            defaultValue: 'now()',
           },
 
           updated_at: {
             type: 'timestamp with time zone',
             maxLength: null,
             nullable: false,
-            defaultValue: 'now()'
-          }
+            defaultValue: 'now()',
+          },
         };
 
         for (const column in expected) {
           assert.deepEqual(
             actual[column],
             expected[column],
-            `Column ${column} is not the same`
+            `Column ${column} is not the same`,
           );
         }
 

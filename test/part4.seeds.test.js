@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 
-'use strict';
 
 process.env.NODE_ENV = 'test';
 
@@ -37,14 +36,14 @@ suite('part4 seeds', () => {
           book_id: 1,
           user_id: 1,
           created_at: new Date('2016-06-29 14:26:16 UTC'),
-          updated_at: new Date('2016-06-29 14:26:16 UTC')
+          updated_at: new Date('2016-06-29 14:26:16 UTC'),
         }];
 
         for (let i = 0; i < expected.length; i++) {
           assert.deepEqual(
             actual[i],
             expected[i],
-            `Row id=${i + 1} not the same`
+            `Row id=${i + 1} not the same`,
           );
         }
 

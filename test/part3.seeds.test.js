@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 
-'use strict';
 
 process.env.NODE_ENV = 'test';
 
@@ -40,7 +39,7 @@ suite('part3 seeds', () => {
           email: 'jkrowling@gmail.com',
           hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
           created_at: new Date('2016-06-29 14:26:16 UTC'),
-          updated_at: new Date('2016-06-29 14:26:16 UTC')
+          updated_at: new Date('2016-06-29 14:26:16 UTC'),
         }];
 
         /* eslint-enable max-len */
@@ -49,7 +48,7 @@ suite('part3 seeds', () => {
           assert.deepEqual(
             actual[i],
             expected[i],
-            `Row id=${i + 1} not the same`
+            `Row id=${i + 1} not the same`,
           );
         }
 

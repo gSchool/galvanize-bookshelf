@@ -1,4 +1,4 @@
-'use strict';
+
 
 process.env.NODE_ENV = 'test';
 
@@ -29,7 +29,7 @@ suite('part4 routes favorites bonus', () => {
           .set('Content-Type', 'application/json')
           .send({
             email: 'jkrowling@gmail.com',
-            password: 'youreawizard'
+            password: 'youreawizard',
           })
           .end((err, res) => {
             if (err) {

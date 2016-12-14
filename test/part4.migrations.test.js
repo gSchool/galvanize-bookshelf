@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 
-'use strict';
 
 process.env.NODE_ENV = 'test';
 
@@ -27,43 +26,43 @@ suite('part4 migrations', () => {
             type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: 'nextval(\'favorites_id_seq\'::regclass)'
+            defaultValue: 'nextval(\'favorites_id_seq\'::regclass)',
           },
 
           book_id: {
             type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: null
+            defaultValue: null,
           },
 
           user_id: {
             type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: null
+            defaultValue: null,
           },
 
           created_at: {
             type: 'timestamp with time zone',
             maxLength: null,
             nullable: false,
-            defaultValue: 'now()'
+            defaultValue: 'now()',
           },
 
           updated_at: {
             type: 'timestamp with time zone',
             maxLength: null,
             nullable: false,
-            defaultValue: 'now()'
-          }
+            defaultValue: 'now()',
+          },
         };
 
         for (const column in expected) {
           assert.deepEqual(
             actual[column],
             expected[column],
-            `Column ${column} is not the same`
+            `Column ${column} is not the same`,
           );
         }
 
@@ -98,19 +97,19 @@ suite('part4 migrations', () => {
           table_name: 'favorites',
           column_name: 'book_id',
           foreign_table_name: 'books',
-          foreign_column_name: 'id'
+          foreign_column_name: 'id',
         }, {
           table_name: 'favorites',
           column_name: 'user_id',
           foreign_table_name: 'users',
-          foreign_column_name: 'id'
+          foreign_column_name: 'id',
         }];
 
         for (const column in expected) {
           assert.deepEqual(
             actual[column],
             expected[column],
-            `Column ${column} is not the same`
+            `Column ${column} is not the same`,
           );
         }
 
