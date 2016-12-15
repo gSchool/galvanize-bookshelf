@@ -1,4 +1,4 @@
-'use strict';
+
 
 process.env.NODE_ENV = 'test';
 
@@ -43,7 +43,7 @@ suite('part4 routes token', () => {
       .set('Content-Type', 'application/json')
       .send({
         email: 'jkrowling@gmail.com',
-        password: 'youreawizard'
+        password: 'youreawizard',
       })
       .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
       .expect('Content-Type', /json/)
@@ -55,7 +55,7 @@ suite('part4 routes token', () => {
         id: 1,
         firstName: 'Joanne',
         lastName: 'Rowling',
-        email: 'jkrowling@gmail.com'
+        email: 'jkrowling@gmail.com',
       }, done);
   });
 
@@ -68,7 +68,7 @@ suite('part4 routes token', () => {
       .set('Content-Type', 'application/json')
       .send({
         email: 'jkrowling@gmail.com',
-        password: 'youreawizard'
+        password: 'youreawizard',
       })
       .end((err, res) => {
         if (err) {
@@ -101,7 +101,7 @@ suite('part4 routes token', () => {
       .set('Content-Type', 'application/json')
       .send({
         email: 'bad.email@gmail.com',
-        password: 'youreawizard'
+        password: 'youreawizard',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Bad email or password', done);
@@ -114,7 +114,7 @@ suite('part4 routes token', () => {
       .set('Content-Type', 'application/json')
       .send({
         email: 'jkrowling@gmail.com',
-        password: 'badpassword'
+        password: 'badpassword',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Bad email or password', done);

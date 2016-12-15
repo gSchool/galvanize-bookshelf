@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 
-'use strict';
 
 process.env.NODE_ENV = 'test';
 
@@ -43,7 +42,7 @@ suite('part3 routes', () => {
         firstName: 'John',
         lastName: 'Siracusa',
         email: 'john.siracusa@gmail.com',
-        password
+        password,
       })
       .expect('Content-Type', /json/)
       .expect((res) => {
@@ -54,7 +53,7 @@ suite('part3 routes', () => {
         id: 2,
         firstName: 'John',
         lastName: 'Siracusa',
-        email: 'john.siracusa@gmail.com'
+        email: 'john.siracusa@gmail.com',
       })
       .end((httpErr, _res) => {
         if (httpErr) {
@@ -75,7 +74,7 @@ suite('part3 routes', () => {
               id: 2,
               first_name: 'John',
               last_name: 'Siracusa',
-              email: 'john.siracusa@gmail.com'
+              email: 'john.siracusa@gmail.com',
             });
 
             // eslint-disable-next-line no-sync

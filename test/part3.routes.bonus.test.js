@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 
-'use strict';
 
 process.env.NODE_ENV = 'test';
 
@@ -39,7 +38,7 @@ suite('part3 routes bonus', () => {
       .send({
         firstName: 'John',
         lastName: 'Siracusa',
-        password: 'ilikebigcats'
+        password: 'ilikebigcats',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Email must not be blank', done);
@@ -53,7 +52,7 @@ suite('part3 routes bonus', () => {
       .send({
         firstName: 'John',
         lastName: 'Siracusa',
-        email: 'john.siracusa@gmail.com'
+        email: 'john.siracusa@gmail.com',
       })
       .expect('Content-Type', /plain/)
       .expect(400, 'Password must be at least 8 characters long', done);
@@ -66,7 +65,7 @@ suite('part3 routes bonus', () => {
         first_name: 'John',
         last_name: 'Siracusa',
         email: 'john.siracusa@gmail.com',
-        hashed_password: bcrypt.hashSync('ilikebigcats', 1)
+        hashed_password: bcrypt.hashSync('ilikebigcats', 1),
       })
       .then(() => {
         request(server)
@@ -77,7 +76,7 @@ suite('part3 routes bonus', () => {
             firstName: 'John',
             lastName: 'Siracusa',
             email: 'john.siracusa@gmail.com',
-            password: 'ilikebigcats'
+            password: 'ilikebigcats',
           })
           .expect('Content-Type', /plain/)
           .expect(400, 'Email already exists', done);

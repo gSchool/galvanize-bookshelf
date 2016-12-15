@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 
-'use strict';
 
 process.env.NODE_ENV = 'test';
 
@@ -27,57 +26,57 @@ suite('part1 migrations', () => {
             type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: 'nextval(\'books_id_seq\'::regclass)'
+            defaultValue: 'nextval(\'books_id_seq\'::regclass)',
           },
 
           title: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
-            defaultValue: '\'\'::character varying'
+            defaultValue: '\'\'::character varying',
           },
 
           author: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
-            defaultValue: '\'\'::character varying'
+            defaultValue: '\'\'::character varying',
           },
 
           genre: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
-            defaultValue: '\'\'::character varying'
+            defaultValue: '\'\'::character varying',
           },
 
           description: {
             type: 'text',
             maxLength: null,
             nullable: false,
-            defaultValue: '\'\'::text'
+            defaultValue: '\'\'::text',
           },
 
           cover_url: {
             type: 'text',
             maxLength: null,
             nullable: false,
-            defaultValue: '\'\'::text'
+            defaultValue: '\'\'::text',
           },
 
           created_at: {
             type: 'timestamp with time zone',
             maxLength: null,
             nullable: false,
-            defaultValue: 'now()'
+            defaultValue: 'now()',
           },
 
           updated_at: {
             type: 'timestamp with time zone',
             maxLength: null,
             nullable: false,
-            defaultValue: 'now()'
-          }
+            defaultValue: 'now()',
+          },
         };
 
         for (const column in expected) {
