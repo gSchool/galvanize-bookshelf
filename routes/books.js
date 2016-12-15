@@ -16,6 +16,7 @@ router.get('/books', (req, res) => {
             process.exit(1);
         });
 });
+// beforeEach((done)=> knex.migrate.)
 
 router.get('/books/:id', (req, res) => {
     const id = req.params.id;
