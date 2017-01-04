@@ -43,6 +43,13 @@ Finally, ensure the test suite can connect to the right database.
 npm test test/part1.migrations.test.js
 ```
 
+The tests will not pass, but if you cannot connect to the test database, you'll get the following error.
+
+```text
+Knex:warning - Pool2 - Error: Pool was destroyed
+Knex:Error Pool2 - error: database "bookshelf_tes" does not exist
+```
+
 ## Migrations
 
 Translate the following entity relationship diagram into a Knex migration file.
@@ -67,6 +74,8 @@ You can run the following test suite to verify the migration file works as expec
 ```shell
 npm test test/part1.migrations.test.js
 ```
+
+You do not need to run the migrations, the tests will take care of that.
 
 ## Seeds
 
