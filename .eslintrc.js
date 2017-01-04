@@ -1,6 +1,6 @@
 module.exports = {
   extends: [
-    'ryansobol/es6',
+    'airbnb',
     'ryansobol/mocha',
     'ryansobol/node'
   ]

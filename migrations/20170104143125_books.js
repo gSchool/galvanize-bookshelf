@@ -1,5 +1,9 @@
+/* eslint-disable func-names */
+/* eslint-disable strict */
 
-exports.up = function(knex) {
+'use strict';
+
+exports.up = function (knex) {
   return knex.schema.createTable('books', (table) => {
     table.increments();
     table.string('title').notNullable().defaultTo('');
@@ -11,6 +15,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable('books');
 };
