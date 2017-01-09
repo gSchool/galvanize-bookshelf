@@ -45,8 +45,15 @@ suite('part3 routes', () => {
         email: 'john.siracusa@gmail.com',
         password
       })
+      .expect((res) => {
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+      })
       .expect(200, {
-        userId: 2
+        id: 2,
+        firstName: 'John',
+        lastName: 'Siracusa',
+        email: 'john.siracusa@gmail.com'
       })
       .expect('Content-Type', /json/)
       .end((httpErr, _res) => {
