@@ -59,7 +59,7 @@ Additionally, ensure the middleware handles the following HTTP requests and send
 You can run the following test suite to verify the middleware works as expected.
 
 ```shell
-npm test test/part5.routes.favorites.test.js
+npm test test/part5.routes.test.js
 ```
 
 ## Bonus
@@ -99,7 +99,7 @@ In the `routes/favorites.js` module, update middleware to handle the following H
 You can run the following test suite to verify the middleware works as expected.
 
 ```shell
-npm test test/part5.routes.favorites.bonus.test.js
+npm test test/part5.routes.bonus.test.js
 ```
 
 **NOTE:** Ensure the middleware handles the previous HTTP requests as before.
