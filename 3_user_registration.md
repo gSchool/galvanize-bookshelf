@@ -1,4 +1,4 @@
-#### [⇐ Previous](2_express_knex.md) | [Next ⇒](4_authentication_authorization.md)
+#### [⇐ Previous](2_express_knex.md) | [Next ⇒](4_user_authentication.md)
 
 # User Registration
 
@@ -100,4 +100,4 @@ Using your preferred ESLint rules, lint your project with the `npm run lint .` c
 
 Once you're satisfied, find a classmate and see if that person would like some help.
 
-#### [⇐ Previous](2_express_knex.md) | [Next ⇒](4_authentication_authorization.md)
+#### [⇐ Previous](2_express_knex.md) | [Next ⇒](4_user_authentication.md)

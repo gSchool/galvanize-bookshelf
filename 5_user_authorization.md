@@ -1,8 +1,8 @@
-#### [⇐ Previous](3_user_registration.md) | [Next ⇒](5_heroku_deployment.md)
+#### [⇐ Previous](4_user_authentication.md) | [Next ⇒](6_heroku_deployment.md)
 
-# Authentication and Authorization
+# User Authorization
 
-In this assignment, you'll build authentication and authorization systems for your RESTful, database-driven, HTTP server.
+In this assignment, you'll build an authorization system for your RESTful, database-driven, HTTP server.
 
 ## Migrations
 
@@ -23,7 +23,7 @@ Translate the following entity relationship diagram into a Knex migration file.
 You can run the following test suite to verify the migration file works as expected.
 
 ```shell
-npm test test/part4.migrations.test.js
+npm test test/part5.migrations.test.js
 ```
 
 ## Seeds
@@ -31,38 +31,10 @@ npm test test/part4.migrations.test.js
 Translate the following [JavaScript entity](https://gist.github.com/ryansobol/0bcc0058af3ce5823263ac005a34b050) into a Knex seed file. You can run the following test suite to verify the seed file works as expected.
 
 ```shell
-npm test test/part4.seeds.test.js
+npm test test/part5.seeds.test.js
 ```
 
-## Authentication
-
-In the `routes/token.js` module, add middleware to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type.
-
-| Request Method | Request URL | Request Body                                                     | Response Status | Response Body                                    |
-|----------------|-------------|------------------------------------------------------------------|-----------------|--------------------------------------------------|
-| `GET`          | `/token`    | N/A                                                              | `200`           | `false`                                          |
-| `POST`         | `/token`    | `{ "email": "jkrowling@gmail.com", "password": "youreawizard" }` | `200`           | `{ id: 1, "email": "jkrowling@gmail.com", ... }` |
-| `GET`          | `/token`    | N/A                                                              | `200`           | `true`                                           |
-| `DELETE`       | `/token`    | N/A                                                              | `200`           | `true`                                           |
-
-**NOTE:** The second `GET /token` request assumes a token was created by the previous `POST /token` request. Also, don't send the user's password or hashed password in the response body.
-
-Additionally, ensure the `POST /token` middleware handles the following HTTP requests and sends back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type.
-
-| Request Method | Request URL | Request Body                                                     | Response Status | Response Body           |
-|----------------|-------------|------------------------------------------------------------------|-----------------|-------------------------|
-| `POST`         | `/token`    | `{ "email": "bad.email@gmail.com", "password": "youreawizard" }` | `400`           | `Bad email or password` |
-| `POST`         | `/token`    | `{ "email": "jkrowling@gmail.com", "password": "badpassword" }`  | `400`           | `Bad email or password` |
-
-You can run the following test suite to verify the middleware works as expected.
-
-**NOTE** The token is assumed to be stored in a cookie called `token`.
-
-```shell
-npm test test/part4.routes.token.test.js
-```
-
-## Authorization
+## Routes
 
 In the `routes/favorites.js` module, add middleware to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type. Assume a token has been created for a user with an `id` of `1`.
 
@@ -87,7 +59,7 @@ Additionally, ensure the middleware handles the following HTTP requests and send
 You can run the following test suite to verify the middleware works as expected.
 
 ```shell
-npm test test/part4.routes.favorites.test.js
+npm test test/part5.routes.favorites.test.js
 ```
 
 ## Bonus
@@ -114,23 +86,6 @@ Then, play around with the live application by logging in a user and viewing the
 
 ## Bonus
 
-In the `routes/token.js` module, update middleware to handle the following HTTP requests and send back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type.
-
-| Request Method | Request URL | Request Body              | Response Status | Response Body                |
-|----------------|-------------|---------------------------|-----------------|------------------------------|
-| `POST`         | `/token`    | `{ "email": "", ... }`    | `400`           | `Email must not be blank`    |
-| `POST`         | `/token`    | `{ "password": "", ... }` | `400`           | `Password must not be blank` |
-
-You can run the following test suite to verify the middleware works as expected.
-
-```shell
-npm test test/part4.routes.token.bonus.test.js
-```
-
-**NOTE:** Ensure the middleware handles the previous HTTP requests as before.
-
-## Bonus
-
 In the `routes/favorites.js` module, update middleware to handle the following HTTP requests and send back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type. Assume a token has been created for a user with an `id` of `1`.
 
 | Request Method | Request URL                   | Request Body          | Response Status | Response Body                |
@@ -144,7 +99,7 @@ In the `routes/favorites.js` module, update middleware to handle the following H
 You can run the following test suite to verify the middleware works as expected.
 
 ```shell
-npm test test/part4.routes.favorites.bonus.test.js
+npm test test/part5.routes.favorites.bonus.test.js
 ```
 
 **NOTE:** Ensure the middleware handles the previous HTTP requests as before.

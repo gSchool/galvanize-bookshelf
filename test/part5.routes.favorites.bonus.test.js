@@ -7,7 +7,7 @@ const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
 
-suite('part4 routes favorites bonus', () => {
+suite('part5 routes favorites bonus', () => {
   const agent = request.agent(server);
 
   before((done) => {

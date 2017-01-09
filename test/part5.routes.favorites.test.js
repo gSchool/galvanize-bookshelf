@@ -9,7 +9,7 @@ const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
 
-suite('part4 routes favorites', () => {
+suite('part5 routes favorites', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => {
