@@ -91,8 +91,8 @@ suite('part4 routes token', () => {
       .del('/token')
       .set('Accept', 'application/json')
       .expect('set-cookie', /token=; Path=\//)
-      .expect('Content-Type', /json/)
-      .expect(200, 'true', done);
+      .expect(200)
+      .end(done);
   });
 
   test('POST /token with bad email', (done) => {
