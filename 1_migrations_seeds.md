@@ -31,10 +31,10 @@ And, update the `knexfile.js` file with the following connection information for
 'postgres://localhost/bookshelf_test'
 ```
 
-Then, generate a secret key that'll be used to sign JWT information. You'll learn what a JWT is and why it's signed in an upcoming lesson.
+Then, generate a cryptographic key that'll be used for the JWT signature. You'll learn what a JWT is and why it's signed in an upcoming lesson.
 
 ```shell
-bash -c 'echo "JWT_SECRET="$(openssl rand -hex 64)' > .env
+bash -c 'echo "JWT_KEY="$(openssl rand -base64 64)' > .env
 ```
 
 Finally, ensure the test suite can connect to the right database.
