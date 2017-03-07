@@ -77,8 +77,8 @@ suite('part2 routes', () => {
         genre: 'JavaScript',
         description: 'With Learning JavaScript Design Patterns, you\'ll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-date with the latest best practices, this book is for you.',
         cover_url: 'https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/295/javascript_design_patterns.jpg',
-        createdat: '2016-06-26T14:26:16.000Z',
-        updatedat: '2016-06-26T14:26:16.000Z'
+        created_at: '2016-06-26T14:26:16.000Z',
+        updated_at: '2016-06-26T14:26:16.000Z'
       }, {
         id: 2,
         title: 'Learning React Native',
