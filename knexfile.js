@@ -1,9 +1,15 @@
-'use strict';
+// Update with your config settings.
 
 module.exports = {
-  development: {},
 
-  test: {},
+    test:{
+      client:"pg",
+      connection:'postgres://localhost/bookshelf_test',
+    },
+    development:{
+      client:"pg",
+      connection:'postgres://localhost/bookshelf_dev',
+    }
 
-  production: {}
+
 };
