@@ -55,7 +55,7 @@ In the `routes/users.js` module, update the middleware to handle the following H
 
 | Request Method | Request URL        | Request Body                                                                                                        | Response Status | Response Body                                                   | Set-Cookie        |
 |----------------|--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------|-----------------------------------------------------------------|-------------------|
-| `POST`         | `/users`           | `{ "first_name": "John", "last_name": "Siracusa", "email": "john.siracusa@gmail.com", "password": "ilikebigcats" }` | `200`           | `{ id: 2, "first_name": "John", "last_name": "Siracusa", ... }` | `token=eyJhbG...` |
+| `POST`         | `/users`           | `{ "firstName": "John", "lastName": "Siracusa", "email": "john.siracusa@gmail.com", "password": "ilikebigcats" }` | `200`           | `{ id: 2, "firstName": "John", "lastName": "Siracusa", ... }` | `token=eyJhbG...` |
 
 You can run the following test suite to verify the middleware works as expected.
 
