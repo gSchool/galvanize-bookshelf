@@ -4,6 +4,9 @@
 
 In this assignment, you'll deploy your database-driven application to Heroku.
 
+Refer to the steps below. I also made a little video going through the process:
+https://vimeo.com/207720558
+
 ## Pre-deployment
 
 First, complete the following pre-deployment steps.
@@ -32,7 +35,7 @@ Next, complete the following deployment steps.
 Finally, complete the following post-deployment steps.
 
 1. Add `https://USERNAME-galvanize-bookshelf.herokuapp.com/` to your Github repository's URL.
-1. Fix any test errors, including bonus tests, with `npm test`.
+1. Fix any test errors, including bonus tests, with `npm test`. Note that this at the moment can only be run in your local environment.
 1. Fix any linting errors with `npm run lint .`.
 1. Submit your solution for grading.
 
