@@ -112,4 +112,4 @@ Using your preferred ESLint rules, lint your project with the `npm run lint .` c
 
 Once you're satisfied, find a classmate and see if that person would like some help.
 
-#### [⇐ Previous](3_user_registration.md) | [Next ⇒](5_heroku_deployment.md)
+#### [⇐ Previous](3_user_registration.md) | [Next ⇒](6_heroku_deployment.md)
