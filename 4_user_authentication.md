@@ -3,7 +3,7 @@
 # User Authentication
 
 In this assignment, you'll build an authentication system for your RESTful, database-driven, HTTP server.
-_NOTE_ the tests assume you're using JWT to encode a token and using the cookie mechanism for the transfer of said token.
+* the tests assume you're using JWT to encode a token and using the cookie mechanism for the transfer of said token.
 
 ## Routes
 
