@@ -3,6 +3,8 @@
 # User Authorization
 
 In this assignment, you'll build an authorization system for your RESTful, database-driven, HTTP server.
+* the tests assume you're using JWT to encode a token and using the cookie mechanism for the transfer of said token.
+
 
 ## Migrations
 
