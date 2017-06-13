@@ -6,42 +6,27 @@ const { suite, test } = require('mocha');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
+const { addDatabaseHooks } = require('./utils')
 
-suite('part5 routes favorites bonus', () => {
+suite('part5 routes favorites bonus', addDatabaseHooks(() => {
   const agent = request.agent(server);
 
-  before((done) => {
-    knex.migrate.latest()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
   beforeEach((done) => {
-    knex.seed.run()
-      .then(() => {
-        request(server)
-          .post('/token')
-          .set('Accept', 'application/json')
-          .set('Content-Type', 'application/json')
-          .send({
-            email: 'jkrowling@gmail.com',
-            password: 'youreawizard'
-          })
-          .end((err, res) => {
-            if (err) {
-              return done(err);
-            }
-
-            agent.saveCookies(res);
-            done();
-          });
+    request(server)
+      .post('/token')
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'application/json')
+      .send({
+        email: 'jkrowling@gmail.com',
+        password: 'youreawizard'
       })
-      .catch((err) => {
-        done(err);
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+
+        agent.saveCookies(res);
+        done();
       });
   });
 
@@ -88,4 +73,4 @@ suite('part5 routes favorites bonus', () => {
       .expect('Content-Type', /plain/)
       .expect(404, 'Favorite not found', done);
   });
-});
+}));

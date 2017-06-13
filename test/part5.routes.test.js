@@ -8,43 +8,28 @@ const { suite, test } = require('mocha');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
+const { addDatabaseHooks } = require('./utils')
 
-suite('part5 routes favorites', () => {
-  before((done) => {
-    knex.migrate.latest()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
-  suite('with token', () => {
+suite('part5 routes favorites', addDatabaseHooks(() => {
+  suite('with token', addDatabaseHooks(() => {
     const agent = request.agent(server);
 
     beforeEach((done) => {
-      knex.seed.run()
-        .then(() => {
-          request(server)
-            .post('/token')
-            .set('Accept', 'application/json')
-            .set('Content-Type', 'application/json')
-            .send({
-              email: 'jkrowling@gmail.com',
-              password: 'youreawizard'
-            })
-            .end((err, res) => {
-              if (err) {
-                return done(err);
-              }
-
-              agent.saveCookies(res);
-              done();
-            });
+      request(server)
+        .post('/token')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .send({
+          email: 'jkrowling@gmail.com',
+          password: 'youreawizard'
         })
-        .catch((err) => {
-          done(err);
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+
+          agent.saveCookies(res);
+          done();
         });
     });
 
@@ -112,29 +97,9 @@ suite('part5 routes favorites', () => {
         })
         .expect(200, { bookId: 1, userId: 1 }, done);
     });
-  });
+  }));
 
-  suite('without token', () => {
-    before((done) => {
-      knex.migrate.latest()
-        .then(() => {
-          done();
-        })
-        .catch((err) => {
-          done(err);
-        });
-    });
-
-    beforeEach((done) => {
-      knex.seed.run()
-        .then(() => {
-          done();
-        })
-        .catch((err) => {
-          done(err);
-        });
-    });
-
+  suite('without token', addDatabaseHooks(() => {
     test('GET /favorites', (done) => {
       request(server)
         .get('/favorites')
@@ -178,5 +143,5 @@ suite('part5 routes favorites', () => {
         .expect('Content-Type', /plain/)
         .expect(401, 'Unauthorized', done);
     });
-  });
-});
+  }));
+}));

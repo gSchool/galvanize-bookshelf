@@ -10,28 +10,9 @@ const bcrypt = require('bcrypt');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
+const { addDatabaseHooks } = require('./utils')
 
-suite('part4 routes users bonus', () => {
-  before((done) => {
-    knex.migrate.latest()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
-  beforeEach((done) => {
-    knex.seed.run()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
+suite('part4 routes users bonus', addDatabaseHooks(() => {
   test('POST /users', (done) => {
     const password = 'ilikebigcats';
 
@@ -59,4 +40,4 @@ suite('part4 routes users bonus', () => {
       .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
       .end(done);
   });
-});
+}));

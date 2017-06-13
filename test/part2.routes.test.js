@@ -6,28 +6,8 @@ const { suite, test } = require('mocha');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
-
-suite('part2 routes', () => {
-  before((done) => {
-    knex.migrate.latest()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
-  beforeEach((done) => {
-    knex.seed.run()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
+const { addDatabaseHooks } = require('./utils')
+suite('part2 routes', addDatabaseHooks(() => {
   test('GET /books', (done) => {
     /* eslint-disable max-len */
     request(server)
@@ -209,4 +189,4 @@ suite('part2 routes', () => {
 
       /* eslint-enable max-len */
   });
-});
+}));

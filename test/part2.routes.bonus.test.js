@@ -6,29 +6,10 @@ const { suite, test } = require('mocha');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
+const { addDatabaseHooks } = require('./utils')
 
 // eslint-disable-next-line max-statements
-suite('part2 routes bonus', () => {
-  before((done) => {
-    knex.migrate.latest()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
-  beforeEach((done) => {
-    knex.seed.run()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
+suite('part2 routes bonus', addDatabaseHooks(() => {
   test('GET /books/9000', (done) => {
     request(server)
       .get('/books/9000')
@@ -185,4 +166,4 @@ suite('part2 routes bonus', () => {
       .expect('Content-Type', /plain/)
       .expect(404, 'Not Found', done);
   });
-});
+}));

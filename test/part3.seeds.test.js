@@ -7,28 +7,9 @@ process.env.NODE_ENV = 'test';
 const assert = require('chai').assert;
 const { suite, test } = require('mocha');
 const knex = require('../knex');
+const { addDatabaseHooks } = require('./utils')
 
-suite('part3 seeds', () => {
-  before((done) => {
-    knex.migrate.latest()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
-  beforeEach((done) => {
-    knex.seed.run()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
+suite('part3 seeds', addDatabaseHooks(() => {
   test('users rows', (done) => {
     knex('users').orderBy('id', 'ASC')
       .then((actual) => {
@@ -59,4 +40,4 @@ suite('part3 seeds', () => {
         done(err);
       });
   });
-});
+}));

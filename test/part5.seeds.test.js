@@ -8,27 +8,9 @@ const assert = require('chai').assert;
 const { suite, test } = require('mocha');
 const knex = require('../knex');
 
-suite('part5 seeds', () => {
-  before((done) => {
-    knex.migrate.latest()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
+const { addDatabaseHooks } = require('./utils')
 
-  beforeEach((done) => {
-    knex.seed.run()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
+suite('part5 seeds', addDatabaseHooks(() => {
   test('favorites rows', (done) => {
     knex('favorites').orderBy('id', 'ASC')
       .then((actual) => {
@@ -54,4 +36,4 @@ suite('part5 seeds', () => {
         done(err);
       });
   });
-});
+}));

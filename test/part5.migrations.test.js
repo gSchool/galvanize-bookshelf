@@ -7,18 +7,9 @@ process.env.NODE_ENV = 'test';
 const assert = require('chai').assert;
 const { suite, test } = require('mocha');
 const knex = require('../knex');
+const { addDatabaseHooks } = require('./utils')
 
-suite('part5 migrations', () => {
-  before((done) => {
-    knex.migrate.latest()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
+suite('part5 migrations', addDatabaseHooks(() => {
   test('favorites columns', (done) => {
     knex('favorites').columnInfo()
       .then((actual) => {
@@ -120,4 +111,4 @@ suite('part5 migrations', () => {
         done(err);
       });
   });
-});
+}));

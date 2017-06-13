@@ -6,28 +6,9 @@ const { suite, test } = require('mocha');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
+const { addDatabaseHooks } = require('./utils')
 
-suite('part4 routes token', () => {
-  before((done) => {
-    knex.migrate.latest()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
-  beforeEach((done) => {
-    knex.seed.run()
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        done(err);
-      });
-  });
-
+suite('part4 routes token', addDatabaseHooks(() => {
   test('GET /token without token', (done) => {
     request(server)
       .get('/token')
@@ -120,4 +101,4 @@ suite('part4 routes token', () => {
       .expect('Content-Type', /plain/)
       .expect(400, 'Bad email or password', done);
   });
-});
+}));
