@@ -2,9 +2,36 @@
 
 const express = require('express');
 
+const knex = require('../knex.js');
+
+
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-// YOUR CODE HERE
+router.get('/books', (req, res, next) => {
+  knex("books")
+    .select('id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl', 'created_at as createdAt', 'updated_at as updatedAt')
+    .orderBy('title', 'ASC')
+    .then((books) => {
+      res.send(books);
+    })
+    .catch((err) =>{
+      return next(err)
+    })
+})
+
+router.get('/books/:id', (req, res, next) => {
+  let id = req.params.id
+  knex("books")
+    .where('id', id)
+    .select('id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl', 'created_at as createdAt', 'updated_at as updatedAt')
+    .first()
+    .then((books) => {
+      res.send(books);
+    })
+    .catch((err) =>{
+      return next(err)
+    })
+})
 
 module.exports = router;
