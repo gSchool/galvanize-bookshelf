@@ -16,9 +16,9 @@ router.get('/books', (req, res, next) => {
       res.send(books);
     })
     .catch((err) =>{
-      return next(err)
-    })
-})
+      return next(err);
+    });
+});
 
 router.get('/books/:id', (req, res, next) => {
   let id = req.params.id
@@ -30,8 +30,25 @@ router.get('/books/:id', (req, res, next) => {
       res.send(books);
     })
     .catch((err) =>{
-      return next(err)
+      return next(err);
+    });
+});
+
+router.post('/books', (req, res, next) => {
+  knex("books")
+    .insert({
+      'title': req.body.title,
+      'author': req.body.author,
+      'genre': req.body.genre,
+      'description': req.body.description,
+      'cover_url': req.body.cover_url
+    }, '*')
+    .then((books) => {
+      res.send(books);
     })
-})
+    .catch((err) =>{
+      return next(err);
+    });
+});
 
 module.exports = router;
