@@ -41,10 +41,10 @@ router.post('/books', (req, res, next) => {
       'author': req.body.author,
       'genre': req.body.genre,
       'description': req.body.description,
-      'cover_url': req.body.cover_url
-    })
+      'cover_url': req.body.coverUrl
+    }).returning(['id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl'])
     .then((books) => {
-      res.send(books);
+      res.send(books[0]);
     })
     .catch((err) => {
       return next(err);
