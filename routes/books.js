@@ -44,21 +44,19 @@ router.post("/books", (req, res, next) => {
   book.cover_url = req.body.coverUrl;
   
   if (!book.title) {
-    return sendError(res, next, "Title");
+    return sendError(next, "Title");
   }
   else if (!book.author) {
-    return sendError(res, next, "Author");
+    return sendError(next, "Author");
   }
   else if (!book.genre) {
-    return sendError(res, next, "Genre");    
+    return sendError(next, "Genre");    
   }    
   else if (!book.description) {
-    return sendError(res, next, "Description");
-    
+    return sendError(next, "Description");
   }
   else if (!book.cover_url) {
-    return sendError(res, next, "Cover URL");
-    
+    return sendError(next, "Cover URL");
   }
 
   knex("books")
@@ -116,7 +114,7 @@ router.delete("/books/:id", (req, res, next) => {
   });
 });
 
-function sendError(res, next, field) {
+function sendError(next, field) {
   let err = {};
 
   err.message = `${field} must not be blank`;
