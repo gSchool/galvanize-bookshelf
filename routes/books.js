@@ -42,11 +42,11 @@ router.post('/books', (req, res, next) => {
       'genre': req.body.genre,
       'description': req.body.description,
       'cover_url': req.body.cover_url
-    }, '*')
+    })
     .then((books) => {
       res.send(books);
     })
-    .catch((err) =>{
+    .catch((err) => {
       return next(err);
     });
 });
