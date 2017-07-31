@@ -51,4 +51,36 @@ router.post('/books', (req, res, next) => {
     });
 });
 
+router.patch('/books/:id', (req, res, next) =>{
+  knex('books')
+    .where('id', req.params.id)
+    .update({
+      'title': req.body.title,
+      'author': req.body.author,
+      'genre': req.body.genre,
+      'description': req.body.description,
+      'cover_url': req.body.coverUrl
+    })
+    .returning(['id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl'])
+    .then((books) => {
+      res.send(books[0])
+    })
+    .catch((err) => {
+      return next(err)
+    })
+})
+
+router.delete('/books/:id', (req, res, next) => {
+  knex('books')
+    .where('id', req.params.id)
+    .del()
+    .returning(['title', 'author', 'genre', 'description', 'cover_url as coverUrl'])
+    .then((books) =>{
+      res.send(books[0])
+    })
+    .catch((err) =>{
+      return next(err)
+    })
+})
+
 module.exports = router;
