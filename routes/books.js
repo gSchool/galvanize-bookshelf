@@ -25,9 +25,8 @@ router.get('/books/:id', (req, res, next) => {
   knex("books")
     .where('id', id)
     .select('id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl', 'created_at as createdAt', 'updated_at as updatedAt')
-    .first()
     .then((books) => {
-      res.send(books);
+      res.send(books[0]);
     })
     .catch((err) =>{
       return next(err);
@@ -42,7 +41,8 @@ router.post('/books', (req, res, next) => {
       'genre': req.body.genre,
       'description': req.body.description,
       'cover_url': req.body.coverUrl
-    }).returning(['id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl'])
+    })
+    .returning(['id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl'])
     .then((books) => {
       res.send(books[0]);
     })
