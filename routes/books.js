@@ -11,7 +11,7 @@ const router = express.Router();
 
 //
 const errHandle = (statusCode, msg) => {
-  const err = {output:{statusCode: statusCode}, message: msg}
+  const err = {'output':{'statusCode': statusCode},'message': msg}
   return err;
 }
 
@@ -23,7 +23,6 @@ router.get('/books', (req, res, next) => {
       res.send(books);
     })
     .catch((err) =>{
-      err.output.statusCode(404)
       return next(err);
     });
 });
@@ -44,7 +43,6 @@ router.get('/books/:id', (req, res, next) => {
       res.send(books[0]);
     })
     .catch((err) =>{
-      // err.output.statusCode(404)
       return next(err);
     });
 });
@@ -84,18 +82,17 @@ router.post('/books', (req, res, next) => {
       res.send(books[0]);
     })
     .catch((err) => {
-      // err.output.statusCode(400)
       return next(err);
     });
 });
 
 router.patch('/books/:id', (req, res, next) =>{
-  let id = req.params.id
+  let id = parseInt(req.params.id)
   if (Number.isNaN(id) || id < 0){
     return next(errHandle(404, "Not Found"));
   }
   knex('books')
-    .where('id', req.params.id)
+    .where('id', id)
     .update({
       'title': req.body.title,
       'author': req.body.author,
@@ -105,30 +102,34 @@ router.patch('/books/:id', (req, res, next) =>{
     })
     .returning(['id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl'])
     .then((books) => {
+      console.log(books)
       if (books.length === 0){
         return next(errHandle(404, "Not Found"));
       }
+
       res.send(books[0])
     })
     .catch((err) => {
-      // err.output.statusCode(404)
       return next(err)
-    })
-})
+    });
+});
 
 router.delete('/books/:id', (req, res, next) => {
+  let id = parseInt(req.params.id)
+  if (Number.isNaN(id) || id < 0){
+    return next(errHandle(404, "Not Found"));
+  }
   knex('books')
-    .where('id', req.params.id)
+    .where('id', id)
     .del()
     .returning(['title', 'author', 'genre', 'description', 'cover_url as coverUrl'])
-    .then((books) =>{
+    .then((books) => {
       res.send(books[0])
     })
     .catch((err) =>{
-      // err.output.statusCode(404)
       return next(err)
-    })
-})
+    });
+});
 
 
 module.exports = router;
