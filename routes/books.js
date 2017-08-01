@@ -87,7 +87,7 @@ router.post('/books', (req, res, next) => {
 });
 
 router.patch('/books/:id', (req, res, next) =>{
-  let id = parseInt(req.params.id)
+  let id = Number.parseInt(req.params.id)
   if (Number.isNaN(id) || id < 0){
     return next(errHandle(404, "Not Found"));
   }
@@ -103,7 +103,7 @@ router.patch('/books/:id', (req, res, next) =>{
     .returning(['id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl'])
     .then((books) => {
       console.log(books)
-      if (books.length === 0){
+      if (!books){
         return next(errHandle(404, "Not Found"));
       }
 
@@ -121,9 +121,13 @@ router.delete('/books/:id', (req, res, next) => {
   }
   knex('books')
     .where('id', id)
+    .first()
     .del()
     .returning(['title', 'author', 'genre', 'description', 'cover_url as coverUrl'])
     .then((books) => {
+      if (!books) {
+        return next(errHandle(404, "Not Found"))
+      }
       res.send(books[0])
     })
     .catch((err) =>{
