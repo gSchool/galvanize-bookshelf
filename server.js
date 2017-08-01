@@ -10,7 +10,7 @@ const app = express();
 app.disable('x-powered-by');
 
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
 switch (app.get('env')) {
@@ -57,9 +57,9 @@ app.use((_req, res) => {
 
 // eslint-disable-next-line max-params
 app.use((err, _req, res, _next) => {
-  if (err.output && err.output.statusCode) {
+  if (err.statusCode) {
     return res
-      .status(err.output.statusCode)
+      .status(err.statusCode)
       .set('Content-Type', 'text/plain')
       .send(err.message);
   }
