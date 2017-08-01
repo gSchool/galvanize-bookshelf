@@ -8,6 +8,18 @@ const knex = require('../knex.js');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
+
+//
+// const errHandle = (numb) => {
+//   let err = {"message": "", "output":{"statusCode": numb}}
+//   if (numb === 404){
+//     err.message = "Not Found"}
+//   if (numb === 400){
+//     err.message = ""
+//   }
+//   return next(err)
+// }
+
 router.get('/books', (req, res, next) => {
   knex("books")
     .select('id', 'title', 'author', 'genre', 'description', 'cover_url as coverUrl', 'created_at as createdAt', 'updated_at as updatedAt')
@@ -16,6 +28,7 @@ router.get('/books', (req, res, next) => {
       res.send(books);
     })
     .catch((err) =>{
+      err.output.statusCode(404)
       return next(err);
     });
 });
@@ -29,6 +42,7 @@ router.get('/books/:id', (req, res, next) => {
       res.send(books[0]);
     })
     .catch((err) =>{
+      err.output.statusCode(404)
       return next(err);
     });
 });
@@ -47,6 +61,7 @@ router.post('/books', (req, res, next) => {
       res.send(books[0]);
     })
     .catch((err) => {
+      err.output.statusCode(400)
       return next(err);
     });
 });
@@ -66,6 +81,7 @@ router.patch('/books/:id', (req, res, next) =>{
       res.send(books[0])
     })
     .catch((err) => {
+      err.output.statusCode(404)
       return next(err)
     })
 })
@@ -79,8 +95,10 @@ router.delete('/books/:id', (req, res, next) => {
       res.send(books[0])
     })
     .catch((err) =>{
+      err.output.statusCode(404)
       return next(err)
     })
 })
+
 
 module.exports = router;
