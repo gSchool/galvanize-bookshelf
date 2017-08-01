@@ -13,9 +13,22 @@ router.post("/users", (req, res, next) => {
   user.last_name = req.body.lastName;
   user.email = req.body.email;
 
+  if (!user.first_name) { return sendError(next, "First Name must not be blank"); }
+  else if (!user.last_name) { return sendError(next, "Last Name must not be blank"); }
+  else if (!user.email) { return sendError(next, "Email must not be blank"); }
+
+  validatePassword(next, req.body.password);
+
   bcrypt.hash(req.body.password, 12)
     .then((hashedPassword) => {
       user.hashed_password = hashedPassword;
+
+      return knex("users").where("users.email", user.email);
+    })
+    .then((result) => {
+      if (result.length) {
+        return sendError(next, "Email already exists");
+      }
       return knex("users").insert(user, "*");
     })
     .then((result) => {
@@ -33,5 +46,23 @@ router.post("/users", (req, res, next) => {
       next(err);
     });
 });
+
+function sendError(next, message) {
+  let err = {};
+
+  err.message = message;
+  err.output = {statusCode: 400};
+
+  return next(err);
+}
+
+function validatePassword(next, pwd) {
+  if (!pwd) {
+    return sendError(next, "Password must be at least 8 characters long");
+  }
+  else if (pwd.length < 8) {
+    return sendError(next, "Password must be at least 8 characters long");
+  }
+}
 
 module.exports = router;
