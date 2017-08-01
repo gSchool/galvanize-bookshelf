@@ -30,7 +30,7 @@ router.get('/books', (req, res, next) => {
 
 router.get('/books/:id', (req, res, next) => {
   let id = req.params.id
-  if (Number.isNaN(id) || id < 0){
+  if (isNaN(id) || id < 0){
     return next(errHandle(404, "Not Found"));
   }
 
@@ -44,7 +44,7 @@ router.get('/books/:id', (req, res, next) => {
       res.send(books[0]);
     })
     .catch((err) =>{
-      err.output.statusCode(404)
+      // err.output.statusCode(404)
       return next(err);
     });
 });
@@ -59,7 +59,7 @@ router.post('/books', (req, res, next) => {
     return next(errHandle(400, "Author must not be blank"));
   }
   if(!genre){
-    return next(errHandle(400, "Genre name must not be blank"));
+    return next(errHandle(400, "Genre must not be blank"));
   }
   if(!description){
     return next(errHandle(400, "Description must not be blank"));
@@ -84,7 +84,7 @@ router.post('/books', (req, res, next) => {
       res.send(books[0]);
     })
     .catch((err) => {
-      err.output.statusCode(400)
+      // err.output.statusCode(400)
       return next(err);
     });
 });
@@ -111,7 +111,7 @@ router.patch('/books/:id', (req, res, next) =>{
       res.send(books[0])
     })
     .catch((err) => {
-      err.output.statusCode(404)
+      // err.output.statusCode(404)
       return next(err)
     })
 })
@@ -125,7 +125,7 @@ router.delete('/books/:id', (req, res, next) => {
       res.send(books[0])
     })
     .catch((err) =>{
-      err.output.statusCode(404)
+      // err.output.statusCode(404)
       return next(err)
     })
 })
