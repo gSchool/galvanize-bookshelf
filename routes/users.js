@@ -5,7 +5,7 @@ const router = express.Router();
 
 const knex = require("../knex.js");
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt-as-promised");
 
 router.post("/users", (req, res, next) => {
   let user = {};
@@ -21,7 +21,7 @@ router.post("/users", (req, res, next) => {
 
   bcrypt.hash(req.body.password, 12)
     .then((hashedPassword) => {
-      user.hashed_password = hashedPassword;
+      user.hashed_password = hashedPassword;      
 
       return knex("users").where("users.email", user.email);
     })
