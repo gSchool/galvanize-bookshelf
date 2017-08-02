@@ -7,7 +7,7 @@ const knex = require('../knex.js');
 const router = express.Router();
 
 // YOUR CODE HERE
-router.post('/users', (req, res, err) => {
+router.post('/users', (req, res, next) => {
   const{firstName, lastName, email, password} = req.body
   const hashed_password = bcrypt.hash(password, 12)
   return knex("user")
