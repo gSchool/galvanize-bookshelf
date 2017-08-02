@@ -1,5 +1,6 @@
 'use strict';
 
+const boom = require('boom');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const knex = require('../knex.js');
@@ -10,7 +11,7 @@ const router = express.Router();
 
 router.get('/token', (req, res, next) => {
   knex('users')
-    
+
 })
 
 module.exports = router;
