@@ -10,6 +10,7 @@ const router = express.Router();
 
 router.get('/token', (req, res, next) => {
   knex('users')
+    
 })
 
 module.exports = router;
