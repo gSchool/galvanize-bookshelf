@@ -24,11 +24,11 @@ router.post('/token', (req, res, next) => {
   knex('users')
     .where('email', req.body.email)
     .first()
-    .then((user) => {
-      if (!user){
+    .then((row) => {
+      if (!row){
         throw errHandle(400, 'Bad email or password')
       }
-      user = user
+      user = row
       return bcrypt.compare(req.body.password, user.hashed_password)
     })
     .then(() => {
@@ -42,7 +42,14 @@ router.post('/token', (req, res, next) => {
         secure: router.get('env') === 'production'
     })
     delete user.hashed_password;
-    res.send(user);
+    res.send({
+      id: user.id,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      createdAt: user.created_at,
+      updatedAt: user.updated_at,
+      email: user.email
+    });
     })
     .catch(bcrypt.MISMATCH_ERROR, () => {
       throw errHandle(400, 'Bad email or password')
