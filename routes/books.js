@@ -4,16 +4,11 @@ const express = require('express');
 
 const knex = require('../knex.js');
 
+const errHandle = require('../errHandle.js')
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-
-//
-const errHandle = (statusCode, msg) => {
-  const err = {'output':{'statusCode': statusCode},'message': msg}
-  return err;
-}
 
 router.get('/books', (req, res, next) => {
   knex("books")
