@@ -21,6 +21,12 @@ router.get('/token', (req, res) => {
 
 router.post('/token', (req, res, next) => {
   let user;
+  if (!req.body.email || !req.body.email){
+    throw errHandle(400, 'Email must not be blank')
+  }
+  if (!req.body.password || !req.body.password){
+    throw errHandle(400, 'Password must not be blank')
+  }
   knex('users')
     .where('email', req.body.email)
     .first()
