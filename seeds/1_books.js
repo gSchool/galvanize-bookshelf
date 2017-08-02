@@ -78,8 +78,8 @@ exports.seed = function(knex) {
       return knex('books').insert(
           booksList
         )
-        .then(() => {
-          return knex.raw("SELECT setval('books_id_seq', (SELECT MAX(id) FROM books));");
-        });
+    })
+    .then(() => {
+      return knex.raw("SELECT setval('books_id_seq', (SELECT MAX(id) FROM books));");
     });
 };

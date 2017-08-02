@@ -79,7 +79,6 @@ router.post('/books', (req, res, next) => {
     });
   };
 
-
   knex('books')
     .insert({
       title: req.body.title,
@@ -111,7 +110,10 @@ router.patch('/books/:id', (req, res, next) => {
     .first()
     .then((book) => {
       if (!book) {
-        return next()
+        return next({
+          statusCode: 404,
+          message: 'Not Found'
+        })
       }
       return knex('books')
         .where('id', id)
@@ -148,7 +150,10 @@ router.delete('/books/:id', (req, res, next) => {
     .first()
     .then((book) => {
       if (!book) {
-        return next()
+        return next({
+          statusCode: 404,
+          message: 'Not Found'
+        })
       }
 
       deletedBook = book;
@@ -161,6 +166,9 @@ router.delete('/books/:id', (req, res, next) => {
       delete deletedBook.id;
       res.send(camelizeKeys(deletedBook))
     })
-})
+    .catch((err) => {
+      return next(err)
+    });
+});
 
 module.exports = router;
