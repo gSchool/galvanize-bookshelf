@@ -1,11 +1,12 @@
-'use strict';
+"use strict";
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const knex = require("../knex.js");
 
 const bcrypt = require("bcrypt-as-promised");
+const jwt = require("jsonwebtoken");
 
 router.post("/users", (req, res, next) => {
   let user = {};
@@ -34,11 +35,19 @@ router.post("/users", (req, res, next) => {
     .then((result) => {
       delete result[0].hashed_password;
 
+      const token = jwt.sign({userId: result[0].id}, process.env.JWT_KEY, {expiresIn: "7 days"});
+
+      res.cookie("token", token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+        secure: router.get("env") === "production"
+      });
+
       res.send({
         firstName: result[0].first_name,
-         lastName: result[0].last_name,
-            email: result[0].email,
-               id: result[0].id
+        lastName:  result[0].last_name,
+        email:     result[0].email,
+        id:        result[0].id
       });
 
     })
