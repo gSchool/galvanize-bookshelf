@@ -4,7 +4,7 @@ const express = require('express');
 
 const knex = require('../knex.js');
 
-const errHandle = require('../errHandle.js')
+const errHandle = require('../errHandle.js');
 
 const cookieParser = require('cookie-parser');
 

@@ -5,7 +5,8 @@ const boom = require('boom');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const knex = require('../knex.js');
-const errHandle = require('../errHandle.js')
+const errHandle = require('../errHandle.js');
+const cookieParser = require('cookie-parser');
 
 
 const router = express.Router();

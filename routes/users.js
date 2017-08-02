@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt-as-promised');
 const express = require('express');
 const knex = require('../knex.js');
 const errHandle = require('../errHandle.js')
-// eslint-disable-next-line new-cap
+const cookieParser = require('cookie-parser');
 const router = express.Router();
 
 // YOUR CODE HERE
