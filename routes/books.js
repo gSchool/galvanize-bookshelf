@@ -6,6 +6,8 @@ const knex = require('../knex.js');
 
 const errHandle = require('../errHandle.js')
 
+const cookieParser = require('cookie-parser');
+
 // eslint-disable-next-line new-cap
 const router = express.Router();
 

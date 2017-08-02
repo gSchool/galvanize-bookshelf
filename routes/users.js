@@ -10,9 +10,6 @@ const router = express.Router();
 // YOUR CODE HERE
 router.post('/users', (req, res, next) => {
   const{firstName, lastName, email, password} = req.body
-
-
-
   bcrypt.hash(password, 12)
   .then((hashedPassword) =>{
     return knex("users")
