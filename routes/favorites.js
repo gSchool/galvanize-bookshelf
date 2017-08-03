@@ -22,7 +22,6 @@ router.get('/favorites', authorize, (req, res, next) => {
 })
 
 router.get('/favorites/check', authorize, (req, res, next) => {
-
  knex('favorites')
   .innerJoin('books', 'books.id', 'favorites.book_id')
   .where('favorites.user_id', req.claim.userId)
@@ -42,14 +41,16 @@ router.get('/favorites/check', authorize, (req, res, next) => {
 
 router.post('/favorites', authorize, (req, res, next) => {
   knex('favorites')
+    .insert({book_id: req.body.bookId, user_id: req.query.userId})
+    .returning('*')
+    .then((faves) => {
+      res.send(camelizeKeys(faves))
+    })
+    .catch((err) =>{
+  return next(err)})
 
 })
 
-router.post('/favorites', authorize, (req, res, next) => {
-  console.log(req.query);
-  knex('favorites')
-
-})
 
 
 
