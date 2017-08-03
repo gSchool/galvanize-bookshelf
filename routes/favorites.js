@@ -34,7 +34,16 @@ router.get('/favorites/check', authorize, (req, res, next) => {
   })
 })
 
-router.post('')
+router.post('/favorites', authorize, (req, res, next) => {
+  knex('favorites')
+
+})
+
+router.post('/favorites', authorize, (req, res, next) => {
+  console.log(req.query);
+  knex('favorites')
+
+})
 
 
 
