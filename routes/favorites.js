@@ -47,7 +47,7 @@ router.post('/favorites', authorize, (req, res, next) => {
       res.send(camelizeKeys(faves))
     })
     .catch((err) =>{
-  return next(err)})
+      return next(err)})
 
 })
 
