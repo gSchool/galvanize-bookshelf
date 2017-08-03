@@ -5,7 +5,7 @@ const humps = require("humps");
 const express = require("express");
 const knex = require("../knex");
 
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
@@ -16,43 +16,65 @@ router.get("/favorites", authorizeUser, (req, res, next) => {
     .then((result) => {
       result = humps.camelizeKeys(result);
       res.send(result);
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 
 router.get("/favorites/check", authorizeUser, (req, res, next) => {
   const bookId = parseInt(req.query.bookId);
 
-  if (!bookId || isNaN(bookId)) { return next({message: "No book specified", output: {statusCode: 400}}); }
+  if (!bookId || isNaN(bookId)) { return next({message: "Book ID must be an integer", output: {statusCode: 400}}); }
 
   knex("favorites")
     .where("book_id", bookId)
     .then((result) => {
       if (!result || result.length === 0) { return res.send(false); }
       res.send(true);
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 
 router.post("/favorites", authorizeUser, (req, res, next) => {
   const bookId = parseInt(req.body.bookId);
 
-  knex("favorites")
-    .insert({book_id: bookId, user_id: req.payload.userId}, ["id", "book_id", "user_id"])
+  if (!bookId || isNaN(bookId)) { return next({message: "Book ID must be an integer", output: {statusCode: 400}}); }  
+
+  knex("books")
+    .where("id", bookId)
+    .then((result) => {
+      if(result.length === 0) { return next({message: "Book not found", output: {statusCode: 404}}); }    
+      return knex("favorites").insert({book_id: bookId, user_id: req.payload.userId}, ["id", "book_id", "user_id"]);
+    })
     .then((result) => {
       result = humps.camelizeKeys(result[0]);
+
       res.send(result);
+    })
+    .catch((err) => {
+      next(err);
     });
 }); 
 
 router.delete("/favorites", authorizeUser, (req, res, next) => {
   const bookId = parseInt(req.body.bookId);
 
+  if (!bookId || isNaN(bookId)) { return next({message: "Book ID must be an integer", output: {statusCode: 400}}); }    
+
   knex("favorites")
     .where("book_id", bookId)
     .andWhere("user_id", req.payload.userId)
     .del(["book_id", "user_id"])
     .then((result) => {
+      if(result.length === 0) { return next({message: "Favorite not found", output: {statusCode: 404}}); }          
       result = humps.camelizeKeys(result[0]);  
       res.send(result);
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 
