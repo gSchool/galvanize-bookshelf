@@ -10,7 +10,6 @@ const {camelizeKeys, decamelizeKeys} = require('humps');
 const router = express.Router();
 
 router.get('/favorites', authorize, (req, res, next) => {
-  // console.log(req.query);
  knex('favorites')
   .innerJoin('books', 'books.id', 'favorites.book_id')
   .where('favorites.user_id', req.claim.userId)
@@ -23,17 +22,19 @@ router.get('/favorites', authorize, (req, res, next) => {
 })
 
 router.get('/favorites/check', authorize, (req, res, next) => {
-  console.log(req.query);
  knex('favorites')
   .innerJoin('books', 'books.id', 'favorites.book_id')
   .where('favorites.user_id', req.claim.userId)
+  .where('books.id', req.query.bookId)
   .then((faves) => {
-    res.send(camelizeKeys(faves))
+    res.send(!faves)
   })
   .catch((err) => {
     return next(err)
   })
 })
+
+router.post('')
 
 
 
