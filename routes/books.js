@@ -27,7 +27,7 @@ router.get("/books/:id", (req, res, next) => {
     .select("id", "title", "author", "genre", "description", "cover_url as coverUrl", "created_at as createdAt", "updated_at as updatedAt")
     .where("id", id)
     .then((book) => {
-      if (!book.length) { return next(); }
+      if (!book.length) { return sendError(next, "Not Found", 404); }
       res.send(book[0]);
     })
     .catch((err) => {
@@ -44,19 +44,19 @@ router.post("/books", (req, res, next) => {
   book.cover_url = req.body.coverUrl;
   
   if (!book.title) {
-    return sendError(next, "Title");
+    return sendError(next, "Title must not be blank", 400);
   }
   else if (!book.author) {
-    return sendError(next, "Author");
+    return sendError(next, "Author must not be blank", 400);
   }
   else if (!book.genre) {
-    return sendError(next, "Genre");    
+    return sendError(next, "Genre must not be blank", 400);    
   }    
   else if (!book.description) {
-    return sendError(next, "Description");
+    return sendError(next, "Description must not be blank", 400);
   }
   else if (!book.cover_url) {
-    return sendError(next, "Cover URL");
+    return sendError(next, "Cover URL must not be blank", 400);
   }
 
   knex("books")
@@ -79,15 +79,15 @@ router.patch("/books/:id", (req, res, next) => {
   book.description = req.body.description;
   book.cover_url = req.body.coverUrl;
 
-  if (isNaN(book.id)) { return next(); }
-
+  if (isNaN(book.id)) { return sendError(next, "Not Found", 404); }
+  
   knex("books")
     .update(book)
     .where("id", book.id)
     .returning(["id", "title", "author", "genre", "description", "cover_url as coverUrl"])
     .then((response) => {
-      if (!book.length) { return next(); }
-      
+      if (response.length === 0) { return sendError(next, "Not Found", 404); }
+
       res.send(response[0]);
     })
     .catch((err) => {
@@ -98,14 +98,14 @@ router.patch("/books/:id", (req, res, next) => {
 router.delete("/books/:id", (req, res, next) => {
   const id = parseInt(req.params.id);
   
-  if (isNaN(id)) { return next(); }
+  if (isNaN(id)) { return sendError(next, "Not Found", 404); }
   
   knex("books")
   .where("id", id)
   .returning(["title", "author", "genre", "description", "cover_url as coverUrl"])  
   .del()
   .then((response) => {
-    if (!response.length) { return next(); }
+    if (!response.length) { return sendError(next, "Not Found", 404); }
     
     res.send(response[0]);
   })
@@ -114,11 +114,11 @@ router.delete("/books/:id", (req, res, next) => {
   });
 });
 
-function sendError(next, field) {
+function sendError(next, error, statusCode) {
   let err = {};
 
-  err.message = `${field} must not be blank`;
-  err.output = {statusCode: 400};
+  err.message = error;
+  err.output = {statusCode: statusCode};
 
   return next(err);
 }
