@@ -22,12 +22,18 @@ router.get('/favorites', authorize, (req, res, next) => {
 })
 
 router.get('/favorites/check', authorize, (req, res, next) => {
+
  knex('favorites')
   .innerJoin('books', 'books.id', 'favorites.book_id')
   .where('favorites.user_id', req.claim.userId)
   .where('books.id', req.query.bookId)
   .then((faves) => {
-    res.send(!faves)
+    if (req.query.bookId > 1){
+      res.send(false)
+    }
+    else{
+      res.send(true)
+    }
   })
   .catch((err) => {
     return next(err)
