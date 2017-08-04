@@ -13,6 +13,6 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: 'https://johnyork-erwin-bookshelf.herokuapp.com/'
+    connection: process.env.DATABASE_URL
   }
 };
