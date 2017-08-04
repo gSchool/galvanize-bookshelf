@@ -57,6 +57,7 @@ app.use((_req, res) => {
 
 // eslint-disable-next-line max-params
 app.use((err, _req, res, _next) => {
+  console.log('in err handle', err);
   if (err.output && err.output.statusCode) {
     return res
       .status(err.output.statusCode)
