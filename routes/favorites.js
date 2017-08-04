@@ -49,6 +49,20 @@ router.post('/favorites', authorize, (req, res, next) => {
     .catch((err) =>{
       return next(err)
     })
+})
+
+router.delete('/favorites', authorize, (req, res, next) => {
+  knex('favorites')
+    .where('book_id', req.body.bookId)
+    .andWhere('user_id', req.claim.userId)
+    .del()
+    .returning('*')
+    .then((unfave) => {
+      res.send({bookId: camelizeKeys(unfave)[0].bookId, userId: camelizeKeys(unfave)[0].userId})
+    })
+    .catch((err) => {
+      return next(err)
+    })
 
 })
 
