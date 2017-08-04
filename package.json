@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "knex": "knex",
-    "start": "nodemon server.js",
     "heroku-postbuild": "knex migrate:latest",
     "lint": "eslint  --ignore-pattern public/js/vendor",
     "nf": "nf start",
+    "start": "nodemon server.js",
     "test": "mocha"
   },
   "repository": {
