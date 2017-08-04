@@ -12,5 +12,8 @@ exports.seed = function(knex, Promise) {
           updated_at: new Date('2016-06-29 14:26:16 UTC')
         }])
       ]);
+    })
+    .then(() => {
+      return knex.raw("SELECT setval('favorites_id_seq', (SELECT MAX(id) FROM favorites));")
     });
 };

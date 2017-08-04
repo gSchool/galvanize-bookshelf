@@ -41,13 +41,14 @@ router.get('/favorites/check', authorize, (req, res, next) => {
 
 router.post('/favorites', authorize, (req, res, next) => {
   knex('favorites')
-    .insert({book_id: req.body.bookId, user_id: req.query.userId})
+    .insert({book_id: req.body.bookId, user_id: req.claim.userId})
     .returning('*')
     .then((faves) => {
-      res.send(camelizeKeys(faves))
+      res.send(camelizeKeys(faves[0]))
     })
     .catch((err) =>{
-      return next(err)})
+      return next(err)
+    })
 
 })
 
