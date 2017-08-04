@@ -23,6 +23,9 @@ router.get('/books', (_req, res, next) => {
 
 
 router.get('/books/:id', (req, res, next) => {
+  // COMMENT: make sure that id is a number,
+  // COMMENT: if it is not a number, send a 400 (Bad Request)
+
   knex('books')
     .where('id', req.params.id)
     .first()
@@ -41,6 +44,9 @@ router.get('/books/:id', (req, res, next) => {
 
 
 router.post('/books', (req, res, next) => {
+  // COMMENT: Makes sure that the information that you want is in the
+  // COMMENT: request body.
+
   knex('books')
     .insert({
       title: req.body.title,
@@ -67,6 +73,8 @@ router.post('/books', (req, res, next) => {
 
 
 router.patch('/books/:id', (req, res, next) => {
+  // COMMENT: Make sure that id is a number
+
   knex('books')
     .where('id', req.params.id)
     .first()
@@ -106,6 +114,8 @@ router.patch('/books/:id', (req, res, next) => {
 router.delete('/books/:id', (req, res, next) => {
   let book;
 
+  // COMMENT: Make sure that id is a number
+
   knex('books')
     .where('id', req.params.id)
     .first()
@@ -121,6 +131,10 @@ router.delete('/books/:id', (req, res, next) => {
         .where('id', req.params.id);
     })
     .then(() => {
+      // COMMENT: You only need to delete the id if you are sending the object
+      // COMMENT: Back in the response.
+      // COMMENT: In this case, you are creating a brand new object, and not
+      // COMMENT: including the id. Which works great.
       delete book.id;
       const newObj = {
         title: book.title,
