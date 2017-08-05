@@ -48,7 +48,7 @@ router.post('/token', (req, res, next) => {
     })
     .catch((err) => {
       next({
-        statusCode: 400, 
+        statusCode: 400,
         message: "Bad email or password"
       })
     });

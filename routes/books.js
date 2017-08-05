@@ -15,8 +15,8 @@ router.get('/books', (_req, res, next) => {
     })
     .catch((err) => {
       next(err)
-    })
-})
+    });
+});
 
 router.get('/books/:id', (req, res, next) => {
   let id = Number.parseInt(req.params.id);
@@ -25,7 +25,7 @@ router.get('/books/:id', (req, res, next) => {
     return next({
       statusCode: 404,
       message: "Not Found"
-    })
+    });
   };
 
   knex('books')
