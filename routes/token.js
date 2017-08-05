@@ -19,7 +19,7 @@ router.post('/token', (req, res, next) => {
     .first()
     .then((row) => {
       if (!row) {
-        throw boom.create(400, 'Bad request');
+        return next(boom.create(400, 'Bad email or password'));
       }
 
       user = camelizeKeys(row)
@@ -28,7 +28,7 @@ router.post('/token', (req, res, next) => {
     })
     //if password is valid, then make up a token and a cookie
     .then(() => {
-      const claim = {userID: user.id};
+      const claim = {userId: user.id};
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days'
       });
@@ -44,13 +44,16 @@ router.post('/token', (req, res, next) => {
       res.send(user);
     })
     .catch(bcrypt.MISMATCH_ERROR, () => {
-      throw boom.create(400, 'Bad email or password');
+      return next(boom.create(400, 'Bad email or password'));
     })
     .catch((err) => {
-      next({
-        statusCode: 400,
-        message: "Bad email or password"
-      })
+      // next(
+        // {
+        return next(boom.create(400, 'Bad email or password'));
+
+      //   statusCode: 400,
+      //   message: "Bad email or password"
+      // })
     });
 })
 
