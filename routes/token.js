@@ -11,7 +11,7 @@ const { camelizeKeys } = require('humps');
 const router = express.Router();
 
 router.post('/token', (req, res, next) => {
-//find out whether the user's email is in a database; if so check whether password is correct
+//find out if user's email is in a database; if so check whether password is correct
   let user;
 
   knex('users')
@@ -47,17 +47,11 @@ router.post('/token', (req, res, next) => {
       return next(boom.create(400, 'Bad email or password'));
     })
     .catch((err) => {
-      // next(
-        // {
         return next(boom.create(400, 'Bad email or password'));
-
-      //   statusCode: 400,
-      //   message: "Bad email or password"
-      // })
     });
 })
 
-//when a req comes in with a jwt, check it
+//authorization: when a req comes in with a jwt, check it
 router.get('/token', (req, res, next) => {
   jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
     if (err) {
