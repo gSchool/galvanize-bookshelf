@@ -55,7 +55,74 @@ router.post('/books', (req, res, next) => {
     next(err)
   })
 })
+router.patch('/books/:id', (req, res, next) => {
+  const id = req.params.id
+  const { title, author, genre, description, coverUrl } = req.body
 
+  let newBook = {}
 
+  if (title) {
+    newBook.title = title
+  }
+  if (author) {
+    newBook.author = author
+  }
+  if (genre) {
+    newBook.genre = genre
+  }
+  if (description) {
+    newBook.description = description
+  }
+  if (coverUrl) {
+    newBook.cover_url = coverUrl
+  }
+
+  knex('books')
+  .where('id', id)
+
+  .then((books) => {
+    knex('books')
+    .update(newBook)
+    .where('id', id)
+    .returning('*')
+
+    .then((books) =>{
+      let book = {
+        id: books[0].id,
+        title: books[0].title,
+        author: books[0].author,
+        genre: books[0].genre,
+        description: books[0].description,
+        coverUrl: books[0].cover_url
+      }
+      res.json(book)
+    })
+    .catch((err) => next (err))
+  })
+})
+
+router.delete('/books/:id', (req, res, next) => {
+  const id = req.params.id
+  knex('books')
+
+  .then((books) => {
+    knex('books')
+    .del()
+    .where('id', id)
+    .returning('*')
+
+    .then((books) =>{
+      let book = {
+        title: books[0].title,
+        author: books[0].author,
+        genre: books[0].genre,
+        description: books[0].description,
+        coverUrl: books[0].cover_url
+      }
+      res.json(book)
+    })
+    .catch((err) => next (err))
+  })
+})
 
 module.exports = router;
