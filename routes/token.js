@@ -35,7 +35,7 @@ router.post('/token', function(req, res, next){
       res.setHeader('Content-Type', 'text/plain')
       res.send('Bad email or password')
     } else if (bcrypt.compareSync(req.body.password, data.hashed_password)){
-      let token = jwt.sign(data.id, SECRET)
+      let token = jwt.sign({id:data.id}, SECRET)
       res.cookie('token', token, {httpOnly:true})
       res.send({
           id: data.id,
