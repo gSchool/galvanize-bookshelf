@@ -77,7 +77,36 @@ router.post('/favorites', authorize, (req, res, next) => {
       next(err)
     })
 })
+router.delete('/favorites', authorize, (req, res, next) => {
+  const bookId = req.body.bookId
+  if (!Number.isInteger(bookId)) {
+    return next(boom.create(400, 'Book ID must be an integer'))
+  }
+  const declare = { book_id: bookId, user_id: req.claim }
 
+  let favorite;
 
+  knex ('favorites')
+    .where(declare)
+    .first()
+    .then((row) => {
+      if(!row) {
+        throw boom.create(404, 'Favorite not found')
+      }
+      favorite = camelizeKeys(row)
+
+      return knex('favorites')
+      .del()
+      .where('id', favorite.id)
+    })
+    .then(() => {
+      delete favorite.id
+
+      res.send(favorite)
+    })
+    .catch((err) => {
+      next(err)
+    })
+})
 
 module.exports = router;
