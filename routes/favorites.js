@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const knex = require('../knex')
@@ -60,7 +62,6 @@ router.post('/favorites', (req, res, next) => {
       knex('favorites')
         .insert(newBook)
         .returning('*')
-        // .first()
         .then((data) => {
           res.status(200)
           res.json(camelizeKeys(data[0]))
