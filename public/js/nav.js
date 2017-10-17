@@ -15,7 +15,7 @@
 
         const $logout = $('<a>').text('Log out');
 
-        $('logout').click((event) => {
+        $logout.click((event) => {
           event.preventDefault();
 
           const options = {
