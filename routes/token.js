@@ -51,7 +51,7 @@ router.post('/token', function(req, res, next){
   .catch(next)
 })
 
-router.delete ('/token', (req, res, next) => {
+router.delete('/token', (req, res) => {
   res.clearCookie('token')
   res.end()
 })

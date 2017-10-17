@@ -21,7 +21,8 @@
           const options = {
             dataType: 'json',
             type: 'DELETE',
-            url: '/token'
+            url: '/token',
+            success: window.location = '/'
           };
 
           $.ajax(options)
