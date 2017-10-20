@@ -9,7 +9,8 @@
     "lint": "eslint  --ignore-pattern public/js/vendor",
     "nf": "nf start",
     "start": "node server.js",
-    "test": "mocha"
+    "test": "mocha",
+    "devstart": "nodemon server.js"
   },
   "repository": {
     "type": "git",

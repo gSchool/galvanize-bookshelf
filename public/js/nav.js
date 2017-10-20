@@ -18,19 +18,18 @@
         $logout.click((event) => {
           event.preventDefault();
 
-          const options = {
+          $.ajax({
             dataType: 'json',
+            url: '/token',
             type: 'DELETE',
-            url: '/token'
-          };
+            success: (data) => {
+              window.location.href = '/'
+            },
+            error: (res) => {
+              window.location.href = '/'
+            }
 
-          $.ajax(options)
-            .done(() => {
-              window.location.href = '/login.html';
-            })
-            .fail(() => {
-              Materialize.toast('Unable to log out. Please try again.', 3000);
-            });
+          })
         });
 
         $firstNavItems.append($favorites);

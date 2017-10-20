@@ -15,9 +15,10 @@ router.get('/favorites', (req, res, next) => {
       res.send('Unauthorized')
     } else {
       knex('favorites')
-        .innerJoin('books', 'books.id', 'favorites.user_id')
+        .innerJoin('books', 'books.id', 'favorites.book_id')
         .where('favorites.user_id', payload.userId)
         .then((data) => {
+          console.log(data)
           const results = camelizeKeys(data)
           res.status(200)
           res.json(results)
