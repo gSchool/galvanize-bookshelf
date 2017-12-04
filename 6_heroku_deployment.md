@@ -42,7 +42,7 @@ Finally, complete the following post-deployment steps.
 
 ## Bonus
 
-Use the [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler) add-on to seed the production database with `npm run knex seeds:run` every hour.
+Use the [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler) add-on to seed the production database with `npm run knex seed:run` every hour.
 
 ## Bonus
 
