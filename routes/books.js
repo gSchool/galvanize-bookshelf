@@ -83,7 +83,6 @@ router.delete('/books/:id',(req,res,next)=>{
   .del()
   .first(rows)
   .then((deleted)=>{
-    console.log(deleted)
     res.status(200).send(deleted)
   })
 
