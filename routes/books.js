@@ -78,7 +78,7 @@ router.patch('/books/:id', (req,res,next)=>{
 
 router.delete('/books/:id',(req,res,next)=>{
   let rows = ['title','author','genre','description','cover_url AS coverUrl']
-  knex('books')
+  return knex('books')
   .where('id',req.params.id)
   .del()
   .first(rows)
