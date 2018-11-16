@@ -34,7 +34,7 @@
     "jsonwebtoken": "^8.4.0",
     "knex": "^0.15.2",
     "morgan": "^1.9.1",
-    "pg": "^6.4.2",
+    "pg": "^6.4.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
