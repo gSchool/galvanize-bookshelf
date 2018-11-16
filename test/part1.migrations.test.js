@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 
-'use strict';
+'use strict'
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 
-const assert = require('chai').assert;
-const { suite, test } = require('mocha');
-const knex = require('../knex');
-const { addDatabaseHooks } = require('./utils');
+const assert = require('chai').assert
+const { suite, test } = require('mocha')
+const knex = require('../knex')
+const { addDatabaseHooks } = require('./utils')
 
 suite('part1 migrations', addDatabaseHooks(() => {
   test('books columns', (done) => {
@@ -69,20 +69,20 @@ suite('part1 migrations', addDatabaseHooks(() => {
             nullable: false,
             defaultValue: 'now()'
           }
-        };
+        }
 
         for (const column in expected) {
           assert.deepEqual(
             actual[column],
             expected[column],
             `Column ${column} is not the same`
-          );
+          )
         }
 
-        done();
+        done()
       })
       .catch((err) => {
-        done(err);
-      });
-  });
-}));
+        done(err)
+      })
+  })
+}))

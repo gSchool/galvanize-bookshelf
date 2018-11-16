@@ -1,15 +1,15 @@
 /* eslint-disable camelcase */
 
-'use strict';
+'use strict'
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 
-const { suite, test } = require('mocha');
-const bcrypt = require('bcrypt');
-const request = require('supertest');
-const knex = require('../knex');
-const server = require('../server');
-const { addDatabaseHooks } = require('./utils');
+const { suite, test } = require('mocha')
+const bcrypt = require('bcrypt')
+const request = require('supertest')
+const knex = require('../knex')
+const server = require('../server')
+const { addDatabaseHooks } = require('./utils')
 
 suite('part3 routes bonus', addDatabaseHooks(() => {
   test('POST /users with no email', (done) => {
@@ -23,8 +23,8 @@ suite('part3 routes bonus', addDatabaseHooks(() => {
         password: 'ilikebigcats'
       })
       .expect('Content-Type', /plain/)
-      .expect(400, 'Email must not be blank', done);
-  });
+      .expect(400, 'Email must not be blank', done)
+  })
 
   test('POST /users with no password', (done) => {
     request(server)
@@ -37,8 +37,8 @@ suite('part3 routes bonus', addDatabaseHooks(() => {
         email: 'john.siracusa@gmail.com'
       })
       .expect('Content-Type', /plain/)
-      .expect(400, 'Password must be at least 8 characters long', done);
-  });
+      .expect(400, 'Password must be at least 8 characters long', done)
+  })
 
   test('POST /users with existing email', (done) => {
     /* eslint-disable no-sync */
@@ -61,12 +61,12 @@ suite('part3 routes bonus', addDatabaseHooks(() => {
             password: 'ilikebigcats'
           })
           .expect('Content-Type', /plain/)
-          .expect(400, 'Email already exists', done);
+          .expect(400, 'Email already exists', done)
       })
       .catch((err) => {
-        done(err);
-      });
+        done(err)
+      })
 
       /* eslint-enable no-sync */
-  });
-}));
+  })
+}))

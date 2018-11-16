@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 
-const { suite, test } = require('mocha');
-const request = require('supertest');
-const server = require('../server');
-const { addDatabaseHooks } = require('./utils');
+const { suite, test } = require('mocha')
+const request = require('supertest')
+const server = require('../server')
+const { addDatabaseHooks } = require('./utils')
 
 suite('part4 routes token bonus', addDatabaseHooks(() => {
   test('POST /token with no email', (done) => {
@@ -17,8 +17,8 @@ suite('part4 routes token bonus', addDatabaseHooks(() => {
         password: 'youreawizard'
       })
       .expect('Content-Type', /plain/)
-      .expect(400, 'Email must not be blank', done);
-  });
+      .expect(400, 'Email must not be blank', done)
+  })
 
   test('POST /token with no password', (done) => {
     request(server)
@@ -29,6 +29,6 @@ suite('part4 routes token bonus', addDatabaseHooks(() => {
         email: 'jkrowling@gmail.com'
       })
       .expect('Content-Type', /plain/)
-      .expect(400, 'Password must not be blank', done);
-  });
-}));
+      .expect(400, 'Password must not be blank', done)
+  })
+}))

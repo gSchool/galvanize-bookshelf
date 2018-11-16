@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 
-const { suite, test } = require('mocha');
-const request = require('supertest');
-const server = require('../server');
-const { addDatabaseHooks } = require('./utils');
+const { suite, test } = require('mocha')
+const request = require('supertest')
+const server = require('../server')
+const { addDatabaseHooks } = require('./utils')
 
 suite('part4 routes token', addDatabaseHooks(() => {
   test('GET /token without token', (done) => {
@@ -13,8 +13,8 @@ suite('part4 routes token', addDatabaseHooks(() => {
       .get('/token')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
-      .expect(200, 'false', done);
-  });
+      .expect(200, 'false', done)
+  })
 
   test('POST /token', (done) => {
     /* eslint-disable max-len */
@@ -28,8 +28,8 @@ suite('part4 routes token', addDatabaseHooks(() => {
       })
       .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
       .expect((res) => {
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
+        delete res.body.createdAt
+        delete res.body.updatedAt
       })
       .expect(200, {
         id: 1,
@@ -38,11 +38,11 @@ suite('part4 routes token', addDatabaseHooks(() => {
         email: 'jkrowling@gmail.com'
       })
       .expect('Content-Type', /json/)
-      .end(done);
-  });
+      .end(done)
+  })
 
   test('GET /token with token', (done) => {
-    const agent = request.agent(server);
+    const agent = request.agent(server)
 
     request(server)
       .post('/token')
@@ -54,16 +54,16 @@ suite('part4 routes token', addDatabaseHooks(() => {
       })
       .end((err) => {
         if (err) {
-          return done(err);
+          return done(err)
         }
 
         agent
           .get('/token')
           .set('Accept', 'application/json')
           .expect('Content-Type', /json/)
-          .expect(200, 'true', done);
-      });
-  });
+          .expect(200, 'true', done)
+      })
+  })
 
   test('DELETE /token', (done) => {
     request(server)
@@ -71,8 +71,8 @@ suite('part4 routes token', addDatabaseHooks(() => {
       .set('Accept', 'application/json')
       .expect('set-cookie', /token=; Path=\//)
       .expect(200)
-      .end(done);
-  });
+      .end(done)
+  })
 
   test('POST /token with bad email', (done) => {
     request(server)
@@ -84,8 +84,8 @@ suite('part4 routes token', addDatabaseHooks(() => {
         password: 'youreawizard'
       })
       .expect('Content-Type', /plain/)
-      .expect(400, 'Bad email or password', done);
-  });
+      .expect(400, 'Bad email or password', done)
+  })
 
   test('POST /token with bad password', (done) => {
     request(server)
@@ -97,6 +97,6 @@ suite('part4 routes token', addDatabaseHooks(() => {
         password: 'badpassword'
       })
       .expect('Content-Type', /plain/)
-      .expect(400, 'Bad email or password', done);
-  });
-}));
+      .expect(400, 'Bad email or password', done)
+  })
+}))

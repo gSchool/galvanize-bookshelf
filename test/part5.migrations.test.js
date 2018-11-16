@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 
-'use strict';
+'use strict'
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 
-const assert = require('chai').assert;
-const { suite, test } = require('mocha');
-const knex = require('../knex');
-const { addDatabaseHooks } = require('./utils');
+const assert = require('chai').assert
+const { suite, test } = require('mocha')
+const knex = require('../knex')
+const { addDatabaseHooks } = require('./utils')
 
 suite('part5 migrations', addDatabaseHooks(() => {
   test('favorites columns', (done) => {
@@ -48,22 +48,22 @@ suite('part5 migrations', addDatabaseHooks(() => {
             nullable: false,
             defaultValue: 'now()'
           }
-        };
+        }
 
         for (const column in expected) {
           assert.deepEqual(
             actual[column],
             expected[column],
             `Column ${column} is not the same`
-          );
+          )
         }
 
-        done();
+        done()
       })
       .catch((err) => {
-        done(err);
-      });
-  });
+        done(err)
+      })
+  })
 
   test('favorites constraints', (done) => {
     const query = `
@@ -78,11 +78,11 @@ suite('part5 migrations', addDatabaseHooks(() => {
         JOIN information_schema.constraint_column_usage AS ccu
           ON ccu.constraint_name = tc.constraint_name
       WHERE constraint_type = 'FOREIGN KEY' AND tc.table_name='favorites';
-    `;
+    `
 
     knex.raw(query)
       .then((result) => {
-        const actual = result.rows;
+        const actual = result.rows
 
         /* eslint-disable-next-line camelcase */
         const expected = [{
@@ -95,20 +95,20 @@ suite('part5 migrations', addDatabaseHooks(() => {
           column_name: 'user_id',
           foreign_table_name: 'users',
           foreign_column_name: 'id'
-        }];
+        }]
 
         for (const column in expected) {
           assert.deepEqual(
             actual[column],
             expected[column],
             `Column ${column} is not the same`
-          );
+          )
         }
 
-        done();
+        done()
       })
       .catch((err) => {
-        done(err);
-      });
-  });
-}));
+        done(err)
+      })
+  })
+}))

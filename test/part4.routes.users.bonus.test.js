@@ -1,18 +1,18 @@
 /* eslint-disable camelcase */
 
-'use strict';
+'use strict'
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 
-const { suite, test } = require('mocha');
-const request = require('supertest');
-const server = require('../server');
-const { addDatabaseHooks } = require('./utils');
+const { suite, test } = require('mocha')
+const request = require('supertest')
+const server = require('../server')
+const { addDatabaseHooks } = require('./utils')
 
 suite('part4 routes users bonus', addDatabaseHooks(() => {
   /* eslint-disable max-len */
   test('POST /users', (done) => {
-    const password = 'ilikebigcats';
+    const password = 'ilikebigcats'
 
     request(server)
       .post('/users')
@@ -25,8 +25,8 @@ suite('part4 routes users bonus', addDatabaseHooks(() => {
         password
       })
       .expect((res) => {
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
+        delete res.body.createdAt
+        delete res.body.updatedAt
       })
       .expect(200, {
         id: 2,
@@ -36,6 +36,6 @@ suite('part4 routes users bonus', addDatabaseHooks(() => {
       })
       .expect('Content-Type', /json/)
       .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
-      .end(done);
-  });
-}));
+      .end(done)
+  })
+}))

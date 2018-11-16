@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 
-'use strict';
+'use strict'
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'
 
-const assert = require('chai').assert;
-const { suite, test } = require('mocha');
-const knex = require('../knex');
-const { addDatabaseHooks } = require('./utils');
+const assert = require('chai').assert
+const { suite, test } = require('mocha')
+const knex = require('../knex')
+const { addDatabaseHooks } = require('./utils')
 
 suite('part1 seeds', addDatabaseHooks(() => {
   test('books rows', (done) => {
@@ -86,7 +86,7 @@ suite('part1 seeds', addDatabaseHooks(() => {
           cover_url: 'http://akamaicovers.oreilly.com/images/0636920032977/lrg.jpg',
           created_at: new Date('2016-06-26 14:26:16 UTC'),
           updated_at: new Date('2016-06-26 14:26:16 UTC')
-        }];
+        }]
 
         /* eslint-enable max-len */
 
@@ -95,13 +95,13 @@ suite('part1 seeds', addDatabaseHooks(() => {
             actual[i],
             expected[i],
             `Row id=${i + 1} not the same`
-          );
+          )
         }
 
-        done();
+        done()
       })
       .catch((err) => {
-        done(err);
-      });
-  });
-}));
+        done(err)
+      })
+  })
+}))
