@@ -25,7 +25,6 @@ suite('part5 routes favorites bonus', addDatabaseHooks(() => {
           return done(err);
         }
 
-        agent.saveCookies(res);
         done();
       });
   });

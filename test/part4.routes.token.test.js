@@ -57,8 +57,6 @@ suite('part4 routes token', addDatabaseHooks(() => {
           return done(err);
         }
 
-        agent.saveCookies(res);
-
         agent
           .get('/token')
           .set('Accept', 'application/json')
