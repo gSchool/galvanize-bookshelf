@@ -8,7 +8,7 @@ const assert = require('chai').assert;
 const { suite, test } = require('mocha');
 const knex = require('../knex');
 
-const { addDatabaseHooks } = require('./utils')
+const { addDatabaseHooks } = require('./utils');
 
 suite('part5 seeds', addDatabaseHooks(() => {
   test('favorites rows', (done) => {
