@@ -15,4 +15,9 @@ Additionally, each part has a set of optional bonus assignments to try once you 
 
 The [solutions](https://github.com/gSchool/galvanize-bookshelf-solution) are available to instructors as well as students who've completed this series.
 
+## Scripts
+1. Run the linter using `npm run lint`
+1. Run the server using `npm start`
+1. Run the tests using `npm test` If you run the tests manually, make sure to add run it will the tdd interface `mocha -u tdd`
+
 #### [⇐ Previous](6_heroku_deployment.md) | [Next ⇒](1_migrations_seeds.md)
