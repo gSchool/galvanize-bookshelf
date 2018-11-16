@@ -8,7 +8,7 @@
     "knex": "knex",
     "lint": "eslint . --ignore-pattern public/js/vendor",
     "start": "nodemon server.js",
-    "test": "mocha -u tdd"
+    "test": "mocha -u tdd --exit"
   },
   "repository": {
     "type": "git",
