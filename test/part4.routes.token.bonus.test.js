@@ -4,9 +4,8 @@ process.env.NODE_ENV = 'test';
 
 const { suite, test } = require('mocha');
 const request = require('supertest');
-const knex = require('../knex');
 const server = require('../server');
-const { addDatabaseHooks } = require('./utils')
+const { addDatabaseHooks } = require('./utils');
 
 suite('part4 routes token bonus', addDatabaseHooks(() => {
   test('POST /token with no email', (done) => {

@@ -7,7 +7,8 @@ process.env.NODE_ENV = 'test';
 const assert = require('chai').assert;
 const { suite, test } = require('mocha');
 const knex = require('../knex');
-const { addDatabaseHooks } = require('./utils')
+const { addDatabaseHooks } = require('./utils');
+
 suite('part3 migrations', addDatabaseHooks(() => {
   test('users columns', (done) => {
     knex('users').columnInfo()

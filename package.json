@@ -6,7 +6,7 @@
   "scripts": {
     "heroku-postbuild": "knex migrate:latest",
     "knex": "knex",
-    "lint": "eslint  --ignore-pattern public/js/vendor",
+    "lint": "eslint . --ignore-pattern public/js/vendor",
     "start": "nodemon server.js",
     "test": "mocha -u tdd"
   },

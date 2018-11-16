@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 const request = require('supertest');
 const knex = require('../knex');
 const server = require('../server');
-const { addDatabaseHooks } = require('./utils')
+const { addDatabaseHooks } = require('./utils');
 
 suite('part3 routes', addDatabaseHooks(() => {
   test('POST /users', (done) => {

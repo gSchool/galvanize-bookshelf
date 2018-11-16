@@ -6,9 +6,8 @@ process.env.NODE_ENV = 'test';
 
 const { suite, test } = require('mocha');
 const request = require('supertest');
-const knex = require('../knex');
 const server = require('../server');
-const { addDatabaseHooks } = require('./utils')
+const { addDatabaseHooks } = require('./utils');
 
 suite('part5 routes favorites', addDatabaseHooks(() => {
   suite('with token', addDatabaseHooks(() => {
@@ -23,7 +22,7 @@ suite('part5 routes favorites', addDatabaseHooks(() => {
           email: 'jkrowling@gmail.com',
           password: 'youreawizard'
         })
-        .end((err, res) => {
+        .end((err) => {
           if (err) {
             return done(err);
           }

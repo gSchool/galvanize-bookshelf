@@ -4,9 +4,8 @@ process.env.NODE_ENV = 'test';
 
 const { suite, test } = require('mocha');
 const request = require('supertest');
-const knex = require('../knex');
 const server = require('../server');
-const { addDatabaseHooks } = require('./utils')
+const { addDatabaseHooks } = require('./utils');
 
 suite('part4 routes token', addDatabaseHooks(() => {
   test('GET /token without token', (done) => {
@@ -18,6 +17,7 @@ suite('part4 routes token', addDatabaseHooks(() => {
   });
 
   test('POST /token', (done) => {
+    /* eslint-disable max-len */
     request(server)
       .post('/token')
       .set('Accept', 'application/json')
@@ -52,7 +52,7 @@ suite('part4 routes token', addDatabaseHooks(() => {
         email: 'jkrowling@gmail.com',
         password: 'youreawizard'
       })
-      .end((err, res) => {
+      .end((err) => {
         if (err) {
           return done(err);
         }
