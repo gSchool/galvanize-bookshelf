@@ -18,6 +18,6 @@ The [solutions](https://github.com/gSchool/galvanize-bookshelf-solution) are ava
 ## Scripts
 1. Run the linter using `npm run lint`
 1. Run the server using `npm start`
-1. Run the tests using `npm test` If you run the tests manually, make sure to add run it will the tdd interface `mocha -u tdd`
+1. Run the tests using `npm test`
 
 #### [⇐ Previous](6_heroku_deployment.md) | [Next ⇒](1_migrations_seeds.md)
