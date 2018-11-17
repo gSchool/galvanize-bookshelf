@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/gschool/galvanize-bookshelf#readme",
   "dependencies": {
-    "bcrypt": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "boom": "^3.2.2",
     "cookie-parser": "^1.4.3",
