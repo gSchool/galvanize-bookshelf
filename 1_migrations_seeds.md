@@ -47,7 +47,7 @@ The tests will not pass, but if you cannot connect to the test database, you'll 
 
 ```text
 Knex:warning - Pool2 - Error: Pool was destroyed
-Knex:Error Pool2 - error: database "bookshelf_tes" does not exist
+Knex:Error Pool2 - error: database "bookshelf_test" does not exist
 ```
 
 ## Migrations
@@ -59,9 +59,9 @@ Translate the following entity relationship diagram into a Knex migration file.
 │                                          books                                           │
 ├─────────────┬─────────────────────────┬──────────────────────────────────────────────────┤
 │id           │serial                   │primary key                                       │
-│title        │varchar(255)             │not null default ''                               │
-│author       │varchar(255)             │not null default ''                               │
-│genre        │varchar(255)             │not null default ''                               │
+│title        │string             │not null default ''                               │
+│author       │string             │not null default ''                               │
+│genre        │string             │not null default ''                               │
 │description  │text                     │not null default ''                               │
 │cover_url    │text                     │not null default ''                               │
 │created_at   │timestamp with time zone │not null default now()                            │
