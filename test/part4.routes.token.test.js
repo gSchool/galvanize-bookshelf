@@ -40,11 +40,10 @@ suite('part4 routes token', addDatabaseHooks(() => {
       .expect('Content-Type', /json/)
       .end(done)
   })
-
   test('GET /token with token', (done) => {
     const agent = request.agent(server)
 
-    request(server)
+    agent
       .post('/token')
       .set('Accept', 'application/json')
       .set('Content-Type', 'application/json')
