@@ -6,7 +6,7 @@ In this assignment, you'll build a RESTful, database-driven, HTTP server, using 
 
 ## Books
 
-In the `routes/books.js` module, add middleware to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type.
+In the `routes/books.js` module, use `next` to send an appropriate object to the error handling route (in server.js) to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type.
 
 | Request Method | Request URL        | Request Body                                             | Response Status | Response Body                                                          |
 |----------------|--------------------|----------------------------------------------------------|-----------------|------------------------------------------------------------------------|

@@ -11,7 +11,7 @@ This is a multi-day assignment split into the following parts. Your task is to c
 1. [User Authorization](5_user_authorization.md)
 1. [Heroku Deployment](6_heroku_deployment.md)
 
-Additionally, each part has a set of optional bonus assignments to try once you completed the its main assignment. Since parts share many of the same bonus assignments, you may move to the next part without having finished all the bonuses.
+Additionally, each part has a set of optional bonus assignments to try once you completed its main assignment. Since parts share many of the same bonus assignments, you may move to the next part without having finished all the bonuses.
 
 The [solutions](https://github.com/gSchool/galvanize-bookshelf-solution) are available to instructors as well as students who've completed this series.
 

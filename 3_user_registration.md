@@ -13,9 +13,9 @@ Translate the following entity relationship diagram into a Knex migration file.
 │                              users                               │
 ├────────────────┬─────────────────────────┬───────────────────────┤
 │id              │serial                   │primary key            │
-│first_name      │varchar(255)             │not null default ''    │
-│last_name       │varchar(255)             │not null default ''    │
-│email           │varchar(255)             │not null unique        │
+│first_name      │string            │not null default ''    │
+│last_name       │string            │not null default ''    │
+│email           │string            │not null unique        │
 |hashed_password |char(60)                 │not null               │
 │created_at      │timestamp with time zone │not null default now() │
 │updated_at      │timestamp with time zone │not null default now() │
@@ -38,7 +38,7 @@ npm test test/part3.seeds.test.js
 
 ## Routes
 
-In the `routes/users.js` module, add middleware to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type.
+In the `routes/users.js` module, use `next` to send an appropriate object to the error handling route (in server.js) to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type.
 
 | Request Method | Request URL        | Request Body                                                                                                        | Response Status | Response Body                                                  |
 |----------------|--------------------|---------------------------------------------------------------------------------------------------------------------|-----------------|----------------------------------------------------------------|
@@ -76,7 +76,7 @@ Then, play around with the live application by registering a new user. As you pl
 
 ## Bonus
 
-In the `routes/users.js` module, update the middleware to handle the following HTTP requests and send back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type.
+In the `routes/users.js` module, handle the following HTTP requests and send back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type.
 
 | Request Method | Request URL        | Request Body                              | Response Status | Response Body                                 |
 |----------------|--------------------|-------------------------------------------|-----------------|-----------------------------------------------|
@@ -84,17 +84,17 @@ In the `routes/users.js` module, update the middleware to handle the following H
 | `POST`         | `/users`           | `{ password: "", ... }`                   | `400`           | `Password must be at least 8 characters long` |
 | `POST`         | `/users`           | `{ "email": "jkrowling@gmail.com", ... }` | `400`           | `Email already exists`                        |
 
-You can run the following test suite to verify the middleware works as expected.
+You can run the following test suite to verify your code works as expected.
 
 ```shell
 npm test test/part3.routes.bonus.test.js
 ```
 
-**NOTE:** Ensure the middleware handles the previous HTTP requests as before.
+**NOTE:** Ensure the previous tests still pass.
 
-## Bonus
+## Linting
 
-Using your preferred ESLint rules, lint your project with the `npm run lint .` command.
+Using your preferred ESLint rules, lint your project with the `npm run lint` command.
 
 ## Bonus
 

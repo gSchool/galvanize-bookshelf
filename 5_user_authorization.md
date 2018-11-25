@@ -38,7 +38,7 @@ npm test test/part5.seeds.test.js
 
 ## Routes
 
-In the `routes/favorites.js` module, add middleware to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type. Assume a token has been created for a user with an `id` of `1`.
+In the `routes/favorites.js` module, use `next` to send an appropriate object to the error handling route (in server.js) to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type. Assume a token has been created for a user with an `id` of `1`.
 
 | Request Method | Request URL                 | Request Body       | Response Status | Response Body                                        |
 |----------------|-----------------------------|--------------------|-----------------|------------------------------------------------------|
@@ -48,7 +48,7 @@ In the `routes/favorites.js` module, add middleware to handle the following HTTP
 | `POST`         | `/favorites`                | `{ "bookId": 2 } ` | `200`           | `{ "id": 2, "bookId": 2, "userId": 1, ... }`         |
 | `DELETE`       | `/favorites`                | `{ "bookId": 1 }`  | `200`           | `{ "bookId": 1, "userId": 1, ... }`                  |
 
-Additionally, ensure the middleware handles the following HTTP requests and sends back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type. Assume no token has been created.
+Additionally, ensure your code handles the following HTTP requests and sends back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type. Assume no token has been created.
 
 | Request Method | Request URL                 | Request Body      | Response Status | Response Body     |
 |----------------|-----------------------------|-------------------|-----------------|-------------------|
@@ -88,7 +88,7 @@ Then, play around with the live application by logging in a user and viewing the
 
 ## Bonus
 
-In the `routes/favorites.js` module, update middleware to handle the following HTTP requests and send back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type. Assume a token has been created for a user with an `id` of `1`.
+In the `routes/favorites.js` module, update your code to handle the following HTTP requests and send back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type. Assume a token has been created for a user with an `id` of `1`.
 
 | Request Method | Request URL                   | Request Body          | Response Status | Response Body                |
 |----------------|-------------------------------|-----------------------|-----------------|------------------------------|
@@ -106,7 +106,7 @@ npm test test/part5.routes.bonus.test.js
 
 **NOTE:** Ensure the middleware handles the previous HTTP requests as before.
 
-## Bonus
+## Linting
 
 Using your preferred ESLint rules, lint your project with the `npm run lint .` command.
 

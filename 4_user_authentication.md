@@ -7,7 +7,7 @@ In this assignment, you'll build an authentication system for your RESTful, data
 
 ## Routes
 
-In the `routes/token.js` module, add middleware to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type.
+In the `routes/token.js` module, use `next` to send an appropriate object to the error handling route (in server.js) to handle the following HTTP requests and send back the associated HTTP response. The information in both the request body and response body use the `application/json` content type.
 
 | Request Method | Request URL | Request Body                                                     | Response Status | Response Body                                    | Set-Cookie        |
 |----------------|-------------|------------------------------------------------------------------|-----------------|--------------------------------------------------|-------------------|
@@ -18,7 +18,7 @@ In the `routes/token.js` module, add middleware to handle the following HTTP req
 
 **NOTE:** The second `GET /token` request assumes a token was created by the previous `POST /token` request. Also, don't send the user's password or hashed password in the response body.
 
-Additionally, ensure the `POST /token` middleware handles the following HTTP requests and sends back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type.
+Additionally, ensure `POST /token` handles the following HTTP requests and sends back the associated HTTP response. The information in the request body uses the `application/json` content type while the information in the response body uses the `text/plain` content type.
 
 | Request Method | Request URL | Request Body                                                     | Response Status | Response Body           |
 |----------------|-------------|------------------------------------------------------------------|-----------------|-------------------------|
@@ -42,13 +42,13 @@ In the `routes/token.js` module, update the middleware to handle the following H
 | `POST`         | `/token`    | `{ "email": "", ... }`    | `400`           | `Email must not be blank`    |
 | `POST`         | `/token`    | `{ "password": "", ... }` | `400`           | `Password must not be blank` |
 
-You can run the following test suite to verify the middleware works as expected.
+You can run the following test suite to verify tyour code works as expected.
 
 ```shell
 npm test test/part4.routes.token.bonus.test.js
 ```
 
-**NOTE:** Ensure the middleware handles the previous HTTP requests as before.
+**NOTE:** Ensure your code handles the previous HTTP requests as before.
 
 ## Bonus
 
@@ -66,9 +66,9 @@ npm test test/part4.routes.users.bonus.test.js
 
 **NOTE:** Ensure the middleware handles the previous HTTP requests as before.
 
-## Bonus
+## Linting
 
-Using your preferred ESLint rules, lint your project with the `npm run lint .` command.
+Using your preferred ESLint rules, lint your project with the `npm run lint` command.
 
 ## Bonus
 

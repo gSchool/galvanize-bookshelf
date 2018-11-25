@@ -93,9 +93,9 @@ SELECT setval('books_id_seq', (SELECT MAX(id) FROM books));
 
 Using the knex.raw method you can execute a command like this as the last part of the seed data import sequence.  Remember the async nature of javascript and knex when deciding where to use this method.
 
-## Bonus
+## Linting
 
-Using your preferred ESLint rules, lint your project with the `npm run lint .` command.
+Using your preferred ESLint rules, lint your project with the `npm run lint` command.
 
 **TIP:** If you use the builtin `eslint-config-ryansobol` rules, you may want to disable the `camelcase` and `max-len` rules with [inline comments](http://eslint.org/docs/user-guide/configuring#disabling-rules-with-inline-comments) where appropriate.
 
