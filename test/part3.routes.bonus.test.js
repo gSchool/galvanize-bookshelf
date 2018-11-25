@@ -5,7 +5,7 @@
 process.env.NODE_ENV = 'test'
 
 const { suite, test } = require('mocha')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const request = require('supertest')
 const knex = require('../knex')
 const server = require('../server')
