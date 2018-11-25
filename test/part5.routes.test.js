@@ -14,7 +14,7 @@ suite('part5 routes favorites', addDatabaseHooks(() => {
     const agent = request.agent(server)
 
     beforeEach((done) => {
-      request(server)
+      agent
         .post('/token')
         .set('Accept', 'application/json')
         .set('Content-Type', 'application/json')
