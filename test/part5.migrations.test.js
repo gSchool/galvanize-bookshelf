@@ -97,8 +97,7 @@ suite('part5 migrations', addDatabaseHooks(() => {
           foreign_column_name: 'id'
         }]
 
-/* eslint-disable-next-line max-len */
-
+/* eslint-disable max-len */
         for (const column of expected) {
           assert.deepInclude(
             actual,
