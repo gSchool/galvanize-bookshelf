@@ -97,11 +97,13 @@ suite('part5 migrations', addDatabaseHooks(() => {
           foreign_column_name: 'id'
         }]
 
-        for (const column in expected) {
-          assert.deepEqual(
-            actual[column],
-            expected[column],
-            `Column ${column} is not the same`
+/* eslint-disable-next-line max-len */
+
+        for (const column of expected) {
+          assert.deepInclude(
+            actual,
+            column,
+            `Check that both foreign keys exists and everything is spelled correctly`
           )
         }
 
