@@ -4,7 +4,7 @@
   "description": "Create a web application to manage your book collection",
   "main": "server.js",
   "scripts": {
-    "heroku-postbuild": "knex migrate:latest",
+    "heroku-postbuild": "knex migrate:rollback; knex migrate:latest; knex seed:run;",
     "knex": "knex",
     "lint": "eslint  --ignore-pattern public/js/vendor",
     "nf": "nf start",
@@ -33,7 +33,7 @@
     "express": "^4.14.0",
     "humps": "^1.1.0",
     "jsonwebtoken": "^7.1.9",
-    "knex": "^0.11.7",
+    "knex": "^0.11.10",
     "morgan": "^1.7.0",
     "pg": "^6.0.0"
   },
@@ -48,6 +48,6 @@
     "supertest": "^1.2.0"
   },
   "engines": {
-    "node": "7.4.0"
+    "node": "8.6.0"
   }
 }
