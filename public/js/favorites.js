@@ -5,9 +5,11 @@
 
   $.getJSON('/favorites')
     .done((favorites) => {
+      console.log(favorites)
       const $favs = $('#favorites');
 
       for (const fav of favorites) {
+        console.log(fav)
         const $anchor = $('<a>')
           .attr({
             href: `/book.html?id=${fav.bookId}`,
@@ -31,4 +33,11 @@
     .fail(() => {
       window.location.href = '/signup.html';
     });
+
+
+
+
+
+
+
 })();
