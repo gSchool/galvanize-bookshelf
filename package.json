@@ -42,7 +42,7 @@
     "dotenv": "^2.0.0",
     "eslint": "^3.1.1",
     "eslint-config-ryansobol": "^7.7.0",
-    "foreman": "^1.4.1",
+    "foreman": "^3.0.1",
     "mocha": "^2.5.3",
     "nodemon": "^1.10.0",
     "supertest": "^1.2.0"
